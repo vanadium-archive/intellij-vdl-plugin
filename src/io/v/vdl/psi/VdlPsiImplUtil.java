@@ -34,4 +34,8 @@ public class VdlPsiImplUtil {
     public static boolean isValidHost(@SuppressWarnings("UnusedParameters") @NotNull VdlStringLiteral o) {
         return true;
     }
+
+    public static boolean shouldGoDeeper(@SuppressWarnings("UnusedParameters")  @NotNull VdlTypeSpec o) {
+        return false;
+    }
 }

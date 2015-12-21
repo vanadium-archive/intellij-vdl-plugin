@@ -1,7 +1,11 @@
 {
   parserClass='io.v.vdl.VdlParser'
 
+  implements='io.v.vdl.psi.VdlCompositeElement'
+  extends='io.v.vdl.psi.VdlCompositeElementImpl'
+
   elementTypeHolderClass='io.v.vdl.psi.VdlTypes'
+  elementTypeClass='io.v.vdl.psi.VdlCompositeElementType'
   tokenTypeClass='io.v.vdl.psi.VdlTokenType'
   parserUtilClass='io.v.vdl.VdlParserUtil'
 
@@ -98,6 +102,7 @@ left QualifiedTypeReferenceExpression ::= '.' identifier {elementType=TypeRefere
 private TypeLit ::=
     ArrayOrSliceType
   | StructType
+  | UnionType
   | PointerType
   | FunctionType
   | InterfaceType
@@ -107,6 +112,7 @@ private TypeLit ::=
 ArrayOrSliceType ::= '[' ('...'|Expression?) ']' Type {pin=1}
 
 StructType ::= struct '{' Fields? '}' {pin=1}
+UnionType ::= union '{' Fields? '}' {pin=1}
 private Fields ::= FieldDeclaration (semi FieldDeclaration)* semi? {pin=1}
 FieldDeclaration ::= (FieldDefinitionList Type | AnonymousFieldDefinition) Tag?
 private FieldDefinitionList ::= FieldDefinition (',' FieldDefinition)*
@@ -201,7 +207,7 @@ private ExpressionListRecover ::= !('!' | '!=' | '%' | '%=' | '&&' | '&' | '&=' 
 
 TypeDeclaration ::= 'type' ( TypeSpec | '(' TypeSpecs? ')' ) {pin(".*")=1}
 private TypeSpecs ::= TypeSpec (semi TypeSpec)* semi? {pin=1}
-TypeSpec ::= SpecType {pin=1}
+TypeSpec ::= SpecType {pin=1 methods=[shouldGoDeeper]}
 SpecType ::= identifier Type
 
 VarDeclaration ::= var ( VarSpec | '(' VarSpecs? ')' ) {pin=1}

@@ -5,8 +5,8 @@ import io.v.vdl.VdlLanguage;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
-public class VdlElementType extends IElementType {
-    public VdlElementType(@NotNull @NonNls String debugName) {
+public class VdlCompositeElementType extends IElementType {
+    public VdlCompositeElementType(@NotNull @NonNls String debugName) {
         super(debugName, VdlLanguage.INSTANCE);
     }
 }

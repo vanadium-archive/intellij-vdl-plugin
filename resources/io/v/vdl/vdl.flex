@@ -188,6 +188,7 @@ ESCAPES = [abfnrtv]
 "chan"                                    {  return CHAN;  }
 
 "struct"                                  {  return STRUCT;  }
+"union"                                   {  return UNION;  }
 "else"                                    {  return ELSE;  }
 "goto"                                    {  return GOTO;  }
 "switch"                                  {  return SWITCH;  }
