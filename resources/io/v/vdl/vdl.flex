@@ -202,6 +202,7 @@ ESCAPES = [abfnrtv]
 "range"                                   {  return RANGE;  }
 "type"                                    {  return TYPE_;  }
 "var"                                     {  return VAR;  }
+"error"                                   {  return ERROR;  }
 
 {IDENT}                                  {  yybegin(MAYBE_SEMICOLON); return IDENTIFIER; }
 

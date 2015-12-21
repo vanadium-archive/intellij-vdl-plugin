@@ -189,7 +189,8 @@ private OneOfDeclarations ::=
   | VarDeclaration
   | FunctionDeclaration
   | MethodDeclaration
-private TopLevelDeclarationRecover ::= !(';' |'type' | const | func | var)
+  | ErrorDeclaration
+private TopLevelDeclarationRecover ::= !(';' |'type' | const | func | var | error)
 
 ConstDeclaration ::= const ( ConstSpec | '(' ConstSpecs? ')' ) {pin(".*")=1}
 private ConstSpecs ::= ConstSpec (semi ConstSpec)* semi? {pin=1}
@@ -222,6 +223,15 @@ private VarDefinitionList ::= VarDefinition ( ',' VarDefinition )*
 VarDefinition ::= identifier
 
 ShortVarDeclaration ::= VarDefinitionList ':=' ExpressionList {pin=2 extends=VarSpec}
+
+ErrorDeclaration ::= error ( ErrorSpec | '(' ErrorSpecs? ')' ) {pin=1}
+private ErrorSpecs ::= ErrorSpec (semi ErrorSpec)* semi? {pin=1}
+ErrorSpec ::= ErrorIdentifier ArgumentList '{' ErrorDetails '}'
+ErrorIdentifier ::= identifier
+private ErrorDetails ::= ErrorDetail (',' ErrorDetail)* semi?
+ErrorDetail ::= ActionIdentifier | ErrorLanguageSpec
+ActionIdentifier ::= identifier
+ErrorLanguageSpec ::= StringLiteral ':' StringLiteral
 
 FunctionDeclaration ::= func identifier Signature Block? {
   pin=2
