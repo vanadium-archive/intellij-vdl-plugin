@@ -14,7 +14,7 @@ import java.util.Map;
 import static io.v.vdl.VdlSyntaxHighlightingColors.*;
 
 public class VdlSyntaxHighlighter extends SyntaxHighlighterBase {
-    private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<IElementType, TextAttributesKey>();
+    private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<>();
 
     static {
         fillMap(ATTRIBUTES, LINE_COMMENT, VdlParserDefinition.LINE_COMMENT);

@@ -31,7 +31,7 @@ public class VdlParserDefinition implements ParserDefinition {
     public static final TokenSet STRING_LITERALS = TokenSet.create(STRING, RAW_STRING, CHAR);
     public static final TokenSet NUMBERS = TokenSet.create(INT, FLOAT, FLOATI, DECIMALI, FLOATI); // todo: HEX, OCT,
     public static final TokenSet KEYWORDS = TokenSet.create(
-            PACKAGE, IMPORT, BREAK, CASE, CHAN, CONST, CONTINUE, DEFAULT, DEFER, ELSE, FALLTHROUGH, FOR, FUNC, GO, GOTO, IF, IMPORT,
+            PACKAGE, IMPORT, BREAK, CASE, CHAN, CONST, CONTINUE, DEFAULT, DEFER, ELSE, ENUM, FALLTHROUGH, FOR, FUNC, GO, GOTO, IF, IMPORT,
             INTERFACE, MAP, PACKAGE, RANGE, RETURN, SELECT, STRUCT, SWITCH, TYPE_, VAR, UNION);
     public static final TokenSet OPERATORS = TokenSet.create(
             EQ, ASSIGN, NOT_EQ, NOT, PLUS_PLUS, PLUS_ASSIGN, PLUS, MINUS_MINUS, MINUS_ASSIGN, MINUS, COND_OR, BIT_OR_ASSIGN, BIT_OR,
