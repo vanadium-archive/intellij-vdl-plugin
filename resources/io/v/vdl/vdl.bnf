@@ -1,0 +1,20 @@
+{
+  parserClass="io.v.vdl.VdlParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Simple"
+  psiImplClassSuffix="Impl"
+  psiPackage="io.v.vdl.psi"
+  psiImplPackage="io.v.vdl.psi.impl"
+
+  elementTypeHolderClass="io.v.vdl.psi.VdlTypes"
+  elementTypeClass="io.v.vdl.psi.VdlElementType"
+  tokenTypeClass="io.v.vdl.psi.VdlTokenType"
+}
+
+simpleFile ::= item_*
+
+private item_ ::= (property|COMMENT|CRLF)
+
+property ::= (KEY? SEPARATOR VALUE?) | KEY
