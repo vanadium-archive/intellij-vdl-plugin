@@ -7,4 +7,5 @@ type Foo interface {
 	WithTags(x, y int32) error {access.Read}
 	Some() error; Method() error
 	StreamingMethod() stream<int32> error
+	SomethingOrError() (int32 | error)
 }

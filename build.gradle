@@ -33,6 +33,7 @@ allprojects {
     }
     test {
       java.srcDir 'tests'
+      resources.srcDir 'testData'
     }
   }
 
