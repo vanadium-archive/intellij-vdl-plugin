@@ -96,7 +96,7 @@ ImportString ::= string | raw_string
 Type ::= TypeName | TypeLit | ParType
 ParType ::= '(' Type ')'
 private TypeName ::= TypeReferenceExpression QualifiedTypeReferenceExpression?
-TypeReferenceExpression ::= identifier
+TypeReferenceExpression ::= 'error' | identifier
 left QualifiedTypeReferenceExpression ::= '.' identifier {elementType=TypeReferenceExpression}
 
 private TypeLit ::=
@@ -230,9 +230,9 @@ ShortVarDeclaration ::= VarDefinitionList ':=' ExpressionList {pin=2 extends=Var
 
 ErrorDeclaration ::= error ( ErrorSpec | '(' ErrorSpecs? ')' ) {pin=1}
 private ErrorSpecs ::= ErrorSpec (semi ErrorSpec)* semi? {pin=1}
-ErrorSpec ::= ErrorIdentifier ArgumentList '{' ErrorDetails '}'
+ErrorSpec ::= ErrorIdentifier Parameters '{' ErrorDetails '}'
 ErrorIdentifier ::= identifier
-private ErrorDetails ::= ErrorDetail (',' ErrorDetail)* semi?
+private ErrorDetails ::= ErrorDetail (',' ErrorDetail)* ','? semi?
 ErrorDetail ::= ActionIdentifier | ErrorLanguageSpec
 ActionIdentifier ::= identifier
 ErrorLanguageSpec ::= StringLiteral ':' StringLiteral
