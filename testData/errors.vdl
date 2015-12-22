@@ -8,4 +8,9 @@ type Foo interface {
 	Some() error; Method() error
 	StreamingMethod() stream<int32> error
 	SomethingOrError() (int32 | error)
+	SomeNamedThingOrError() (someName int32 | error)
+	SomeNamedThingOrError1(int32) (someName int32 | error)
+	SomeNamedThingOrError1(whateverName int32) (someName int32 | error)
+	SomeNamedThingOrError2(whateverName, anotherName int32) (someName int32 | error)
+	SomeNamedThingOrError3(whateverName, anotherName int32) (someName int32, x string | error)
 }

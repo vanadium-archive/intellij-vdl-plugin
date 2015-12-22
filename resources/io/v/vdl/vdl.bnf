@@ -138,8 +138,10 @@ StreamSpec ::= stream StreamArgs {pin=1}
 StreamArgs ::= '<' '>'
     | '<' Type '>'
     | '<' Type ',' Type '>'
-Result ::= '(' TypeListNoPin ErrorResult? ')' | Type | Parameters
+Result ::= '(' TypeListNoPin ErrorResult? ')' | Type | ResultParameters
 ErrorResult ::= '|' error
+ResultParameters ::= '(' [ (ResultParameterList ','? | TypeListNoPin) ] ')'
+private ResultParameterList ::= ParameterDeclaration (',' (ParameterDeclaration | &')'))* ErrorResult? {pin(".*")=1}
 Parameters ::= '(' [ (ParameterList ','?| TypeListNoPin) ] ')'
 private ParameterList ::= ParameterDeclaration (',' (ParameterDeclaration | &')'))* {pin(".*")=1}
 ParameterDeclaration ::= ParamDefinitionListNoPin? '...'? Type | Type
