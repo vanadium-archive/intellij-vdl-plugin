@@ -96,7 +96,7 @@ ImportString ::= string | raw_string
 Type ::= TypeName | TypeLit | ParType
 ParType ::= '(' Type ')'
 private TypeName ::= TypeReferenceExpression QualifiedTypeReferenceExpression?
-TypeReferenceExpression ::= 'error' | identifier
+TypeReferenceExpression ::= identifier
 left QualifiedTypeReferenceExpression ::= '.' identifier {elementType=TypeReferenceExpression}
 
 private TypeLit ::=
@@ -129,7 +129,7 @@ Tag ::= StringLiteral
 PointerType ::= '*' Type {pin=1}
 
 FunctionType ::= func Signature {pin=1}
-Signature ::= Parameters StreamSpec? Result? {
+Signature ::= Parameters StreamSpec? Result? Tags? {
   pin=1
 }
 StreamSpec ::= stream StreamArgs {pin=1}
@@ -142,6 +142,8 @@ private ParameterList ::= ParameterDeclaration (',' (ParameterDeclaration | &')'
 ParameterDeclaration ::= ParamDefinitionListNoPin? '...'? Type | Type
 private ParamDefinitionListNoPin ::= ParamDefinition &(!('.' | ')')) (',' ParamDefinition)* // todo
 ParamDefinition ::= identifier
+
+Tags ::= '{' ExpressionList '}'
 
 InterfaceType ::= interface '{' MethodSpecs? '}'
 private MethodSpecs ::= MethodSpec (semi MethodSpec)* semi? {pin=1}
