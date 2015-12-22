@@ -39,8 +39,6 @@ public class VdlParserDefinition implements ParserDefinition {
             LESS, BIT_XOR_ASSIGN, BIT_XOR, MUL_ASSIGN, MUL, QUOTIENT_ASSIGN, QUOTIENT, REMAINDER_ASSIGN, REMAINDER, SHIFT_RIGHT_ASSIGN,
             SHIFT_RIGHT, GREATER_OR_EQUAL, GREATER, VAR_ASSIGN);
 
-    public static final IFileElementType FILE = new IFileElementType(Language.<VdlLanguage>findInstance(VdlLanguage.class));
-
     @NotNull
     @Override
     public Lexer createLexer(Project project) {
@@ -55,7 +53,7 @@ public class VdlParserDefinition implements ParserDefinition {
 
     @Override
     public IFileElementType getFileNodeType() {
-        return FILE;
+        return VdlFileElementType.INSTANCE;
     }
 
     @NotNull
