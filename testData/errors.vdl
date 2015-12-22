@@ -1,0 +1,5 @@
+package main
+
+type Foo interface {
+	Bar(int32) error
+}
