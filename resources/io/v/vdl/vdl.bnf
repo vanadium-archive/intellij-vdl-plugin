@@ -132,7 +132,7 @@ Tag ::= StringLiteral
 PointerType ::= '*' Type {pin=1}
 
 FunctionType ::= func Signature {pin=1}
-Signature ::= Parameters StreamSpec? Result?
+Signature ::= Parameters StreamSpec? Result
 StreamSpec ::= stream StreamArgs {pin=1}
 StreamArgs ::= '<' '>'
     | '<' Type '>'

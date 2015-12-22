@@ -5,6 +5,6 @@ type Foo interface {
 	Baz() error
 	AnotherBaz(format string) error
 	WithTags(x, y int32) error {access.Read}
-	Some(); Method()
+	Some() error; Method() error
 	StreamingMethod() stream<int32> error
 }
