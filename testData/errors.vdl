@@ -2,4 +2,9 @@ package main
 
 type Foo interface {
 	Bar(int32) error
+	Baz() error
+	AnotherBaz(format string) error
+	WithTags(x, y int32) error {access.Read}
+	Some(); Method()
+	StreamingMethod() stream<int32> error
 }

@@ -9,9 +9,4 @@ public class VdlTokenType extends IElementType {
     public VdlTokenType(@NotNull @NonNls String debugName) {
         super(debugName, VdlLanguage.INSTANCE);
     }
-
-    @Override
-    public String toString() {
-        return "VdlTokenType." + super.toString();
-    }
 }
