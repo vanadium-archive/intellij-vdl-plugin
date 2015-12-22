@@ -28,6 +28,7 @@
     <lang.parserDefinition language="VDL" implementationClass="io.v.vdl.VdlParserDefinition"/>
     <lang.syntaxHighlighterFactory language="VDL" implementationClass="io.v.vdl.VdlSyntaxHighlighterFactory"/>
     <lang.commenter language="VDL" implementationClass="io.v.vdl.VdlCommenter"/>
+    <colorSettingsPage implementation="io.v.vdl.VdlColorSettingsPage"/>
   </extensions>
 
   <actions>
