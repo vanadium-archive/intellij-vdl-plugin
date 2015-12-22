@@ -1,3 +1,7 @@
+// Copyright 2015 The Vanadium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 package io.v.vdl;
 
 import com.intellij.openapi.editor.colors.TextAttributesKey;
@@ -39,12 +43,12 @@ public class VdlColorSettingsPage implements ColorSettingsPage {
                 "\n" +
                 "// This is a line comment.\n" +
                 "type Foo() {\n" +
-                "\tBar(int32) error\n" +
-                "\tBaz(string) stream<int32, bool>\n" +
+                "    Bar(int32) error\n" +
+                "    Baz(string) stream<int32, bool>\n" +
                 "}\n" +
                 "\n" +
-                "error (" +
-                "\tSomeError() {\"en\": \"error description\"}\n" +
+                "error (\n" +
+                "    SomeError() {\"en\": \"error description\"}\n" +
                 ")";
     }
 
