@@ -179,6 +179,7 @@ ESCAPES = [abfnrtv]
 "func"                                    { return FUNC;  }
 "interface"                               { return INTERFACE;  }
 "select"                                  { return SELECT;  }
+"stream"                                  { return STREAM;  }
 
 "case"                                    { return CASE;  }
 "defer"                                   { return DEFER;  }
