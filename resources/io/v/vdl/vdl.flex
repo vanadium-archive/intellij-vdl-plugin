@@ -167,6 +167,8 @@ ESCAPES = [abfnrtv]
 ">="                                      { return GREATER_OR_EQUAL; }
 ">"                                       { return GREATER; }
 
+"?"                                       { return OPTIONAL_ARG; }
+
 ":="                                      { return VAR_ASSIGN; }
 
 "break"                                   { yybegin(MAYBE_SEMICOLON); return BREAK;  }

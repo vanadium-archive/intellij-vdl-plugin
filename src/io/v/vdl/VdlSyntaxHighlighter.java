@@ -28,6 +28,7 @@ public class VdlSyntaxHighlighter extends SyntaxHighlighterBase {
         fillMap(ATTRIBUTES, COLON, VdlTypes.COLON);
         fillMap(ATTRIBUTES, SEMICOLON, VdlTypes.SEMICOLON);
         fillMap(ATTRIBUTES, COMMA, VdlTypes.COMMA);
+        fillMap(ATTRIBUTES, OPTIONAL_ARG, VdlTypes.OPTIONAL_ARG);
         fillMap(ATTRIBUTES, VdlParserDefinition.OPERATORS, OPERATOR);
         fillMap(ATTRIBUTES, VdlParserDefinition.KEYWORDS, KEYWORD);
         fillMap(ATTRIBUTES, VdlParserDefinition.NUMBERS, NUMBER);

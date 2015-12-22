@@ -19,6 +19,7 @@ public class VdlHighlightingTest extends LightPlatformCodeInsightFixtureTestCase
 
     public void testErrors() { doTest(); }
     public void testFortune() { doTest(); }
+    public void testOptional() { doTest(); }
 
     @Override
     protected LightProjectDescriptor getProjectDescriptor() {

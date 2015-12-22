@@ -23,6 +23,7 @@ public class VdlSyntaxHighlightingColors {
     public static final TextAttributesKey COLON = createTextAttributesKey("VDL_COLON", HighlighterColors.TEXT);
     public static final TextAttributesKey COMMA = createTextAttributesKey("VDL_COMMA", DefaultLanguageHighlighterColors.COMMA);
     public static final TextAttributesKey BAD_CHARACTER = createTextAttributesKey("VDL_BAD_TOKEN", HighlighterColors.BAD_CHARACTER);
+    public static final TextAttributesKey OPTIONAL_ARG = createTextAttributesKey("VDL_OPTIONAL_ARG", DefaultLanguageHighlighterColors.OPERATION_SIGN);
     public static final TextAttributesKey TYPE_SPECIFICATION = createTextAttributesKey("VDL_TYPE_SPECIFICATION", DefaultLanguageHighlighterColors.CLASS_NAME);
     public static final TextAttributesKey TYPE_REFERENCE = createTextAttributesKey("VDL_TYPE_REFERENCE", DefaultLanguageHighlighterColors.CLASS_REFERENCE);
     public static final TextAttributesKey BUILTIN_TYPE_REFERENCE = createTextAttributesKey("VDL_BUILTIN_TYPE_REFERENCE", DefaultLanguageHighlighterColors.CLASS_REFERENCE);

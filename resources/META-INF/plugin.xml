@@ -22,7 +22,6 @@
        on how to target different products -->
   <depends>com.intellij.modules.lang</depends>
 
-
   <extensions defaultExtensionNs="com.intellij">
     <fileTypeFactory implementation="io.v.vdl.VdlFileTypeFactory"/>
     <lang.parserDefinition language="VDL" implementationClass="io.v.vdl.VdlParserDefinition"/>
