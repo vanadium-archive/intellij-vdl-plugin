@@ -29,6 +29,7 @@
     <lang.commenter language="VDL" implementationClass="io.v.vdl.VdlCommenter"/>
     <lang.psiStructureViewFactory language="VDL" implementationClass="io.v.vdl.VdlStructureViewFactory"/>
     <lang.braceMatcher language="VDL" implementationClass="io.v.vdl.VdlBraceMatcher"/>
+    <completion.contributor language="VDL" implementationClass="io.v.vdl.VdlKeywordCompletionContributor"/>
     <colorSettingsPage implementation="io.v.vdl.VdlColorSettingsPage"/>
   </extensions>
 
