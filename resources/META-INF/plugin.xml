@@ -28,6 +28,7 @@
     <lang.syntaxHighlighterFactory language="VDL" implementationClass="io.v.vdl.VdlSyntaxHighlighterFactory"/>
     <lang.commenter language="VDL" implementationClass="io.v.vdl.VdlCommenter"/>
     <lang.psiStructureViewFactory language="VDL" implementationClass="io.v.vdl.VdlStructureViewFactory"/>
+    <lang.braceMatcher language="VDL" implementationClass="io.v.vdl.VdlBraceMatcher"/>
     <colorSettingsPage implementation="io.v.vdl.VdlColorSettingsPage"/>
   </extensions>
 
