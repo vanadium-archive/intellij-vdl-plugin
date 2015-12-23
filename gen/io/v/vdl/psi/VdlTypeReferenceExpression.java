@@ -7,6 +7,9 @@ import com.intellij.psi.PsiElement;
 
 public interface VdlTypeReferenceExpression extends VdlCompositeElement {
 
+  @Nullable
+  PsiElement getOptionalArg();
+
   @NotNull
   PsiElement getIdentifier();
 

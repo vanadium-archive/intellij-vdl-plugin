@@ -11,10 +11,7 @@ public interface VdlResult extends VdlCompositeElement {
   VdlErrorResult getErrorResult();
 
   @Nullable
-  VdlErrorTypeName getErrorTypeName();
-
-  @Nullable
-  VdlParameters getParameters();
+  VdlResultParameters getResultParameters();
 
   @Nullable
   VdlType getType();

@@ -266,6 +266,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
     else if (t == RESULT) {
       r = Result(b, 0);
     }
+    else if (t == RESULT_PARAMETERS) {
+      r = ResultParameters(b, 0);
+    }
     else if (t == RETURN_STATEMENT) {
       r = ReturnStatement(b, 0);
     }
@@ -2834,7 +2837,6 @@ public class VdlParser implements PsiParser, LightPsiParser {
   // TypeName &(!'(') | identifier Signature Tags?
   public static boolean MethodSpec(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "MethodSpec")) return false;
-    if (!nextTokenIs(b, "<method spec>", ERROR, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, METHOD_SPEC, "<method spec>");
     r = MethodSpec_0(b, l + 1);
@@ -2897,7 +2899,6 @@ public class VdlParser implements PsiParser, LightPsiParser {
   // MethodSpec (semi MethodSpec)* semi?
   static boolean MethodSpecs(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "MethodSpecs")) return false;
-    if (!nextTokenIs(b, "", ERROR, IDENTIFIER)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_);
     r = MethodSpec(b, l + 1);
@@ -3314,11 +3315,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   // TypeReferenceExpression
   public static boolean ReceiverResultType(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ReceiverResultType")) return false;
-    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    if (!nextTokenIs(b, "<receiver result type>", OPTIONAL_ARG, IDENTIFIER)) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, TYPE, "<receiver result type>");
     r = TypeReferenceExpression(b, l + 1);
-    exit_section_(b, m, TYPE, r);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -3326,7 +3327,6 @@ public class VdlParser implements PsiParser, LightPsiParser {
   // '*'? ReceiverResultType ','?
   static boolean ReceiverTail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ReceiverTail")) return false;
-    if (!nextTokenIs(b, "", MUL, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = ReceiverTail_0(b, l + 1);
@@ -3420,15 +3420,14 @@ public class VdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '(' TypeListNoPin ErrorResult? ')' | ErrorTypeName | Parameters
+  // '(' TypeListNoPin ErrorResult? ')' | Type | ResultParameters
   public static boolean Result(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Result")) return false;
-    if (!nextTokenIs(b, "<result>", LPAREN, ERROR)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, RESULT, "<result>");
     r = Result_0(b, l + 1);
-    if (!r) r = ErrorTypeName(b, l + 1);
-    if (!r) r = Parameters(b, l + 1);
+    if (!r) r = Type(b, l + 1);
+    if (!r) r = ResultParameters(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -3450,6 +3449,122 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean Result_0_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Result_0_2")) return false;
     ErrorResult(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // ParameterDeclaration (',' (ParameterDeclaration | &')'))* ErrorResult?
+  static boolean ResultParameterList(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ResultParameterList")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
+    r = ParameterDeclaration(b, l + 1);
+    p = r; // pin = 1
+    r = r && report_error_(b, ResultParameterList_1(b, l + 1));
+    r = p && ResultParameterList_2(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // (',' (ParameterDeclaration | &')'))*
+  private static boolean ResultParameterList_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ResultParameterList_1")) return false;
+    int c = current_position_(b);
+    while (true) {
+      if (!ResultParameterList_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "ResultParameterList_1", c)) break;
+      c = current_position_(b);
+    }
+    return true;
+  }
+
+  // ',' (ParameterDeclaration | &')')
+  private static boolean ResultParameterList_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ResultParameterList_1_0")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
+    r = consumeToken(b, COMMA);
+    p = r; // pin = 1
+    r = r && ResultParameterList_1_0_1(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // ParameterDeclaration | &')'
+  private static boolean ResultParameterList_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ResultParameterList_1_0_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = ParameterDeclaration(b, l + 1);
+    if (!r) r = ResultParameterList_1_0_1_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // &')'
+  private static boolean ResultParameterList_1_0_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ResultParameterList_1_0_1_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _AND_);
+    r = consumeToken(b, RPAREN);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // ErrorResult?
+  private static boolean ResultParameterList_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ResultParameterList_2")) return false;
+    ErrorResult(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // '(' [ (ResultParameterList ','? | TypeListNoPin) ] ')'
+  public static boolean ResultParameters(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ResultParameters")) return false;
+    if (!nextTokenIs(b, LPAREN)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, LPAREN);
+    r = r && ResultParameters_1(b, l + 1);
+    r = r && consumeToken(b, RPAREN);
+    exit_section_(b, m, RESULT_PARAMETERS, r);
+    return r;
+  }
+
+  // [ (ResultParameterList ','? | TypeListNoPin) ]
+  private static boolean ResultParameters_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ResultParameters_1")) return false;
+    ResultParameters_1_0(b, l + 1);
+    return true;
+  }
+
+  // ResultParameterList ','? | TypeListNoPin
+  private static boolean ResultParameters_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ResultParameters_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = ResultParameters_1_0_0(b, l + 1);
+    if (!r) r = TypeListNoPin(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // ResultParameterList ','?
+  private static boolean ResultParameters_1_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ResultParameters_1_0_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = ResultParameterList(b, l + 1);
+    r = r && ResultParameters_1_0_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // ','?
+  private static boolean ResultParameters_1_0_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ResultParameters_1_0_0_1")) return false;
+    consumeToken(b, COMMA);
     return true;
   }
 
@@ -4317,7 +4432,6 @@ public class VdlParser implements PsiParser, LightPsiParser {
   //     | ErrorTypeName
   static boolean TypeName(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeName")) return false;
-    if (!nextTokenIs(b, "", ERROR, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = TypeName_0(b, l + 1);
@@ -4345,15 +4459,23 @@ public class VdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // identifier
+  // '?'? identifier
   public static boolean TypeReferenceExpression(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeReferenceExpression")) return false;
-    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    if (!nextTokenIs(b, "<type reference expression>", OPTIONAL_ARG, IDENTIFIER)) return false;
     boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, IDENTIFIER);
-    exit_section_(b, m, TYPE_REFERENCE_EXPRESSION, r);
+    Marker m = enter_section_(b, l, _NONE_, TYPE_REFERENCE_EXPRESSION, "<type reference expression>");
+    r = TypeReferenceExpression_0(b, l + 1);
+    r = r && consumeToken(b, IDENTIFIER);
+    exit_section_(b, l, m, r, false, null);
     return r;
+  }
+
+  // '?'?
+  private static boolean TypeReferenceExpression_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "TypeReferenceExpression_0")) return false;
+    consumeToken(b, OPTIONAL_ARG);
+    return true;
   }
 
   /* ********************************************************** */

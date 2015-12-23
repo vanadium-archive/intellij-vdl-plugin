@@ -335,6 +335,10 @@ public class VdlVisitor extends PsiElementVisitor {
     visitCompositeElement(o);
   }
 
+  public void visitResultParameters(@NotNull VdlResultParameters o) {
+    visitCompositeElement(o);
+  }
+
   public void visitReturnStatement(@NotNull VdlReturnStatement o) {
     visitStatement(o);
   }

@@ -27,6 +27,12 @@ public class VdlTypeReferenceExpressionImpl extends VdlCompositeElementImpl impl
   }
 
   @Override
+  @Nullable
+  public PsiElement getOptionalArg() {
+    return findChildByType(OPTIONAL_ARG);
+  }
+
+  @Override
   @NotNull
   public PsiElement getIdentifier() {
     return findNotNullChildByType(IDENTIFIER);

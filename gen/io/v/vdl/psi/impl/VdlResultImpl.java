@@ -34,14 +34,8 @@ public class VdlResultImpl extends VdlCompositeElementImpl implements VdlResult 
 
   @Override
   @Nullable
-  public VdlErrorTypeName getErrorTypeName() {
-    return findChildByClass(VdlErrorTypeName.class);
-  }
-
-  @Override
-  @Nullable
-  public VdlParameters getParameters() {
-    return findChildByClass(VdlParameters.class);
+  public VdlResultParameters getResultParameters() {
+    return findChildByClass(VdlResultParameters.class);
   }
 
   @Override

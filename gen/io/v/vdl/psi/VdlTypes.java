@@ -90,6 +90,7 @@ public interface VdlTypes {
   IElementType RECV_STATEMENT = new VdlCompositeElementType("RECV_STATEMENT");
   IElementType REFERENCE_EXPRESSION = new VdlCompositeElementType("REFERENCE_EXPRESSION");
   IElementType RESULT = new VdlCompositeElementType("RESULT");
+  IElementType RESULT_PARAMETERS = new VdlCompositeElementType("RESULT_PARAMETERS");
   IElementType RETURN_STATEMENT = new VdlCompositeElementType("RETURN_STATEMENT");
   IElementType SELECTOR_EXPR = new VdlCompositeElementType("SELECTOR_EXPR");
   IElementType SELECT_STATEMENT = new VdlCompositeElementType("SELECT_STATEMENT");
@@ -180,6 +181,7 @@ public interface VdlTypes {
   IElementType NOT = new VdlTokenType("!");
   IElementType NOT_EQ = new VdlTokenType("!=");
   IElementType OCT = new VdlTokenType("oct");
+  IElementType OPTIONAL_ARG = new VdlTokenType("?");
   IElementType PACKAGE = new VdlTokenType("package");
   IElementType PLUS = new VdlTokenType("+");
   IElementType PLUS_ASSIGN = new VdlTokenType("+=");
@@ -460,6 +462,9 @@ public interface VdlTypes {
       }
       else if (type == RESULT) {
         return new VdlResultImpl(node);
+      }
+      else if (type == RESULT_PARAMETERS) {
+        return new VdlResultParametersImpl(node);
       }
       else if (type == RETURN_STATEMENT) {
         return new VdlReturnStatementImpl(node);
