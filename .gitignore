@@ -2,6 +2,5 @@
 .gradle
 *.jar
 build/
-gen/
 out/
 *.skeleton
