@@ -60,7 +60,7 @@ public interface VdlTypes {
   IElementType IF_STATEMENT = new VdlCompositeElementType("IF_STATEMENT");
   IElementType IMPORT_DECLARATION = new VdlCompositeElementType("IMPORT_DECLARATION");
   IElementType IMPORT_LIST = new VdlCompositeElementType("IMPORT_LIST");
-  IElementType IMPORT_SPEC = new VdlCompositeElementType("IMPORT_SPEC");
+  IElementType IMPORT_SPEC = VdlStubElementTypeFactory.factory("IMPORT_SPEC");
   IElementType IMPORT_STRING = new VdlCompositeElementType("IMPORT_STRING");
   IElementType INDEX_OR_SLICE_EXPR = new VdlCompositeElementType("INDEX_OR_SLICE_EXPR");
   IElementType INTERFACE_TYPE = new VdlCompositeElementType("INTERFACE_TYPE");
@@ -73,8 +73,7 @@ public interface VdlTypes {
   IElementType LITERAL_TYPE_EXPR = new VdlCompositeElementType("LITERAL_TYPE_EXPR");
   IElementType LITERAL_VALUE = new VdlCompositeElementType("LITERAL_VALUE");
   IElementType MAP_TYPE = new VdlCompositeElementType("MAP_TYPE");
-  IElementType METHOD_DECLARATION = new VdlCompositeElementType("METHOD_DECLARATION");
-  IElementType METHOD_SPEC = new VdlCompositeElementType("METHOD_SPEC");
+  IElementType METHOD_SPEC = VdlStubElementTypeFactory.factory("METHOD_SPEC");
   IElementType MUL_EXPR = new VdlCompositeElementType("MUL_EXPR");
   IElementType OR_EXPR = new VdlCompositeElementType("OR_EXPR");
   IElementType PACKAGE_CLAUSE = new VdlCompositeElementType("PACKAGE_CLAUSE");
@@ -85,7 +84,6 @@ public interface VdlTypes {
   IElementType PAR_TYPE = new VdlCompositeElementType("PAR_TYPE");
   IElementType POINTER_TYPE = new VdlCompositeElementType("POINTER_TYPE");
   IElementType RANGE_CLAUSE = new VdlCompositeElementType("RANGE_CLAUSE");
-  IElementType RECEIVER = new VdlCompositeElementType("RECEIVER");
   IElementType RECEIVER_TYPE = new VdlCompositeElementType("RECEIVER_TYPE");
   IElementType RECV_STATEMENT = new VdlCompositeElementType("RECV_STATEMENT");
   IElementType REFERENCE_EXPRESSION = new VdlCompositeElementType("REFERENCE_EXPRESSION");
@@ -95,6 +93,7 @@ public interface VdlTypes {
   IElementType SELECTOR_EXPR = new VdlCompositeElementType("SELECTOR_EXPR");
   IElementType SELECT_STATEMENT = new VdlCompositeElementType("SELECT_STATEMENT");
   IElementType SEND_STATEMENT = new VdlCompositeElementType("SEND_STATEMENT");
+  IElementType SET_TYPE = new VdlCompositeElementType("SET_TYPE");
   IElementType SHORT_VAR_DECLARATION = new VdlCompositeElementType("SHORT_VAR_DECLARATION");
   IElementType SIGNATURE = new VdlCompositeElementType("SIGNATURE");
   IElementType SIMPLE_STATEMENT = new VdlCompositeElementType("SIMPLE_STATEMENT");
@@ -115,7 +114,7 @@ public interface VdlTypes {
   IElementType TYPE_GUARD = new VdlCompositeElementType("TYPE_GUARD");
   IElementType TYPE_LIST = new VdlCompositeElementType("TYPE_LIST");
   IElementType TYPE_REFERENCE_EXPRESSION = new VdlCompositeElementType("TYPE_REFERENCE_EXPRESSION");
-  IElementType TYPE_SPEC = new VdlCompositeElementType("TYPE_SPEC");
+  IElementType TYPE_SPEC = VdlStubElementTypeFactory.factory("TYPE_SPEC");
   IElementType TYPE_SWITCH_GUARD = new VdlCompositeElementType("TYPE_SWITCH_GUARD");
   IElementType TYPE_SWITCH_STATEMENT = new VdlCompositeElementType("TYPE_SWITCH_STATEMENT");
   IElementType UNARY_EXPR = new VdlCompositeElementType("UNARY_EXPR");
@@ -200,6 +199,7 @@ public interface VdlTypes {
   IElementType SEMICOLON = new VdlTokenType(";");
   IElementType SEMICOLON_SYNTHETIC = new VdlTokenType("<NL>");
   IElementType SEND_CHANNEL = new VdlTokenType("<-");
+  IElementType SET = new VdlTokenType("set");
   IElementType SHIFT_LEFT = new VdlTokenType("<<");
   IElementType SHIFT_LEFT_ASSIGN = new VdlTokenType("<<=");
   IElementType SHIFT_RIGHT = new VdlTokenType(">>");
@@ -412,9 +412,6 @@ public interface VdlTypes {
       else if (type == MAP_TYPE) {
         return new VdlMapTypeImpl(node);
       }
-      else if (type == METHOD_DECLARATION) {
-        return new VdlMethodDeclarationImpl(node);
-      }
       else if (type == METHOD_SPEC) {
         return new VdlMethodSpecImpl(node);
       }
@@ -448,9 +445,6 @@ public interface VdlTypes {
       else if (type == RANGE_CLAUSE) {
         return new VdlRangeClauseImpl(node);
       }
-      else if (type == RECEIVER) {
-        return new VdlReceiverImpl(node);
-      }
       else if (type == RECEIVER_TYPE) {
         return new VdlReceiverTypeImpl(node);
       }
@@ -477,6 +471,9 @@ public interface VdlTypes {
       }
       else if (type == SEND_STATEMENT) {
         return new VdlSendStatementImpl(node);
+      }
+      else if (type == SET_TYPE) {
+        return new VdlSetTypeImpl(node);
       }
       else if (type == SHORT_VAR_DECLARATION) {
         return new VdlShortVarDeclarationImpl(node);

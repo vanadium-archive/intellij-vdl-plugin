@@ -5,15 +5,18 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface VdlPackageClause extends VdlCompositeElement {
-
-  @Nullable
-  PsiElement getIdentifier();
+public interface VdlSetType extends VdlType {
 
   @NotNull
-  PsiElement getPackage();
+  VdlType getType();
 
-  @Nullable
-  String getName();
+  @NotNull
+  PsiElement getLbrack();
+
+  @NotNull
+  PsiElement getRbrack();
+
+  @NotNull
+  PsiElement getSet();
 
 }

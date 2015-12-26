@@ -215,9 +215,6 @@ public class VdlParser implements PsiParser, LightPsiParser {
     else if (t == MAP_TYPE) {
       r = MapType(b, 0);
     }
-    else if (t == METHOD_DECLARATION) {
-      r = MethodDeclaration(b, 0);
-    }
     else if (t == METHOD_SPEC) {
       r = MethodSpec(b, 0);
     }
@@ -251,9 +248,6 @@ public class VdlParser implements PsiParser, LightPsiParser {
     else if (t == RANGE_CLAUSE) {
       r = RangeClause(b, 0);
     }
-    else if (t == RECEIVER) {
-      r = Receiver(b, 0);
-    }
     else if (t == RECEIVER_TYPE) {
       r = ReceiverType(b, 0);
     }
@@ -280,6 +274,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
     }
     else if (t == SEND_STATEMENT) {
       r = SendStatement(b, 0);
+    }
+    else if (t == SET_TYPE) {
+      r = SetType(b, 0);
     }
     else if (t == SHORT_VAR_DECLARATION) {
       r = ShortVarDeclaration(b, 0);
@@ -388,8 +385,8 @@ public class VdlParser implements PsiParser, LightPsiParser {
       SELECTOR_EXPR),
     create_token_set_(ARRAY_OR_SLICE_TYPE, CHANNEL_TYPE, ENUM_TYPE, FUNCTION_TYPE,
       INTERFACE_TYPE, MAP_TYPE, PAR_TYPE, POINTER_TYPE,
-      RECEIVER_TYPE, SPEC_TYPE, STRUCT_TYPE, TYPE,
-      TYPE_LIST, UNION_TYPE),
+      RECEIVER_TYPE, SET_TYPE, SPEC_TYPE, STRUCT_TYPE,
+      TYPE, TYPE_LIST, UNION_TYPE),
     create_token_set_(ASSIGNMENT_STATEMENT, BREAK_STATEMENT, CONTINUE_STATEMENT, DEFER_STATEMENT,
       ELSE_STATEMENT, EXPR_SWITCH_STATEMENT, FALLTHROUGH_STATEMENT, FOR_STATEMENT,
       GOTO_STATEMENT, GO_STATEMENT, IF_STATEMENT, LABELED_STATEMENT,
@@ -2810,30 +2807,6 @@ public class VdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // func Receiver identifier Signature Block?
-  public static boolean MethodDeclaration(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "MethodDeclaration")) return false;
-    if (!nextTokenIs(b, FUNC)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, METHOD_DECLARATION, null);
-    r = consumeToken(b, FUNC);
-    r = r && Receiver(b, l + 1);
-    p = r; // pin = 2
-    r = r && report_error_(b, consumeToken(b, IDENTIFIER));
-    r = p && report_error_(b, Signature(b, l + 1)) && r;
-    r = p && MethodDeclaration_4(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
-  }
-
-  // Block?
-  private static boolean MethodDeclaration_4(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "MethodDeclaration_4")) return false;
-    Block(b, l + 1);
-    return true;
-  }
-
-  /* ********************************************************** */
   // TypeName &(!'(') | identifier Signature Tags?
   public static boolean MethodSpec(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "MethodSpec")) return false;
@@ -2944,7 +2917,6 @@ public class VdlParser implements PsiParser, LightPsiParser {
   //   | TypeDeclaration
   //   | VarDeclaration
   //   | FunctionDeclaration
-  //   | MethodDeclaration
   //   | ErrorDeclaration
   static boolean OneOfDeclarations(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "OneOfDeclarations")) return false;
@@ -2954,7 +2926,6 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!r) r = TypeDeclaration(b, l + 1);
     if (!r) r = VarDeclaration(b, l + 1);
     if (!r) r = FunctionDeclaration(b, l + 1);
-    if (!r) r = MethodDeclaration(b, l + 1);
     if (!r) r = ErrorDeclaration(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
@@ -3275,82 +3246,6 @@ public class VdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '(' (identifier ReceiverTail | ReceiverTail) ')'
-  public static boolean Receiver(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Receiver")) return false;
-    if (!nextTokenIs(b, LPAREN)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, RECEIVER, null);
-    r = consumeToken(b, LPAREN);
-    p = r; // pin = 1
-    r = r && report_error_(b, Receiver_1(b, l + 1));
-    r = p && consumeToken(b, RPAREN) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
-  }
-
-  // identifier ReceiverTail | ReceiverTail
-  private static boolean Receiver_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Receiver_1")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = Receiver_1_0(b, l + 1);
-    if (!r) r = ReceiverTail(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // identifier ReceiverTail
-  private static boolean Receiver_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Receiver_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, IDENTIFIER);
-    r = r && ReceiverTail(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // TypeReferenceExpression
-  public static boolean ReceiverResultType(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "ReceiverResultType")) return false;
-    if (!nextTokenIs(b, "<receiver result type>", OPTIONAL_ARG, IDENTIFIER)) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, TYPE, "<receiver result type>");
-    r = TypeReferenceExpression(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // '*'? ReceiverResultType ','?
-  static boolean ReceiverTail(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "ReceiverTail")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = ReceiverTail_0(b, l + 1);
-    r = r && ReceiverResultType(b, l + 1);
-    r = r && ReceiverTail_2(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // '*'?
-  private static boolean ReceiverTail_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "ReceiverTail_0")) return false;
-    consumeToken(b, MUL);
-    return true;
-  }
-
-  // ','?
-  private static boolean ReceiverTail_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "ReceiverTail_2")) return false;
-    consumeToken(b, COMMA);
-    return true;
-  }
-
-  /* ********************************************************** */
   // TypeName | '(' '*' TypeName ')' | '(' ReceiverType ')'
   public static boolean ReceiverType(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ReceiverType")) return false;
@@ -3629,6 +3524,21 @@ public class VdlParser implements PsiParser, LightPsiParser {
     r = r && Expression(b, l + 1, -1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
+  }
+
+  /* ********************************************************** */
+  // set '[' Type ']'
+  public static boolean SetType(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "SetType")) return false;
+    if (!nextTokenIs(b, SET)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, SET);
+    r = r && consumeToken(b, LBRACK);
+    r = r && Type(b, l + 1);
+    r = r && consumeToken(b, RBRACK);
+    exit_section_(b, m, SET_TYPE, r);
+    return r;
   }
 
   /* ********************************************************** */
@@ -4410,6 +4320,7 @@ public class VdlParser implements PsiParser, LightPsiParser {
   //   | InterfaceType
   //   | MapType
   //   | ChannelType
+  //   | SetType
   static boolean TypeLit(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeLit")) return false;
     boolean r;
@@ -4423,6 +4334,7 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!r) r = InterfaceType(b, l + 1);
     if (!r) r = MapType(b, l + 1);
     if (!r) r = ChannelType(b, l + 1);
+    if (!r) r = SetType(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }

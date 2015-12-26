@@ -187,6 +187,8 @@ ESCAPES = [abfnrtv]
 "defer"                                   { return DEFER;  }
 "go"                                      { return GO;  }
 "map"                                     { return MAP;  }
+"set"                                     { return SET;  }
+
 
 "chan"                                    {  return CHAN;  }
 

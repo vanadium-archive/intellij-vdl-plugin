@@ -38,4 +38,9 @@ public class VdlPackageClauseImpl extends VdlCompositeElementImpl implements Vdl
     return findNotNullChildByType(PACKAGE);
   }
 
+  @Nullable
+  public String getName() {
+    return VdlPsiImplUtil.getName(this);
+  }
+
 }

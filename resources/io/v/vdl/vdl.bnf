@@ -72,6 +72,10 @@
   extends("(Or|Add|Conversion|Mul|Selector)Expr")=BinaryExpr
   extends(".*(Expr|Literal|Lit|OperandName)")=Expression
 
+  implements("(Type|Import|Method)Spec|MethodDeclaration")="io.v.vdl.psi.VdlNamedElement"
+  extends("(Type|Import|Method)Spec|MethodDeclaration")="io.v.vdl.psi.VdlNamedElementImpl<?>"
+  elementTypeFactory("(Type|Import|Method)Spec|MethodDeclaration")="io.v.vdl.psi.VdlStubElementTypeFactory.factory"
+
   pin(".*Statement")=1
   extends(".*Statement")=Statement
   extends(".*Type|TypeList")=Type
@@ -85,14 +89,19 @@ File ::= PackageClause semi ImportList TopLevelDeclaration* {pin(".*")=1}
 ImportList ::= (ImportDeclaration semi)+|<<emptyImportList>>
 private semi ::= '<NL>' | ';' | <<eof>>
 
-PackageClause ::= package identifier {pin=1}
+PackageClause ::= package identifier {pin=1 methods=[getName]}
 
 ImportDeclaration ::= import ( ImportSpec | '(' ImportSpecs? ')' ) {
   pin(".*")=1
 }
 private ImportSpecs ::= ImportSpec (semi ImportSpec)* semi? {pin=1}
-ImportSpec ::= [ '.' | identifier ] ImportString
-ImportString ::= string | raw_string
+ImportSpec ::= [ '.' | identifier ] ImportString {
+    stubClass="io.v.vdl.psi.VdlImportSpecStub"
+    methods=[getAlias isDot getPath getName]
+}
+ImportString ::= string | raw_string {
+    methods=[getPath]
+}
 
 Type ::= TypeName | ErrorTypeName | TypeLit | ParType
 ParType ::= '(' Type ')'
@@ -113,8 +122,10 @@ private TypeLit ::=
   | InterfaceType
   | MapType
   | ChannelType
+  | SetType
 
 ArrayOrSliceType ::= '[' ('...'|Expression?) ']' Type {pin=1}
+SetType ::= set '[' Type ']'
 
 EnumType ::= enum '{' EnumFields? '}' {pin=1}
 private EnumFields ::= EnumFieldDeclaration (semi EnumFieldDeclaration)* semi? {pin=1}
@@ -151,7 +162,9 @@ ParamDefinition ::= identifier
 
 InterfaceType ::= interface '{' MethodSpecs? '}'
 private MethodSpecs ::= MethodSpec (semi MethodSpec)* semi? {pin=1}
-MethodSpec ::= TypeName &(!'(') | identifier Signature Tags?
+MethodSpec ::= TypeName &(!'(') | identifier Signature Tags? {
+  stubClass="io.v.vdl.psi.VdlMethodSpecStub"
+}
 
 Tags ::= '{' ExpressionList '}' {pin=1}
 
@@ -200,7 +213,6 @@ private OneOfDeclarations ::=
   | TypeDeclaration
   | VarDeclaration
   | FunctionDeclaration
-  | MethodDeclaration
   | ErrorDeclaration
 private TopLevelDeclarationRecover ::= !(';' |'type' | const | func | var | error)
 
@@ -225,7 +237,12 @@ private ExpressionListRecover ::= !('!' | '!=' | '%' | '%=' | '&&' | '&' | '&=' 
 
 TypeDeclaration ::= 'type' ( TypeSpec | '(' TypeSpecs? ')' ) {pin(".*")=1}
 private TypeSpecs ::= TypeSpec (semi TypeSpec)* semi? {pin=1}
-TypeSpec ::= SpecType {pin=1 methods=[shouldGoDeeper]}
+TypeSpec ::= SpecType {
+  pin=1
+  stubClass="io.v.vdl.psi.VdlTypeSpecStub"
+  methods=[shouldGoDeeper identifier="SpecType/identifier"]
+
+}
 SpecType ::= identifier Type
 
 VarDeclaration ::= var ( VarSpec | '(' VarSpecs? ')' ) {pin=1}
@@ -248,14 +265,6 @@ ErrorLanguageSpec ::= StringLiteral ':' StringLiteral
 FunctionDeclaration ::= func identifier Signature Block? {
   pin=2
 }
-MethodDeclaration ::= func Receiver identifier Signature Block? {
-  pin=2
-}
-Receiver ::= '(' (identifier ReceiverTail | ReceiverTail) ')' {
-  pin=1
-}
-private ReceiverTail ::= '*'? ReceiverResultType ','?
-ReceiverResultType ::= TypeReferenceExpression {elementType=Type}
 
 Literal ::=
     int
