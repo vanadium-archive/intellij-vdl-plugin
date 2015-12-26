@@ -12,7 +12,16 @@ import com.intellij.navigation.NavigationItem;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiNamedElement;
+import io.v.vdl.psi.VdlAnonymousFieldDefinition;
+import io.v.vdl.psi.VdlFieldDeclaration;
+import io.v.vdl.psi.VdlFieldDefinition;
 import io.v.vdl.psi.VdlFile;
+import io.v.vdl.psi.VdlInterfaceType;
+import io.v.vdl.psi.VdlMethodDeclaration;
+import io.v.vdl.psi.VdlMethodSpec;
+import io.v.vdl.psi.VdlPsiImplUtil;
+import io.v.vdl.psi.VdlStructType;
+import io.v.vdl.psi.VdlType;
 import io.v.vdl.psi.VdlTypeSpec;
 import org.jetbrains.annotations.NotNull;
 
@@ -57,14 +66,13 @@ public class VdlStructureViewElement implements StructureViewTreeElement {
     @NotNull
     @Override
     public TreeElement[] getChildren() {
+        List<TreeElement> result = new ArrayList<TreeElement>();
+
         if (element instanceof VdlFile) {
-            List<TreeElement> result = new ArrayList<TreeElement>();
             for (VdlTypeSpec typeSpec : ((VdlFile) element).getTypes()) {
                 result.add(new VdlStructureViewElement(typeSpec));
             }
-            return result.toArray(new TreeElement[result.size()]);
-        } else {
-            return EMPTY_ARRAY;
         }
+        return result.toArray(new TreeElement[result.size()]);
     }
 }

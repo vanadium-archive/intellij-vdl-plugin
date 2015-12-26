@@ -13,4 +13,7 @@ public interface VdlImportString extends VdlCompositeElement {
   @Nullable
   PsiElement getString();
 
+  @NotNull
+  String getPath();
+
 }

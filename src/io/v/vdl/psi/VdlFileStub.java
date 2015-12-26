@@ -5,9 +5,25 @@
 package io.v.vdl.psi;
 
 import com.intellij.psi.stubs.PsiFileStubImpl;
+import com.intellij.util.io.StringRef;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class VdlFileStub extends PsiFileStubImpl<VdlFile> {
-    public VdlFileStub(VdlFile file) {
+    private final StringRef myPackageName;
+
+    public VdlFileStub(@NotNull VdlFile file) {
+        this(file, StringRef.fromNullableString(file.getPackageName()));
+    }
+
+    public VdlFileStub(@Nullable VdlFile file, StringRef packageName) {
         super(file);
+        myPackageName = packageName;
+    }
+
+
+    @Nullable
+    public String getPackageName() {
+        return myPackageName.getString();
     }
 }

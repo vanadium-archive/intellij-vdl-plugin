@@ -38,4 +38,9 @@ public class VdlImportStringImpl extends VdlCompositeElementImpl implements VdlI
     return findChildByType(STRING);
   }
 
+  @NotNull
+  public String getPath() {
+    return VdlPsiImplUtil.getPath(this);
+  }
+
 }

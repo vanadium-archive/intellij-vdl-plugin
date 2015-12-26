@@ -216,7 +216,7 @@ public class VdlVisitor extends PsiElementVisitor {
   }
 
   public void visitImportSpec(@NotNull VdlImportSpec o) {
-    visitCompositeElement(o);
+    visitNamedElement(o);
   }
 
   public void visitImportString(@NotNull VdlImportString o) {
@@ -268,11 +268,11 @@ public class VdlVisitor extends PsiElementVisitor {
   }
 
   public void visitMethodDeclaration(@NotNull VdlMethodDeclaration o) {
-    visitCompositeElement(o);
+    visitNamedElement(o);
   }
 
   public void visitMethodSpec(@NotNull VdlMethodSpec o) {
-    visitCompositeElement(o);
+    visitNamedElement(o);
   }
 
   public void visitMulExpr(@NotNull VdlMulExpr o) {
@@ -437,7 +437,7 @@ public class VdlVisitor extends PsiElementVisitor {
   }
 
   public void visitTypeSpec(@NotNull VdlTypeSpec o) {
-    visitCompositeElement(o);
+    visitNamedElement(o);
   }
 
   public void visitTypeSwitchGuard(@NotNull VdlTypeSwitchGuard o) {
@@ -473,6 +473,10 @@ public class VdlVisitor extends PsiElementVisitor {
   }
 
   public void visitAssignOp(@NotNull VdlAssignOp o) {
+    visitCompositeElement(o);
+  }
+
+  public void visitNamedElement(@NotNull VdlNamedElement o) {
     visitCompositeElement(o);
   }
 

@@ -60,7 +60,7 @@ public interface VdlTypes {
   IElementType IF_STATEMENT = new VdlCompositeElementType("IF_STATEMENT");
   IElementType IMPORT_DECLARATION = new VdlCompositeElementType("IMPORT_DECLARATION");
   IElementType IMPORT_LIST = new VdlCompositeElementType("IMPORT_LIST");
-  IElementType IMPORT_SPEC = new VdlCompositeElementType("IMPORT_SPEC");
+  IElementType IMPORT_SPEC = VdlStubElementTypeFactory.factory("IMPORT_SPEC");
   IElementType IMPORT_STRING = new VdlCompositeElementType("IMPORT_STRING");
   IElementType INDEX_OR_SLICE_EXPR = new VdlCompositeElementType("INDEX_OR_SLICE_EXPR");
   IElementType INTERFACE_TYPE = new VdlCompositeElementType("INTERFACE_TYPE");
@@ -73,8 +73,8 @@ public interface VdlTypes {
   IElementType LITERAL_TYPE_EXPR = new VdlCompositeElementType("LITERAL_TYPE_EXPR");
   IElementType LITERAL_VALUE = new VdlCompositeElementType("LITERAL_VALUE");
   IElementType MAP_TYPE = new VdlCompositeElementType("MAP_TYPE");
-  IElementType METHOD_DECLARATION = new VdlCompositeElementType("METHOD_DECLARATION");
-  IElementType METHOD_SPEC = new VdlCompositeElementType("METHOD_SPEC");
+  IElementType METHOD_DECLARATION = VdlStubElementTypeFactory.factory("METHOD_DECLARATION");
+  IElementType METHOD_SPEC = VdlStubElementTypeFactory.factory("METHOD_SPEC");
   IElementType MUL_EXPR = new VdlCompositeElementType("MUL_EXPR");
   IElementType OR_EXPR = new VdlCompositeElementType("OR_EXPR");
   IElementType PACKAGE_CLAUSE = new VdlCompositeElementType("PACKAGE_CLAUSE");
@@ -115,7 +115,7 @@ public interface VdlTypes {
   IElementType TYPE_GUARD = new VdlCompositeElementType("TYPE_GUARD");
   IElementType TYPE_LIST = new VdlCompositeElementType("TYPE_LIST");
   IElementType TYPE_REFERENCE_EXPRESSION = new VdlCompositeElementType("TYPE_REFERENCE_EXPRESSION");
-  IElementType TYPE_SPEC = new VdlCompositeElementType("TYPE_SPEC");
+  IElementType TYPE_SPEC = VdlStubElementTypeFactory.factory("TYPE_SPEC");
   IElementType TYPE_SWITCH_GUARD = new VdlCompositeElementType("TYPE_SWITCH_GUARD");
   IElementType TYPE_SWITCH_STATEMENT = new VdlCompositeElementType("TYPE_SWITCH_STATEMENT");
   IElementType UNARY_EXPR = new VdlCompositeElementType("UNARY_EXPR");

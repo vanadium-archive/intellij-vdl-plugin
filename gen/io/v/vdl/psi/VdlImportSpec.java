@@ -4,8 +4,9 @@ package io.v.vdl.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.StubBasedPsiElement;
 
-public interface VdlImportSpec extends VdlCompositeElement {
+public interface VdlImportSpec extends VdlNamedElement, StubBasedPsiElement<VdlImportSpecStub> {
 
   @NotNull
   VdlImportString getImportString();
@@ -15,5 +16,14 @@ public interface VdlImportSpec extends VdlCompositeElement {
 
   @Nullable
   PsiElement getIdentifier();
+
+  String getAlias();
+
+  boolean isDot();
+
+  @NotNull
+  String getPath();
+
+  String getName();
 
 }

@@ -8,13 +8,19 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static io.v.vdl.psi.VdlTypes.*;
-import io.v.vdl.psi.VdlCompositeElementImpl;
+import io.v.vdl.psi.VdlNamedElementImpl;
+import io.v.vdl.psi.VdlImportSpecStub;
 import io.v.vdl.psi.*;
+import com.intellij.psi.stubs.IStubElementType;
 
-public class VdlImportSpecImpl extends VdlCompositeElementImpl implements VdlImportSpec {
+public class VdlImportSpecImpl extends VdlNamedElementImpl<VdlImportSpecStub> implements VdlImportSpec {
 
   public VdlImportSpecImpl(ASTNode node) {
     super(node);
+  }
+
+  public VdlImportSpecImpl(VdlImportSpecStub stub, IStubElementType nodeType) {
+    super(stub, nodeType);
   }
 
   public void accept(@NotNull VdlVisitor visitor) {
@@ -42,6 +48,23 @@ public class VdlImportSpecImpl extends VdlCompositeElementImpl implements VdlImp
   @Nullable
   public PsiElement getIdentifier() {
     return findChildByType(IDENTIFIER);
+  }
+
+  public String getAlias() {
+    return VdlPsiImplUtil.getAlias(this);
+  }
+
+  public boolean isDot() {
+    return VdlPsiImplUtil.isDot(this);
+  }
+
+  @NotNull
+  public String getPath() {
+    return VdlPsiImplUtil.getPath(this);
+  }
+
+  public String getName() {
+    return VdlPsiImplUtil.getName(this);
   }
 
 }

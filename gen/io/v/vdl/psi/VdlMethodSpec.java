@@ -4,8 +4,9 @@ package io.v.vdl.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.StubBasedPsiElement;
 
-public interface VdlMethodSpec extends VdlCompositeElement {
+public interface VdlMethodSpec extends VdlNamedElement, StubBasedPsiElement<VdlMethodSpecStub> {
 
   @Nullable
   VdlErrorTypeName getErrorTypeName();

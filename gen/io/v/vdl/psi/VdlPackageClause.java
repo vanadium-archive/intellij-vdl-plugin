@@ -13,4 +13,7 @@ public interface VdlPackageClause extends VdlCompositeElement {
   @NotNull
   PsiElement getPackage();
 
+  @Nullable
+  String getName();
+
 }
