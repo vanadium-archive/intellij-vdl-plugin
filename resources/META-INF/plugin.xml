@@ -23,6 +23,14 @@
   <depends>com.intellij.modules.lang</depends>
 
   <extensions defaultExtensionNs="com.intellij">
+    <stubIndex implementation="io.v.vdl.psi.VdlAllPublicNamesIndex"/>
+    <stubIndex implementation="io.v.vdl.psi.VdlAllPrivateNamesIndex"/>
+    <stubIndex implementation="io.v.vdl.psi.VdlTypesIndex"/>
+    <stubIndex implementation="io.v.vdl.psi.VdlMethodFingerprintIndex"/>
+
+    <gotoSymbolContributor implementation="io.v.vdl.VdlSymbolContributor"/>
+    <gotoClassContributor implementation="io.v.vdl.VdlTypeContributor"/>
+
     <fileTypeFactory implementation="io.v.vdl.VdlFileTypeFactory"/>
     <lang.parserDefinition language="VDL" implementationClass="io.v.vdl.VdlParserDefinition"/>
     <lang.syntaxHighlighterFactory language="VDL" implementationClass="io.v.vdl.VdlSyntaxHighlighterFactory"/>

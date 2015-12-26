@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collection;
 
 public class VdlMethodFingerprintIndex extends StringStubIndexExtension<VdlMethodSpec> {
-    public static final StubIndexKey<String, VdlMethodSpec> KEY = StubIndexKey.createIndexKey("go.method.fingerprint");
+    public static final StubIndexKey<String, VdlMethodSpec> KEY = StubIndexKey.createIndexKey("vdl.method.fingerprint");
 
     @Override
     public int getVersion() {

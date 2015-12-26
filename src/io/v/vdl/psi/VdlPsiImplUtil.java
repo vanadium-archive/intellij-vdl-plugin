@@ -59,10 +59,6 @@ public class VdlPsiImplUtil {
         return false;
     }
 
-    public static PsiElement setName(VdlMethodDeclaration m, String foo) {
-        return m;
-    }
-
     @Nullable
     public static String getName(@NotNull VdlPackageClause packageClause) {
         PsiElement packageIdentifier = packageClause.getIdentifier();

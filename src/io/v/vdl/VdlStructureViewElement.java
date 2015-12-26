@@ -5,23 +5,11 @@
 package io.v.vdl;
 
 import com.intellij.ide.structureView.StructureViewTreeElement;
-import com.intellij.ide.util.treeView.smartTree.SortableTreeElement;
 import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiNamedElement;
-import io.v.vdl.psi.VdlAnonymousFieldDefinition;
-import io.v.vdl.psi.VdlFieldDeclaration;
-import io.v.vdl.psi.VdlFieldDefinition;
 import io.v.vdl.psi.VdlFile;
-import io.v.vdl.psi.VdlInterfaceType;
-import io.v.vdl.psi.VdlMethodDeclaration;
-import io.v.vdl.psi.VdlMethodSpec;
-import io.v.vdl.psi.VdlPsiImplUtil;
-import io.v.vdl.psi.VdlStructType;
-import io.v.vdl.psi.VdlType;
 import io.v.vdl.psi.VdlTypeSpec;
 import org.jetbrains.annotations.NotNull;
 

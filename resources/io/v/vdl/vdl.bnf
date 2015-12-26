@@ -211,7 +211,6 @@ private OneOfDeclarations ::=
   | TypeDeclaration
   | VarDeclaration
   | FunctionDeclaration
-  | MethodDeclaration
   | ErrorDeclaration
 private TopLevelDeclarationRecover ::= !(';' |'type' | const | func | var | error)
 
@@ -264,15 +263,6 @@ ErrorLanguageSpec ::= StringLiteral ':' StringLiteral
 FunctionDeclaration ::= func identifier Signature Block? {
   pin=2
 }
-MethodDeclaration ::= func Receiver identifier Signature Block? {
-  pin=2
-  stubClass="io.v.vdl.psi.VdlMethodDeclarationStub"
-}
-Receiver ::= '(' (identifier ReceiverTail | ReceiverTail) ')' {
-  pin=1
-}
-private ReceiverTail ::= '*'? ReceiverResultType ','?
-ReceiverResultType ::= TypeReferenceExpression {elementType=Type}
 
 Literal ::=
     int

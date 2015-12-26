@@ -5,10 +5,14 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.Iconable;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.impl.ElementBase;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.ui.RowIcon;
 import com.intellij.usageView.UsageViewUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.intellij.util.PlatformIcons;
+import io.v.vdl.VdlIcons;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -71,6 +75,31 @@ public abstract class VdlNamedElementImpl<T extends VdlNamedStub<?>> extends Vdl
         }
         return this;
     }
+
+    @Nullable
+    @Override
+    public Icon getIcon(int flags) {
+        Icon icon = null;
+        if (this instanceof VdlFunctionDeclaration) icon = VdlIcons.FUNCTION;
+        else if (this instanceof VdlTypeSpec) icon = VdlIcons.TYPE;
+        else if (this instanceof VdlVarDefinition) icon = VdlIcons.VARIABLE;
+        else if (this instanceof VdlConstDefinition) icon = VdlIcons.CONSTANT;
+        else if (this instanceof VdlFieldDefinition) icon = VdlIcons.FIELD;
+        else if (this instanceof VdlMethodSpec) icon = VdlIcons.METHOD;
+        else if (this instanceof VdlAnonymousFieldDefinition) icon = VdlIcons.FIELD;
+        else if (this instanceof VdlParamDefinition) icon = VdlIcons.PARAMETER;
+        if (icon != null) {
+            if ((flags & Iconable.ICON_FLAG_VISIBILITY) != 0) {
+                RowIcon rowIcon = ElementBase.createLayeredIcon(this, icon, flags);
+                rowIcon.setIcon(isPublic() ? PlatformIcons.PUBLIC_ICON : PlatformIcons.PRIVATE_ICON, 1);
+                return rowIcon;
+            }
+            return icon;
+        }
+        return super.getIcon(flags);
+    }
+
+
 
     @Override
     public ItemPresentation getPresentation() {

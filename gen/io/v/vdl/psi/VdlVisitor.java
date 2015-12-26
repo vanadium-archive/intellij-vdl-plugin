@@ -267,10 +267,6 @@ public class VdlVisitor extends PsiElementVisitor {
     visitType(o);
   }
 
-  public void visitMethodDeclaration(@NotNull VdlMethodDeclaration o) {
-    visitNamedElement(o);
-  }
-
   public void visitMethodSpec(@NotNull VdlMethodSpec o) {
     visitNamedElement(o);
   }
@@ -313,10 +309,6 @@ public class VdlVisitor extends PsiElementVisitor {
 
   public void visitRangeClause(@NotNull VdlRangeClause o) {
     visitVarSpec(o);
-  }
-
-  public void visitReceiver(@NotNull VdlReceiver o) {
-    visitCompositeElement(o);
   }
 
   public void visitReceiverType(@NotNull VdlReceiverType o) {

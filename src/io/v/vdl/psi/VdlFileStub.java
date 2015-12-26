@@ -21,7 +21,6 @@ public class VdlFileStub extends PsiFileStubImpl<VdlFile> {
         myPackageName = packageName;
     }
 
-
     @Nullable
     public String getPackageName() {
         return myPackageName.getString();

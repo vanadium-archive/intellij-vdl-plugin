@@ -73,7 +73,6 @@ public interface VdlTypes {
   IElementType LITERAL_TYPE_EXPR = new VdlCompositeElementType("LITERAL_TYPE_EXPR");
   IElementType LITERAL_VALUE = new VdlCompositeElementType("LITERAL_VALUE");
   IElementType MAP_TYPE = new VdlCompositeElementType("MAP_TYPE");
-  IElementType METHOD_DECLARATION = VdlStubElementTypeFactory.factory("METHOD_DECLARATION");
   IElementType METHOD_SPEC = VdlStubElementTypeFactory.factory("METHOD_SPEC");
   IElementType MUL_EXPR = new VdlCompositeElementType("MUL_EXPR");
   IElementType OR_EXPR = new VdlCompositeElementType("OR_EXPR");
@@ -85,7 +84,6 @@ public interface VdlTypes {
   IElementType PAR_TYPE = new VdlCompositeElementType("PAR_TYPE");
   IElementType POINTER_TYPE = new VdlCompositeElementType("POINTER_TYPE");
   IElementType RANGE_CLAUSE = new VdlCompositeElementType("RANGE_CLAUSE");
-  IElementType RECEIVER = new VdlCompositeElementType("RECEIVER");
   IElementType RECEIVER_TYPE = new VdlCompositeElementType("RECEIVER_TYPE");
   IElementType RECV_STATEMENT = new VdlCompositeElementType("RECV_STATEMENT");
   IElementType REFERENCE_EXPRESSION = new VdlCompositeElementType("REFERENCE_EXPRESSION");
@@ -412,9 +410,6 @@ public interface VdlTypes {
       else if (type == MAP_TYPE) {
         return new VdlMapTypeImpl(node);
       }
-      else if (type == METHOD_DECLARATION) {
-        return new VdlMethodDeclarationImpl(node);
-      }
       else if (type == METHOD_SPEC) {
         return new VdlMethodSpecImpl(node);
       }
@@ -447,9 +442,6 @@ public interface VdlTypes {
       }
       else if (type == RANGE_CLAUSE) {
         return new VdlRangeClauseImpl(node);
-      }
-      else if (type == RECEIVER) {
-        return new VdlReceiverImpl(node);
       }
       else if (type == RECEIVER_TYPE) {
         return new VdlReceiverTypeImpl(node);
