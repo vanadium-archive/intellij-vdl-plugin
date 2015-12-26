@@ -347,6 +347,10 @@ public class VdlVisitor extends PsiElementVisitor {
     visitStatement(o);
   }
 
+  public void visitSetType(@NotNull VdlSetType o) {
+    visitType(o);
+  }
+
   public void visitShortVarDeclaration(@NotNull VdlShortVarDeclaration o) {
     visitVarSpec(o);
   }

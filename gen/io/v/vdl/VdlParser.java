@@ -275,6 +275,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
     else if (t == SEND_STATEMENT) {
       r = SendStatement(b, 0);
     }
+    else if (t == SET_TYPE) {
+      r = SetType(b, 0);
+    }
     else if (t == SHORT_VAR_DECLARATION) {
       r = ShortVarDeclaration(b, 0);
     }
@@ -382,8 +385,8 @@ public class VdlParser implements PsiParser, LightPsiParser {
       SELECTOR_EXPR),
     create_token_set_(ARRAY_OR_SLICE_TYPE, CHANNEL_TYPE, ENUM_TYPE, FUNCTION_TYPE,
       INTERFACE_TYPE, MAP_TYPE, PAR_TYPE, POINTER_TYPE,
-      RECEIVER_TYPE, SPEC_TYPE, STRUCT_TYPE, TYPE,
-      TYPE_LIST, UNION_TYPE),
+      RECEIVER_TYPE, SET_TYPE, SPEC_TYPE, STRUCT_TYPE,
+      TYPE, TYPE_LIST, UNION_TYPE),
     create_token_set_(ASSIGNMENT_STATEMENT, BREAK_STATEMENT, CONTINUE_STATEMENT, DEFER_STATEMENT,
       ELSE_STATEMENT, EXPR_SWITCH_STATEMENT, FALLTHROUGH_STATEMENT, FOR_STATEMENT,
       GOTO_STATEMENT, GO_STATEMENT, IF_STATEMENT, LABELED_STATEMENT,
@@ -3524,6 +3527,21 @@ public class VdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // set '[' Type ']'
+  public static boolean SetType(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "SetType")) return false;
+    if (!nextTokenIs(b, SET)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, SET);
+    r = r && consumeToken(b, LBRACK);
+    r = r && Type(b, l + 1);
+    r = r && consumeToken(b, RBRACK);
+    exit_section_(b, m, SET_TYPE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // VarDefinitionList ':=' ExpressionList
   public static boolean ShortVarDeclaration(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ShortVarDeclaration")) return false;
@@ -4302,6 +4320,7 @@ public class VdlParser implements PsiParser, LightPsiParser {
   //   | InterfaceType
   //   | MapType
   //   | ChannelType
+  //   | SetType
   static boolean TypeLit(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeLit")) return false;
     boolean r;
@@ -4315,6 +4334,7 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!r) r = InterfaceType(b, l + 1);
     if (!r) r = MapType(b, l + 1);
     if (!r) r = ChannelType(b, l + 1);
+    if (!r) r = SetType(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }

@@ -93,6 +93,7 @@ public interface VdlTypes {
   IElementType SELECTOR_EXPR = new VdlCompositeElementType("SELECTOR_EXPR");
   IElementType SELECT_STATEMENT = new VdlCompositeElementType("SELECT_STATEMENT");
   IElementType SEND_STATEMENT = new VdlCompositeElementType("SEND_STATEMENT");
+  IElementType SET_TYPE = new VdlCompositeElementType("SET_TYPE");
   IElementType SHORT_VAR_DECLARATION = new VdlCompositeElementType("SHORT_VAR_DECLARATION");
   IElementType SIGNATURE = new VdlCompositeElementType("SIGNATURE");
   IElementType SIMPLE_STATEMENT = new VdlCompositeElementType("SIMPLE_STATEMENT");
@@ -198,6 +199,7 @@ public interface VdlTypes {
   IElementType SEMICOLON = new VdlTokenType(";");
   IElementType SEMICOLON_SYNTHETIC = new VdlTokenType("<NL>");
   IElementType SEND_CHANNEL = new VdlTokenType("<-");
+  IElementType SET = new VdlTokenType("set");
   IElementType SHIFT_LEFT = new VdlTokenType("<<");
   IElementType SHIFT_LEFT_ASSIGN = new VdlTokenType("<<=");
   IElementType SHIFT_RIGHT = new VdlTokenType(">>");
@@ -469,6 +471,9 @@ public interface VdlTypes {
       }
       else if (type == SEND_STATEMENT) {
         return new VdlSendStatementImpl(node);
+      }
+      else if (type == SET_TYPE) {
+        return new VdlSetTypeImpl(node);
       }
       else if (type == SHORT_VAR_DECLARATION) {
         return new VdlShortVarDeclarationImpl(node);

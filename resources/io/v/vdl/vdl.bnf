@@ -122,8 +122,10 @@ private TypeLit ::=
   | InterfaceType
   | MapType
   | ChannelType
+  | SetType
 
 ArrayOrSliceType ::= '[' ('...'|Expression?) ']' Type {pin=1}
+SetType ::= set '[' Type ']'
 
 EnumType ::= enum '{' EnumFields? '}' {pin=1}
 private EnumFields ::= EnumFieldDeclaration (semi EnumFieldDeclaration)* semi? {pin=1}
