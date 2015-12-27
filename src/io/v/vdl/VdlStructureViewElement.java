@@ -10,6 +10,9 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.psi.PsiElement;
 import io.v.vdl.psi.VdlFile;
+import io.v.vdl.psi.VdlInterfaceType;
+import io.v.vdl.psi.VdlMethodSpec;
+import io.v.vdl.psi.VdlType;
 import io.v.vdl.psi.VdlTypeSpec;
 import org.jetbrains.annotations.NotNull;
 
@@ -59,6 +62,13 @@ public class VdlStructureViewElement implements StructureViewTreeElement {
         if (element instanceof VdlFile) {
             for (VdlTypeSpec typeSpec : ((VdlFile) element).getTypes()) {
                 result.add(new VdlStructureViewElement(typeSpec));
+            }
+        } else if (element instanceof VdlTypeSpec) {
+            VdlType type = ((VdlTypeSpec) element).getSpecType().getType();
+            if (type instanceof VdlInterfaceType) {
+                for (VdlMethodSpec spec : ((VdlInterfaceType)type).getMethodSpecList()) {
+                    result.add(new VdlStructureViewElement(spec));
+                }
             }
         }
         return result.toArray(new TreeElement[result.size()]);
