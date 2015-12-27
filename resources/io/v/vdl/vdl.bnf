@@ -290,6 +290,7 @@ private LiteralTypeExprInner ::=
     StructType
   | ArrayOrSliceType
   | MapType
+  | SetType
   | TypeName
 
 LiteralTypeExpr ::= LiteralTypeExprInner

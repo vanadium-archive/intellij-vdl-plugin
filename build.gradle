@@ -50,6 +50,14 @@ allprojects {
       channel publishChannel
     }
   }
+
+  repositories {
+    mavenCentral()
+  }
+
+  dependencies {
+    testCompile 'junit:junit:4.12'
+  }
 }
 
 apply plugin: 'idea'
