@@ -27,6 +27,7 @@
     <stubIndex implementation="io.v.vdl.psi.VdlAllPrivateNamesIndex"/>
     <stubIndex implementation="io.v.vdl.psi.VdlTypesIndex"/>
     <stubIndex implementation="io.v.vdl.psi.VdlMethodFingerprintIndex"/>
+    <stubElementTypeHolder class="io.v.vdl.psi.VdlTypes"/>
 
     <gotoSymbolContributor implementation="io.v.vdl.VdlSymbolContributor"/>
     <gotoClassContributor implementation="io.v.vdl.VdlTypeContributor"/>
@@ -39,6 +40,7 @@
     <lang.braceMatcher language="VDL" implementationClass="io.v.vdl.VdlBraceMatcher"/>
     <completion.contributor language="VDL" implementationClass="io.v.vdl.VdlKeywordCompletionContributor"/>
     <colorSettingsPage implementation="io.v.vdl.VdlColorSettingsPage"/>
+    <lang.smartEnterProcessor language="VDL" implementationClass="io.v.vdl.VdlSmartEnterProcessor"/>
   </extensions>
 
   <actions>

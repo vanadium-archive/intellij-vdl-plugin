@@ -2742,6 +2742,7 @@ public class VdlParser implements PsiParser, LightPsiParser {
   // StructType
   //   | ArrayOrSliceType
   //   | MapType
+  //   | SetType
   //   | TypeName
   static boolean LiteralTypeExprInner(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "LiteralTypeExprInner")) return false;
@@ -2750,6 +2751,7 @@ public class VdlParser implements PsiParser, LightPsiParser {
     r = StructType(b, l + 1);
     if (!r) r = ArrayOrSliceType(b, l + 1);
     if (!r) r = MapType(b, l + 1);
+    if (!r) r = SetType(b, l + 1);
     if (!r) r = TypeName(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
