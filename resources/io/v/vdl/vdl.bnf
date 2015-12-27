@@ -72,9 +72,9 @@
   extends("(Or|Add|Conversion|Mul|Selector)Expr")=BinaryExpr
   extends(".*(Expr|Literal|Lit|OperandName)")=Expression
 
-  implements("(Type|Import|Method)Spec|MethodDeclaration")="io.v.vdl.psi.VdlNamedElement"
-  extends("(Type|Import|Method)Spec|MethodDeclaration")="io.v.vdl.psi.VdlNamedElementImpl<?>"
-  elementTypeFactory("(Type|Import|Method)Spec|MethodDeclaration")="io.v.vdl.psi.VdlStubElementTypeFactory.factory"
+  implements("(Type|Import|Method)Spec|MethodDeclaration|FieldDefinition")="io.v.vdl.psi.VdlNamedElement"
+  extends("(Type|Import|Method)Spec|MethodDeclaration|FieldDefinition")="io.v.vdl.psi.VdlNamedElementImpl<?>"
+  elementTypeFactory("(Type|Import|Method)Spec|MethodDeclaration|FieldDefinition")="io.v.vdl.psi.VdlStubElementTypeFactory.factory"
 
   pin(".*Statement")=1
   extends(".*Statement")=Statement
@@ -114,8 +114,7 @@ ErrorTypeName ::= error
 
 private TypeLit ::=
     ArrayOrSliceType
-  | StructType
-  | UnionType
+  | StructOrUnionType
   | EnumType
   | PointerType
   | FunctionType
@@ -131,12 +130,13 @@ EnumType ::= enum '{' EnumFields? '}' {pin=1}
 private EnumFields ::= EnumFieldDeclaration (semi EnumFieldDeclaration)* semi? {pin=1}
 EnumFieldDeclaration ::= identifier
 
-StructType ::= struct '{' Fields? '}' {pin=1}
-UnionType ::= union '{' Fields? '}' {pin=1}
+StructOrUnionType ::= (struct | union) '{' Fields? '}' {pin=1}
 private Fields ::= FieldDeclaration (semi FieldDeclaration)* semi? {pin=1}
 FieldDeclaration ::= (FieldDefinitionList Type | AnonymousFieldDefinition) Tag?
 private FieldDefinitionList ::= FieldDefinition (',' FieldDefinition)*
-FieldDefinition ::= identifier
+FieldDefinition ::= identifier {
+  stubClass="io.v.vdl.psi.VdlFieldDefinitionStub"
+}
 
 AnonymousFieldDefinition ::= '*'? TypeName
 Tag ::= StringLiteral
@@ -287,7 +287,7 @@ ReferenceExpression ::= identifier {extends=Expression}
 
 CompositeLit ::= (LiteralTypeExprInner LiteralValue) // the brackets are valuable
 private LiteralTypeExprInner ::=
-    StructType
+    StructOrUnionType
   | ArrayOrSliceType
   | MapType
   | SetType

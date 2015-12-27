@@ -39,7 +39,7 @@ public class VdlStringLiteralImpl extends VdlExpressionImpl implements VdlString
   }
 
   @NotNull
-  public VdlStringLiteralImpl updateText(String text) {
+  public VdlStringLiteral updateText(String text) {
     return VdlPsiImplUtil.updateText(this, text);
   }
 

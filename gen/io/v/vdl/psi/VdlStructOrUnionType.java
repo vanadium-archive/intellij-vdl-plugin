@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface VdlStructType extends VdlType {
+public interface VdlStructOrUnionType extends VdlType {
 
   @NotNull
   List<VdlFieldDeclaration> getFieldDeclarationList();
@@ -16,7 +16,10 @@ public interface VdlStructType extends VdlType {
   @Nullable
   PsiElement getRbrace();
 
-  @NotNull
+  @Nullable
   PsiElement getStruct();
+
+  @Nullable
+  PsiElement getUnion();
 
 }

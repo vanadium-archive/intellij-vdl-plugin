@@ -168,7 +168,7 @@ public class VdlVisitor extends PsiElementVisitor {
   }
 
   public void visitFieldDefinition(@NotNull VdlFieldDefinition o) {
-    visitCompositeElement(o);
+    visitNamedElement(o);
   }
 
   public void visitFieldName(@NotNull VdlFieldName o) {
@@ -384,7 +384,7 @@ public class VdlVisitor extends PsiElementVisitor {
     // visitPsiLanguageInjectionHost(o);
   }
 
-  public void visitStructType(@NotNull VdlStructType o) {
+  public void visitStructOrUnionType(@NotNull VdlStructOrUnionType o) {
     visitType(o);
   }
 
@@ -446,10 +446,6 @@ public class VdlVisitor extends PsiElementVisitor {
 
   public void visitUnaryExpr(@NotNull VdlUnaryExpr o) {
     visitExpression(o);
-  }
-
-  public void visitUnionType(@NotNull VdlUnionType o) {
-    visitType(o);
   }
 
   public void visitValue(@NotNull VdlValue o) {

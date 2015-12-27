@@ -10,14 +10,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static io.v.vdl.psi.VdlTypes.*;
 import io.v.vdl.psi.*;
 
-public class VdlStructTypeImpl extends VdlTypeImpl implements VdlStructType {
+public class VdlStructOrUnionTypeImpl extends VdlTypeImpl implements VdlStructOrUnionType {
 
-  public VdlStructTypeImpl(ASTNode node) {
+  public VdlStructOrUnionTypeImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitStructType(this);
+    visitor.visitStructOrUnionType(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -44,9 +44,15 @@ public class VdlStructTypeImpl extends VdlTypeImpl implements VdlStructType {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public PsiElement getStruct() {
-    return findNotNullChildByType(STRUCT);
+    return findChildByType(STRUCT);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getUnion() {
+    return findChildByType(UNION);
   }
 
 }

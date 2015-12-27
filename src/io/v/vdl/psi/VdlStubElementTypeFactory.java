@@ -7,6 +7,7 @@ public class VdlStubElementTypeFactory {
         if (name.equals("METHOD_SPEC")) return new VdlMethodSpecStubElementType(name);
         if (name.equals("IMPORT_SPEC")) return new VdlImportSpecStubElementType(name);
         if (name.equals("TYPE_SPEC")) return new VdlTypeSpecStubElementType(name);
+        if (name.equals("FIELD_DEFINITION")) return new VdlFieldDefinitionStubElementType(name);
         throw new RuntimeException("Unknown element type: " + name);
     }
 }

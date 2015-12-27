@@ -6,7 +6,6 @@ import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
 import io.v.vdl.VdlStringLiteralEscaper;
-import io.v.vdl.psi.impl.VdlStringLiteralImpl;
 
 public interface VdlStringLiteral extends VdlExpression, PsiLanguageInjectionHost {
 
@@ -17,7 +16,7 @@ public interface VdlStringLiteral extends VdlExpression, PsiLanguageInjectionHos
   PsiElement getString();
 
   @NotNull
-  VdlStringLiteralImpl updateText(String text);
+  VdlStringLiteral updateText(String text);
 
   @NotNull
   VdlStringLiteralEscaper createLiteralTextEscaper();

@@ -21,7 +21,7 @@ public class VdlPsiImplUtil {
     }
 
     @NotNull
-    public static VdlStringLiteralImpl updateText(@NotNull VdlStringLiteral o, @NotNull String text) {
+    public static VdlStringLiteral updateText(@NotNull VdlStringLiteral o, @NotNull String text) {
         if (text.length() > 2) {
             if (o.getString() != null) {
                 StringBuilder outChars = new StringBuilder();
@@ -36,7 +36,7 @@ public class VdlPsiImplUtil {
         assert valueNode instanceof LeafElement;
 
         ((LeafElement)valueNode).replaceWithText(text);
-        return (VdlStringLiteralImpl)o;
+        return o;
     }
 
     public static boolean isValidHost(@SuppressWarnings("UnusedParameters") @NotNull VdlStringLiteral o) {
