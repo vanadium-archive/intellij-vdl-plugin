@@ -19,6 +19,11 @@ public class VdlStructureViewFactory implements PsiStructureViewFactory {
     @Override
     public StructureViewBuilder getStructureViewBuilder(final PsiFile psiFile) {
         return new TreeBasedStructureViewBuilder() {
+            @Override
+            public boolean isRootNodeShown() {
+                return false;
+            }
+
             @NotNull
             @Override
             public StructureViewModel createStructureViewModel(@Nullable Editor editor) {
