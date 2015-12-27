@@ -9,11 +9,7 @@ import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.psi.PsiElement;
-import io.v.vdl.psi.VdlFile;
-import io.v.vdl.psi.VdlInterfaceType;
-import io.v.vdl.psi.VdlMethodSpec;
-import io.v.vdl.psi.VdlType;
-import io.v.vdl.psi.VdlTypeSpec;
+import io.v.vdl.psi.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -68,6 +64,12 @@ public class VdlStructureViewElement implements StructureViewTreeElement {
             if (type instanceof VdlInterfaceType) {
                 for (VdlMethodSpec spec : ((VdlInterfaceType)type).getMethodSpecList()) {
                     result.add(new VdlStructureViewElement(spec));
+                }
+            } else if (type instanceof VdlStructOrUnionType) {
+                for (VdlFieldDeclaration decl : ((VdlStructOrUnionType) type).getFieldDeclarationList()) {
+                    for (VdlFieldDefinition defn : decl.getFieldDefinitionList()) {
+                        result.add(new VdlStructureViewElement(defn));
+                    }
                 }
             }
         }

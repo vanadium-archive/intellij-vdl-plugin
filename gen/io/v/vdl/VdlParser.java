@@ -302,8 +302,8 @@ public class VdlParser implements PsiParser, LightPsiParser {
     else if (t == STRING_LITERAL) {
       r = StringLiteral(b, 0);
     }
-    else if (t == STRUCT_TYPE) {
-      r = StructType(b, 0);
+    else if (t == STRUCT_OR_UNION_TYPE) {
+      r = StructOrUnionType(b, 0);
     }
     else if (t == SWITCH_START) {
       r = SwitchStart(b, 0);
@@ -350,9 +350,6 @@ public class VdlParser implements PsiParser, LightPsiParser {
     else if (t == UNARY_EXPR) {
       r = UnaryExpr(b, 0);
     }
-    else if (t == UNION_TYPE) {
-      r = UnionType(b, 0);
-    }
     else if (t == VALUE) {
       r = Value(b, 0);
     }
@@ -385,8 +382,8 @@ public class VdlParser implements PsiParser, LightPsiParser {
       SELECTOR_EXPR),
     create_token_set_(ARRAY_OR_SLICE_TYPE, CHANNEL_TYPE, ENUM_TYPE, FUNCTION_TYPE,
       INTERFACE_TYPE, MAP_TYPE, PAR_TYPE, POINTER_TYPE,
-      RECEIVER_TYPE, SET_TYPE, SPEC_TYPE, STRUCT_TYPE,
-      TYPE, TYPE_LIST, UNION_TYPE),
+      RECEIVER_TYPE, SET_TYPE, SPEC_TYPE, STRUCT_OR_UNION_TYPE,
+      TYPE, TYPE_LIST),
     create_token_set_(ASSIGNMENT_STATEMENT, BREAK_STATEMENT, CONTINUE_STATEMENT, DEFER_STATEMENT,
       ELSE_STATEMENT, EXPR_SWITCH_STATEMENT, FALLTHROUGH_STATEMENT, FOR_STATEMENT,
       GOTO_STATEMENT, GO_STATEMENT, IF_STATEMENT, LABELED_STATEMENT,
@@ -2739,7 +2736,7 @@ public class VdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // StructType
+  // StructOrUnionType
   //   | ArrayOrSliceType
   //   | MapType
   //   | SetType
@@ -2748,7 +2745,7 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "LiteralTypeExprInner")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = StructType(b, l + 1);
+    r = StructOrUnionType(b, l + 1);
     if (!r) r = ArrayOrSliceType(b, l + 1);
     if (!r) r = MapType(b, l + 1);
     if (!r) r = SetType(b, l + 1);
@@ -4009,24 +4006,35 @@ public class VdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // struct '{' Fields? '}'
-  public static boolean StructType(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "StructType")) return false;
-    if (!nextTokenIs(b, STRUCT)) return false;
+  // (struct | union) '{' Fields? '}'
+  public static boolean StructOrUnionType(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "StructOrUnionType")) return false;
+    if (!nextTokenIs(b, "<struct or union type>", STRUCT, UNION)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, STRUCT_TYPE, null);
-    r = consumeToken(b, STRUCT);
+    Marker m = enter_section_(b, l, _COLLAPSE_, STRUCT_OR_UNION_TYPE, "<struct or union type>");
+    r = StructOrUnionType_0(b, l + 1);
     p = r; // pin = 1
     r = r && report_error_(b, consumeToken(b, LBRACE));
-    r = p && report_error_(b, StructType_2(b, l + 1)) && r;
+    r = p && report_error_(b, StructOrUnionType_2(b, l + 1)) && r;
     r = p && consumeToken(b, RBRACE) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
 
+  // struct | union
+  private static boolean StructOrUnionType_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "StructOrUnionType_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, STRUCT);
+    if (!r) r = consumeToken(b, UNION);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
   // Fields?
-  private static boolean StructType_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "StructType_2")) return false;
+  private static boolean StructOrUnionType_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "StructOrUnionType_2")) return false;
     Fields(b, l + 1);
     return true;
   }
@@ -4314,8 +4322,7 @@ public class VdlParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // ArrayOrSliceType
-  //   | StructType
-  //   | UnionType
+  //   | StructOrUnionType
   //   | EnumType
   //   | PointerType
   //   | FunctionType
@@ -4328,8 +4335,7 @@ public class VdlParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b);
     r = ArrayOrSliceType(b, l + 1);
-    if (!r) r = StructType(b, l + 1);
-    if (!r) r = UnionType(b, l + 1);
+    if (!r) r = StructOrUnionType(b, l + 1);
     if (!r) r = EnumType(b, l + 1);
     if (!r) r = PointerType(b, l + 1);
     if (!r) r = FunctionType(b, l + 1);
@@ -4571,29 +4577,6 @@ public class VdlParser implements PsiParser, LightPsiParser {
     r = TypeCaseClause(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
-  }
-
-  /* ********************************************************** */
-  // union '{' Fields? '}'
-  public static boolean UnionType(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "UnionType")) return false;
-    if (!nextTokenIs(b, UNION)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, UNION_TYPE, null);
-    r = consumeToken(b, UNION);
-    p = r; // pin = 1
-    r = r && report_error_(b, consumeToken(b, LBRACE));
-    r = p && report_error_(b, UnionType_2(b, l + 1)) && r;
-    r = p && consumeToken(b, RBRACE) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
-  }
-
-  // Fields?
-  private static boolean UnionType_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "UnionType_2")) return false;
-    Fields(b, l + 1);
-    return true;
   }
 
   /* ********************************************************** */

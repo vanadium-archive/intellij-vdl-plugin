@@ -8,13 +8,19 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static io.v.vdl.psi.VdlTypes.*;
-import io.v.vdl.psi.VdlCompositeElementImpl;
+import io.v.vdl.psi.VdlNamedElementImpl;
+import io.v.vdl.psi.VdlFieldDefinitionStub;
 import io.v.vdl.psi.*;
+import com.intellij.psi.stubs.IStubElementType;
 
-public class VdlFieldDefinitionImpl extends VdlCompositeElementImpl implements VdlFieldDefinition {
+public class VdlFieldDefinitionImpl extends VdlNamedElementImpl<VdlFieldDefinitionStub> implements VdlFieldDefinition {
 
   public VdlFieldDefinitionImpl(ASTNode node) {
     super(node);
+  }
+
+  public VdlFieldDefinitionImpl(VdlFieldDefinitionStub stub, IStubElementType nodeType) {
+    super(stub, nodeType);
   }
 
   public void accept(@NotNull VdlVisitor visitor) {

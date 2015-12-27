@@ -48,7 +48,7 @@ public interface VdlTypes {
   IElementType EXPR_SWITCH_STATEMENT = new VdlCompositeElementType("EXPR_SWITCH_STATEMENT");
   IElementType FALLTHROUGH_STATEMENT = new VdlCompositeElementType("FALLTHROUGH_STATEMENT");
   IElementType FIELD_DECLARATION = new VdlCompositeElementType("FIELD_DECLARATION");
-  IElementType FIELD_DEFINITION = new VdlCompositeElementType("FIELD_DEFINITION");
+  IElementType FIELD_DEFINITION = VdlStubElementTypeFactory.factory("FIELD_DEFINITION");
   IElementType FIELD_NAME = new VdlCompositeElementType("FIELD_NAME");
   IElementType FOR_CLAUSE = new VdlCompositeElementType("FOR_CLAUSE");
   IElementType FOR_STATEMENT = new VdlCompositeElementType("FOR_STATEMENT");
@@ -102,7 +102,7 @@ public interface VdlTypes {
   IElementType STREAM_ARGS = new VdlCompositeElementType("STREAM_ARGS");
   IElementType STREAM_SPEC = new VdlCompositeElementType("STREAM_SPEC");
   IElementType STRING_LITERAL = new VdlCompositeElementType("STRING_LITERAL");
-  IElementType STRUCT_TYPE = new VdlCompositeElementType("STRUCT_TYPE");
+  IElementType STRUCT_OR_UNION_TYPE = new VdlCompositeElementType("STRUCT_OR_UNION_TYPE");
   IElementType SWITCH_START = new VdlCompositeElementType("SWITCH_START");
   IElementType SWITCH_STATEMENT = new VdlCompositeElementType("SWITCH_STATEMENT");
   IElementType TAG = new VdlCompositeElementType("TAG");
@@ -118,7 +118,6 @@ public interface VdlTypes {
   IElementType TYPE_SWITCH_GUARD = new VdlCompositeElementType("TYPE_SWITCH_GUARD");
   IElementType TYPE_SWITCH_STATEMENT = new VdlCompositeElementType("TYPE_SWITCH_STATEMENT");
   IElementType UNARY_EXPR = new VdlCompositeElementType("UNARY_EXPR");
-  IElementType UNION_TYPE = new VdlCompositeElementType("UNION_TYPE");
   IElementType VALUE = new VdlCompositeElementType("VALUE");
   IElementType VAR_DECLARATION = new VdlCompositeElementType("VAR_DECLARATION");
   IElementType VAR_DEFINITION = new VdlCompositeElementType("VAR_DEFINITION");
@@ -499,8 +498,8 @@ public interface VdlTypes {
       else if (type == STRING_LITERAL) {
         return new VdlStringLiteralImpl(node);
       }
-      else if (type == STRUCT_TYPE) {
-        return new VdlStructTypeImpl(node);
+      else if (type == STRUCT_OR_UNION_TYPE) {
+        return new VdlStructOrUnionTypeImpl(node);
       }
       else if (type == SWITCH_START) {
         return new VdlSwitchStartImpl(node);
@@ -546,9 +545,6 @@ public interface VdlTypes {
       }
       else if (type == UNARY_EXPR) {
         return new VdlUnaryExprImpl(node);
-      }
-      else if (type == UNION_TYPE) {
-        return new VdlUnionTypeImpl(node);
       }
       else if (type == VALUE) {
         return new VdlValueImpl(node);
