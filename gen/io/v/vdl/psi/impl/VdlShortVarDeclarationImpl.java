@@ -16,12 +16,8 @@ public class VdlShortVarDeclarationImpl extends VdlVarSpecImpl implements VdlSho
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitShortVarDeclaration(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitShortVarDeclaration(this);
     else super.accept(visitor);
   }
 

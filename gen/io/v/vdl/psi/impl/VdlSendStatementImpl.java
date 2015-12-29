@@ -16,12 +16,8 @@ public class VdlSendStatementImpl extends VdlStatementImpl implements VdlSendSta
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitSendStatement(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitSendStatement(this);
     else super.accept(visitor);
   }
 

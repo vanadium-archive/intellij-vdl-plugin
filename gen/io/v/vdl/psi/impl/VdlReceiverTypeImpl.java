@@ -16,12 +16,8 @@ public class VdlReceiverTypeImpl extends VdlTypeImpl implements VdlReceiverType 
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitReceiverType(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitReceiverType(this);
     else super.accept(visitor);
   }
 

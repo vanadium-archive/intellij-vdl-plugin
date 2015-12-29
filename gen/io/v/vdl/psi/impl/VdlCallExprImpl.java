@@ -16,12 +16,8 @@ public class VdlCallExprImpl extends VdlExpressionImpl implements VdlCallExpr {
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitCallExpr(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitCallExpr(this);
     else super.accept(visitor);
   }
 

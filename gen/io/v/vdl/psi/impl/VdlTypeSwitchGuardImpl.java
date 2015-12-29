@@ -17,12 +17,8 @@ public class VdlTypeSwitchGuardImpl extends VdlCompositeElementImpl implements V
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitTypeSwitchGuard(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitTypeSwitchGuard(this);
     else super.accept(visitor);
   }
 

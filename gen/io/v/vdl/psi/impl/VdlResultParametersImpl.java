@@ -17,12 +17,8 @@ public class VdlResultParametersImpl extends VdlCompositeElementImpl implements 
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitResultParameters(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitResultParameters(this);
     else super.accept(visitor);
   }
 
