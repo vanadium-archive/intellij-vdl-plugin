@@ -16,12 +16,8 @@ public class VdlFunctionLitImpl extends VdlExpressionImpl implements VdlFunction
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitFunctionLit(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitFunctionLit(this);
     else super.accept(visitor);
   }
 

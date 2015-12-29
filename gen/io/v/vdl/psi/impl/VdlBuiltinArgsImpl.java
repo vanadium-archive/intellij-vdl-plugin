@@ -17,12 +17,8 @@ public class VdlBuiltinArgsImpl extends VdlCompositeElementImpl implements VdlBu
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitBuiltinArgs(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitBuiltinArgs(this);
     else super.accept(visitor);
   }
 

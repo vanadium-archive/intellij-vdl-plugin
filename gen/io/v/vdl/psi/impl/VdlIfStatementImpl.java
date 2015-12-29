@@ -16,12 +16,8 @@ public class VdlIfStatementImpl extends VdlStatementImpl implements VdlIfStateme
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitIfStatement(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitIfStatement(this);
     else super.accept(visitor);
   }
 

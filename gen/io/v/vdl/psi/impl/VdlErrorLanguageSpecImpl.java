@@ -17,12 +17,8 @@ public class VdlErrorLanguageSpecImpl extends VdlCompositeElementImpl implements
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitErrorLanguageSpec(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitErrorLanguageSpec(this);
     else super.accept(visitor);
   }
 

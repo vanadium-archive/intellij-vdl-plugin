@@ -16,12 +16,8 @@ public class VdlEnumTypeImpl extends VdlTypeImpl implements VdlEnumType {
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitEnumType(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitEnumType(this);
     else super.accept(visitor);
   }
 

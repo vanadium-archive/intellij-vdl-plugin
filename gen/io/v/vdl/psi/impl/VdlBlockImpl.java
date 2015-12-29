@@ -17,12 +17,8 @@ public class VdlBlockImpl extends VdlCompositeElementImpl implements VdlBlock {
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitBlock(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitBlock(this);
     else super.accept(visitor);
   }
 

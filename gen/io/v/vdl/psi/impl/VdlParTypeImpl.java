@@ -16,12 +16,8 @@ public class VdlParTypeImpl extends VdlTypeImpl implements VdlParType {
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitParType(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitParType(this);
     else super.accept(visitor);
   }
 

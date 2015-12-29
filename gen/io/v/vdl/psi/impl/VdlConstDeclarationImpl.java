@@ -17,12 +17,8 @@ public class VdlConstDeclarationImpl extends VdlCompositeElementImpl implements 
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitConstDeclaration(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitConstDeclaration(this);
     else super.accept(visitor);
   }
 

@@ -17,12 +17,8 @@ public class VdlVarSpecImpl extends VdlCompositeElementImpl implements VdlVarSpe
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitVarSpec(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitVarSpec(this);
     else super.accept(visitor);
   }
 

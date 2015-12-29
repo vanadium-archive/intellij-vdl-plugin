@@ -17,12 +17,8 @@ public class VdlTypeImpl extends VdlCompositeElementImpl implements VdlType {
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitType(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitType(this);
     else super.accept(visitor);
   }
 

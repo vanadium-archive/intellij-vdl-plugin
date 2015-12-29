@@ -16,12 +16,8 @@ public class VdlChannelTypeImpl extends VdlTypeImpl implements VdlChannelType {
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitChannelType(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitChannelType(this);
     else super.accept(visitor);
   }
 
