@@ -5,7 +5,9 @@
 package io.v.vdl.psi;
 
 import com.intellij.psi.stubs.PsiFileStubImpl;
+import com.intellij.psi.tree.IStubFileElementType;
 import com.intellij.util.io.StringRef;
+import io.v.vdl.VdlFileElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,5 +26,10 @@ public class VdlFileStub extends PsiFileStubImpl<VdlFile> {
     @Nullable
     public String getPackageName() {
         return myPackageName.getString();
+    }
+
+    @Override
+    public IStubFileElementType getType() {
+        return VdlFileElementType.INSTANCE;
     }
 }
