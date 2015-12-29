@@ -16,12 +16,8 @@ public class VdlTypeAssertionExprImpl extends VdlExpressionImpl implements VdlTy
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitTypeAssertionExpr(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitTypeAssertionExpr(this);
     else super.accept(visitor);
   }
 

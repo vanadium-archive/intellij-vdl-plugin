@@ -16,12 +16,8 @@ public class VdlReferenceExpressionImpl extends VdlExpressionImpl implements Vdl
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitReferenceExpression(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitReferenceExpression(this);
     else super.accept(visitor);
   }
 

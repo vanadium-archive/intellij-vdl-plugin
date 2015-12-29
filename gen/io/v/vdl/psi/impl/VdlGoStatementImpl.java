@@ -16,12 +16,8 @@ public class VdlGoStatementImpl extends VdlStatementImpl implements VdlGoStateme
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitGoStatement(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitGoStatement(this);
     else super.accept(visitor);
   }
 

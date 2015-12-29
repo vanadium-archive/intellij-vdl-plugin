@@ -17,12 +17,8 @@ public class VdlFieldNameImpl extends VdlCompositeElementImpl implements VdlFiel
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitFieldName(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitFieldName(this);
     else super.accept(visitor);
   }
 

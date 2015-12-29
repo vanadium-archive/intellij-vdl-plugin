@@ -16,19 +16,15 @@ public class VdlSetTypeImpl extends VdlTypeImpl implements VdlSetType {
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitSetType(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitSetType(this);
     else super.accept(visitor);
   }
 
   @Override
-  @NotNull
+  @Nullable
   public VdlType getType() {
-    return findNotNullChildByClass(VdlType.class);
+    return findChildByClass(VdlType.class);
   }
 
   @Override
@@ -38,9 +34,9 @@ public class VdlSetTypeImpl extends VdlTypeImpl implements VdlSetType {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public PsiElement getRbrack() {
-    return findNotNullChildByType(RBRACK);
+    return findChildByType(RBRACK);
   }
 
   @Override

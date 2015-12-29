@@ -17,12 +17,8 @@ public class VdlStatementImpl extends VdlCompositeElementImpl implements VdlStat
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitStatement(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitStatement(this);
     else super.accept(visitor);
   }
 

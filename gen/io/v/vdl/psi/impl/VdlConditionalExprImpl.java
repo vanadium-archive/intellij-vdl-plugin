@@ -16,12 +16,8 @@ public class VdlConditionalExprImpl extends VdlExpressionImpl implements VdlCond
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitConditionalExpr(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitConditionalExpr(this);
     else super.accept(visitor);
   }
 

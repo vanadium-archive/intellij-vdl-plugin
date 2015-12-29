@@ -16,12 +16,8 @@ public class VdlMapTypeImpl extends VdlTypeImpl implements VdlMapType {
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitMapType(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitMapType(this);
     else super.accept(visitor);
   }
 

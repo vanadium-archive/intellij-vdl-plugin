@@ -124,7 +124,7 @@ private TypeLit ::=
   | SetType
 
 ArrayOrSliceType ::= '[' ('...'|Expression?) ']' Type {pin=1}
-SetType ::= set '[' Type ']'
+SetType ::= set '[' Type ']' {pin=2}
 
 EnumType ::= enum '{' EnumFields? '}' {pin=1}
 private EnumFields ::= EnumFieldDeclaration (semi EnumFieldDeclaration)* semi? {pin=1}

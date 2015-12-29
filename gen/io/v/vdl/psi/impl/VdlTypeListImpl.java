@@ -16,12 +16,8 @@ public class VdlTypeListImpl extends VdlTypeImpl implements VdlTypeList {
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitTypeList(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitTypeList(this);
     else super.accept(visitor);
   }
 
