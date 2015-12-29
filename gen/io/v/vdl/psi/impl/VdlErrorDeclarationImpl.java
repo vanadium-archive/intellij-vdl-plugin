@@ -17,12 +17,8 @@ public class VdlErrorDeclarationImpl extends VdlCompositeElementImpl implements 
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitErrorDeclaration(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitErrorDeclaration(this);
     else super.accept(visitor);
   }
 

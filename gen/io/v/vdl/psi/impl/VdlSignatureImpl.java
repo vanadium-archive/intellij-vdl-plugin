@@ -17,12 +17,8 @@ public class VdlSignatureImpl extends VdlCompositeElementImpl implements VdlSign
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitSignature(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitSignature(this);
     else super.accept(visitor);
   }
 

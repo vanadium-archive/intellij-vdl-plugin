@@ -16,12 +16,8 @@ public class VdlAndExprImpl extends VdlExpressionImpl implements VdlAndExpr {
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitAndExpr(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitAndExpr(this);
     else super.accept(visitor);
   }
 

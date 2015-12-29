@@ -17,12 +17,8 @@ public class VdlTagsImpl extends VdlCompositeElementImpl implements VdlTags {
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitTags(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitTags(this);
     else super.accept(visitor);
   }
 

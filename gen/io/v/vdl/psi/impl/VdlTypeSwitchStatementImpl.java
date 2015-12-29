@@ -16,12 +16,8 @@ public class VdlTypeSwitchStatementImpl extends VdlSwitchStatementImpl implement
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitTypeSwitchStatement(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitTypeSwitchStatement(this);
     else super.accept(visitor);
   }
 

@@ -17,12 +17,8 @@ public class VdlCommClauseImpl extends VdlCompositeElementImpl implements VdlCom
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitCommClause(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitCommClause(this);
     else super.accept(visitor);
   }
 

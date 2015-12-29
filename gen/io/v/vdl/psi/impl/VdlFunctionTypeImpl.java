@@ -16,12 +16,8 @@ public class VdlFunctionTypeImpl extends VdlTypeImpl implements VdlFunctionType 
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitFunctionType(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitFunctionType(this);
     else super.accept(visitor);
   }
 

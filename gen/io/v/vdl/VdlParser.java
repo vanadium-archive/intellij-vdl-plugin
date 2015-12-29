@@ -413,10 +413,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean AnonymousFieldDefinition(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "AnonymousFieldDefinition")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ANONYMOUS_FIELD_DEFINITION, "<anonymous field definition>");
+    Marker m = enter_section_(b, l, _NONE_, "<anonymous field definition>");
     r = AnonymousFieldDefinition_0(b, l + 1);
     r = r && TypeName(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, ANONYMOUS_FIELD_DEFINITION, r, false, null);
     return r;
   }
 
@@ -433,12 +433,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ArgumentList")) return false;
     if (!nextTokenIs(b, LPAREN)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, ARGUMENT_LIST, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, LPAREN);
     p = r; // pin = 1
     r = r && report_error_(b, ArgumentList_1(b, l + 1));
     r = p && consumeToken(b, RPAREN) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, ARGUMENT_LIST, r, p, null);
     return r || p;
   }
 
@@ -481,13 +481,13 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ArrayOrSliceType")) return false;
     if (!nextTokenIs(b, LBRACK)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, ARRAY_OR_SLICE_TYPE, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, LBRACK);
     p = r; // pin = 1
     r = r && report_error_(b, ArrayOrSliceType_1(b, l + 1));
     r = p && report_error_(b, consumeToken(b, RBRACK)) && r;
     r = p && Type(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, ARRAY_OR_SLICE_TYPE, r, p, null);
     return r || p;
   }
 
@@ -514,11 +514,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean AssignmentStatement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "AssignmentStatement")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _LEFT_, ASSIGNMENT_STATEMENT, "<assignment statement>");
+    Marker m = enter_section_(b, l, _LEFT_, "<assignment statement>");
     r = assign_op(b, l + 1);
     p = r; // pin = 1
     r = r && ExpressionList(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, ASSIGNMENT_STATEMENT, r, p, null);
     return r || p;
   }
 
@@ -527,10 +527,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean Block(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Block")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, BLOCK, "<block>");
+    Marker m = enter_section_(b, l, _NONE_, "<block>");
     r = consumeBlock(b, l + 1);
     if (!r) r = Block_1(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, BLOCK, r, false, null);
     return r;
   }
 
@@ -593,9 +593,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean Block_1_1_1_0_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Block_1_1_1_0_1_0")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
+    Marker m = enter_section_(b, l, _NOT_, null);
     r = !Block_1_1_1_0_1_0_0(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -610,11 +610,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "BreakStatement")) return false;
     if (!nextTokenIs(b, BREAK)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, BREAK_STATEMENT, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, BREAK);
     p = r; // pin = 1
     r = r && BreakStatement_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, BREAK_STATEMENT, r, p, null);
     return r || p;
   }
 
@@ -630,10 +630,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean BuiltinArgs(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "BuiltinArgs")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, BUILTIN_ARGS, "<builtin args>");
+    Marker m = enter_section_(b, l, _NONE_, "<builtin args>");
     r = BuiltinArgs_0(b, l + 1);
     if (!r) r = BuiltinArgs_1(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, BUILTIN_ARGS, r, false, null);
     return r;
   }
 
@@ -709,11 +709,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ChanTypePrefix_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ChanTypePrefix_0")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, CHAN);
     p = r; // pin = 1
     r = r && ChanTypePrefix_0_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -728,11 +728,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ChanTypePrefix_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ChanTypePrefix_1")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, SEND_CHANNEL);
     p = r; // pin = 1
     r = r && consumeToken(b, CHAN);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -742,11 +742,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ChannelType")) return false;
     if (!nextTokenIs(b, "<channel type>", SEND_CHANNEL, CHAN)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _COLLAPSE_, CHANNEL_TYPE, "<channel type>");
+    Marker m = enter_section_(b, l, _COLLAPSE_, "<channel type>");
     r = ChanTypePrefix(b, l + 1);
     p = r; // pin = 1
     r = r && Type(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, CHANNEL_TYPE, r, p, null);
     return r || p;
   }
 
@@ -756,10 +756,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "CommCase")) return false;
     if (!nextTokenIs(b, "<comm case>", CASE, DEFAULT)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, COMM_CASE, "<comm case>");
+    Marker m = enter_section_(b, l, _NONE_, "<comm case>");
     r = CommCase_0(b, l + 1);
     if (!r) r = consumeToken(b, DEFAULT);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, COMM_CASE, r, false, null);
     return r;
   }
 
@@ -767,11 +767,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean CommCase_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "CommCase_0")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, CASE);
     p = r; // pin = case
     r = r && CommCase_0_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -803,12 +803,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "CommClause")) return false;
     if (!nextTokenIs(b, "<comm clause>", CASE, DEFAULT)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, COMM_CLAUSE, "<comm clause>");
+    Marker m = enter_section_(b, l, _NONE_, "<comm clause>");
     r = CommCase(b, l + 1);
     p = r; // pin = 1
     r = r && report_error_(b, consumeToken(b, COLON));
     r = p && CommClause_2(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, COMM_CLAUSE, r, p, null);
     return r || p;
   }
 
@@ -846,11 +846,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ConstDeclaration")) return false;
     if (!nextTokenIs(b, CONST)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, CONST_DECLARATION, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, CONST);
     p = r; // pin = 1
     r = r && ConstDeclaration_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, CONST_DECLARATION, r, p, null);
     return r || p;
   }
 
@@ -869,12 +869,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ConstDeclaration_1_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ConstDeclaration_1_1")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, LPAREN);
     p = r; // pin = 1
     r = r && report_error_(b, ConstDeclaration_1_1_1(b, l + 1));
     r = p && consumeToken(b, RPAREN) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -911,11 +911,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ConstDefinitionList")) return false;
     if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = ConstDefinition(b, l + 1);
     p = r; // pin = 1
     r = r && ConstDefinitionList_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -935,11 +935,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ConstDefinitionList_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ConstDefinitionList_1_0")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, COMMA);
     p = r; // pin = 1
     r = r && ConstDefinition(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -949,11 +949,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ConstSpec")) return false;
     if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, CONST_SPEC, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = ConstDefinitionList(b, l + 1);
     p = r; // pin = 1
     r = r && ConstSpec_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, CONST_SPEC, r, p, null);
     return r || p;
   }
 
@@ -979,11 +979,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ConstSpec_1_0_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ConstSpec_1_0_0")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, ASSIGN);
     p = r; // pin = 1
     r = r && ExpressionList(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -991,12 +991,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ConstSpec_1_0_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ConstSpec_1_0_1")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = Type(b, l + 1);
     p = r; // pin = 1
     r = r && report_error_(b, consumeToken(b, ASSIGN));
     r = p && ExpressionList(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -1006,12 +1006,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ConstSpecs")) return false;
     if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = ConstSpec(b, l + 1);
     p = r; // pin = 1
     r = r && report_error_(b, ConstSpecs_1(b, l + 1));
     r = p && ConstSpecs_2(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -1051,11 +1051,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ContinueStatement")) return false;
     if (!nextTokenIs(b, CONTINUE)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, CONTINUE_STATEMENT, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, CONTINUE);
     p = r; // pin = 1
     r = r && ContinueStatement_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, CONTINUE_STATEMENT, r, p, null);
     return r || p;
   }
 
@@ -1113,13 +1113,13 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ConversionTail")) return false;
     if (!nextTokenIs(b, LPAREN)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, LPAREN);
     p = r; // pin = 1
     r = r && report_error_(b, Expression(b, l + 1, -1));
     r = p && report_error_(b, ConversionTail_2(b, l + 1)) && r;
     r = p && consumeToken(b, RPAREN) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -1136,11 +1136,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "DeferStatement")) return false;
     if (!nextTokenIs(b, DEFER)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, DEFER_STATEMENT, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, DEFER);
     p = r; // pin = 1
     r = r && Expression(b, l + 1, -1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, DEFER_STATEMENT, r, p, null);
     return r || p;
   }
 
@@ -1149,10 +1149,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
   static boolean E(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "E")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = withOn(b, l + 1, "PAR", Element_parser_);
     if (!r) r = E_1(b, l + 1);
-    exit_section_(b, l, m, r, false, E_recover_parser_);
+    exit_section_(b, l, m, null, r, false, E_recover_parser_);
     return r;
   }
 
@@ -1171,9 +1171,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean E_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "E_1_0")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
+    Marker m = enter_section_(b, l, _NOT_, null);
     r = !E_1_0_0(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -1187,9 +1187,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   static boolean E_recover(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "E_recover")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
+    Marker m = enter_section_(b, l, _NOT_, null);
     r = !E_recover_0(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -1209,11 +1209,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean Element(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Element")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, ELEMENT, "<element>");
+    Marker m = enter_section_(b, l, _NONE_, "<element>");
     r = First(b, l + 1);
     p = r; // pin = 1
     r = r && Element_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, ELEMENT, r, p, null);
     return r || p;
   }
 
@@ -1228,11 +1228,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean Element_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Element_1_0")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, COLON);
     p = r; // pin = 1
     r = r && Value(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -1241,11 +1241,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   static boolean ElementList(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ElementList")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = E(b, l + 1);
     p = r; // pin = 1
     r = r && ElementList_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -1265,11 +1265,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ElementList_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ElementList_1_0")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, COMMA);
     p = r; // pin = 1
     r = r && ElementList_1_0_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -1286,11 +1286,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ElseStatement")) return false;
     if (!nextTokenIs(b, ELSE)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, ELSE_STATEMENT, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, ELSE);
     p = r; // pin = 1
     r = r && ElseStatement_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, ELSE_STATEMENT, r, p, null);
     return r || p;
   }
 
@@ -1323,12 +1323,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "EnumFields")) return false;
     if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = EnumFieldDeclaration(b, l + 1);
     p = r; // pin = 1
     r = r && report_error_(b, EnumFields_1(b, l + 1));
     r = p && EnumFields_2(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -1368,13 +1368,13 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "EnumType")) return false;
     if (!nextTokenIs(b, ENUM)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, ENUM_TYPE, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, ENUM);
     p = r; // pin = 1
     r = r && report_error_(b, consumeToken(b, LBRACE));
     r = p && report_error_(b, EnumType_2(b, l + 1)) && r;
     r = p && consumeToken(b, RBRACE) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, ENUM_TYPE, r, p, null);
     return r || p;
   }
 
@@ -1391,11 +1391,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ErrorDeclaration")) return false;
     if (!nextTokenIs(b, ERROR)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, ERROR_DECLARATION, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, ERROR);
     p = r; // pin = 1
     r = r && ErrorDeclaration_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, ERROR_DECLARATION, r, p, null);
     return r || p;
   }
 
@@ -1434,10 +1434,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean ErrorDetail(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ErrorDetail")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ERROR_DETAIL, "<error detail>");
+    Marker m = enter_section_(b, l, _NONE_, "<error detail>");
     r = ActionIdentifier(b, l + 1);
     if (!r) r = ErrorLanguageSpec(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, ERROR_DETAIL, r, false, null);
     return r;
   }
 
@@ -1510,11 +1510,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ErrorLanguageSpec")) return false;
     if (!nextTokenIs(b, "<error language spec>", RAW_STRING, STRING)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ERROR_LANGUAGE_SPEC, "<error language spec>");
+    Marker m = enter_section_(b, l, _NONE_, "<error language spec>");
     r = StringLiteral(b, l + 1);
     r = r && consumeToken(b, COLON);
     r = r && StringLiteral(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, ERROR_LANGUAGE_SPEC, r, false, null);
     return r;
   }
 
@@ -1553,12 +1553,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ErrorSpecs")) return false;
     if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = ErrorSpec(b, l + 1);
     p = r; // pin = 1
     r = r && report_error_(b, ErrorSpecs_1(b, l + 1));
     r = p && ErrorSpecs_2(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -1609,13 +1609,13 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean ExprCaseClause(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ExprCaseClause")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, EXPR_CASE_CLAUSE, "<expr case clause>");
+    Marker m = enter_section_(b, l, _NONE_, "<expr case clause>");
     r = ExprCaseClause_0(b, l + 1);
     p = r; // pin = 1
     r = r && report_error_(b, ExprSwitchCase(b, l + 1));
     r = p && report_error_(b, consumeToken(b, COLON)) && r;
     r = p && ExprCaseClause_3(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, EXPR_CASE_CLAUSE, r, p, null);
     return r || p;
   }
 
@@ -1623,9 +1623,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ExprCaseClause_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ExprCaseClause_0")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
+    Marker m = enter_section_(b, l, _NOT_, null);
     r = !consumeToken(b, RBRACE);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -1653,11 +1653,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ExprSwitchCase_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ExprSwitchCase_0")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, CASE);
     p = r; // pin = 1
     r = r && ExpressionList(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -1666,13 +1666,13 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean ExprSwitchStatement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ExprSwitchStatement")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _LEFT_, EXPR_SWITCH_STATEMENT, "<expr switch statement>");
+    Marker m = enter_section_(b, l, _LEFT_, "<expr switch statement>");
     r = Condition(b, l + 1);
     r = r && consumeToken(b, LBRACE);
     p = r; // pin = 2
     r = r && report_error_(b, ExprSwitchStatement_2(b, l + 1));
     r = p && consumeToken(b, RBRACE) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, EXPR_SWITCH_STATEMENT, r, p, null);
     return r || p;
   }
 
@@ -1693,11 +1693,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   static boolean ExpressionArgList(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ExpressionArgList")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = ExpressionOrTypeWithRecover2(b, l + 1);
     p = r; // pin = 1
     r = r && ExpressionArgList_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -1717,11 +1717,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ExpressionArgList_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ExpressionArgList_1_0")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, COMMA);
     p = r; // pin = 1
     r = r && ExpressionArgList_1_0_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -1740,9 +1740,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ExpressionArgList_1_0_1_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ExpressionArgList_1_0_1_1")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _AND_);
+    Marker m = enter_section_(b, l, _AND_, null);
     r = consumeToken(b, RPAREN);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -1751,11 +1751,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   static boolean ExpressionList(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ExpressionList")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = ExpressionWithRecover(b, l + 1);
     p = r; // pin = 1
     r = r && ExpressionList_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -1775,11 +1775,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ExpressionList_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ExpressionList_1_0")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, COMMA);
     p = r; // pin = 1
     r = r && ExpressionList_1_0_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -1798,9 +1798,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ExpressionList_1_0_1_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ExpressionList_1_0_1_1")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _AND_);
+    Marker m = enter_section_(b, l, _AND_, null);
     r = consumeToken(b, RPAREN);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -1809,9 +1809,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   static boolean ExpressionListRecover(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ExpressionListRecover")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
+    Marker m = enter_section_(b, l, _NOT_, null);
     r = !ExpressionListRecover_0(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -1920,9 +1920,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   static boolean ExpressionOrTypeWithRecover(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ExpressionOrTypeWithRecover")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = ExpressionOrLiteralTypeExpr(b, l + 1);
-    exit_section_(b, l, m, r, false, ExpressionListRecover_parser_);
+    exit_section_(b, l, m, null, r, false, ExpressionListRecover_parser_);
     return r;
   }
 
@@ -1931,10 +1931,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
   static boolean ExpressionOrTypeWithRecover2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ExpressionOrTypeWithRecover2")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = withOn(b, l + 1, "PAR", ExpressionOrTypeWithRecover_parser_);
     if (!r) r = ExpressionOrTypeWithRecover2_1(b, l + 1);
-    exit_section_(b, l, m, r, false, ExpressionListRecover_parser_);
+    exit_section_(b, l, m, null, r, false, ExpressionListRecover_parser_);
     return r;
   }
 
@@ -1953,9 +1953,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ExpressionOrTypeWithRecover2_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ExpressionOrTypeWithRecover2_1_0")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
+    Marker m = enter_section_(b, l, _NOT_, null);
     r = !ExpressionOrTypeWithRecover2_1_0_0(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -1969,9 +1969,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   static boolean ExpressionWithRecover(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ExpressionWithRecover")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = Expression(b, l + 1, -1);
-    exit_section_(b, l, m, r, false, ExpressionListRecover_parser_);
+    exit_section_(b, l, m, null, r, false, ExpressionListRecover_parser_);
     return r;
   }
 
@@ -2026,10 +2026,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean FieldDeclaration(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "FieldDeclaration")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, FIELD_DECLARATION, "<field declaration>");
+    Marker m = enter_section_(b, l, _NONE_, "<field declaration>");
     r = FieldDeclaration_0(b, l + 1);
     r = r && FieldDeclaration_1(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, FIELD_DECLARATION, r, false, null);
     return r;
   }
 
@@ -2080,11 +2080,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "FieldDefinitionList")) return false;
     if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = FieldDefinition(b, l + 1);
     p = r; // pin = 1
     r = r && FieldDefinitionList_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -2104,11 +2104,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean FieldDefinitionList_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "FieldDefinitionList_1_0")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, COMMA);
     p = r; // pin = 1
     r = r && FieldDefinition(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -2129,12 +2129,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
   static boolean Fields(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Fields")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = FieldDeclaration(b, l + 1);
     p = r; // pin = 1
     r = r && report_error_(b, Fields_1(b, l + 1));
     r = p && Fields_2(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -2174,13 +2174,13 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "File")) return false;
     if (!nextTokenIs(b, PACKAGE)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = PackageClause(b, l + 1);
     p = r; // pin = 1
     r = r && report_error_(b, semi(b, l + 1));
     r = p && report_error_(b, ImportList(b, l + 1)) && r;
     r = p && File_3(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -2213,13 +2213,13 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean ForClause(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ForClause")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, FOR_CLAUSE, "<for clause>");
+    Marker m = enter_section_(b, l, _NONE_, "<for clause>");
     r = ForClause_0(b, l + 1);
     r = r && consumeToken(b, SEMICOLON);
     r = r && ForClause_2(b, l + 1);
     r = r && consumeToken(b, SEMICOLON);
     r = r && ForClause_4(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, FOR_CLAUSE, r, false, null);
     return r;
   }
 
@@ -2262,13 +2262,13 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ForStatement")) return false;
     if (!nextTokenIs(b, FOR)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, FOR_STATEMENT, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, FOR);
     p = r; // pin = for|ForOrRangeClause
     r = r && report_error_(b, enterMode(b, l + 1, "BLOCK?"));
     r = p && report_error_(b, ForStatement_2(b, l + 1)) && r;
     r = p && exitModeSafe(b, l + 1, "BLOCK?") && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, FOR_STATEMENT, r, p, null);
     return r || p;
   }
 
@@ -2288,11 +2288,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ForStatement_2_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ForStatement_2_0")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = ForOrRangeClause(b, l + 1);
     p = r; // pin = for|ForOrRangeClause
     r = r && Block(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -2313,12 +2313,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "FunctionDeclaration")) return false;
     if (!nextTokenIs(b, FUNC)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, FUNCTION_DECLARATION, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeTokens(b, 2, FUNC, IDENTIFIER);
     p = r; // pin = 2
     r = r && report_error_(b, Signature(b, l + 1));
     r = p && FunctionDeclaration_3(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, FUNCTION_DECLARATION, r, p, null);
     return r || p;
   }
 
@@ -2335,11 +2335,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "FunctionType")) return false;
     if (!nextTokenIs(b, FUNC)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, FUNCTION_TYPE, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, FUNC);
     p = r; // pin = 1
     r = r && Signature(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, FUNCTION_TYPE, r, p, null);
     return r || p;
   }
 
@@ -2349,11 +2349,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "GoStatement")) return false;
     if (!nextTokenIs(b, GO)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, GO_STATEMENT, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, GO);
     p = r; // pin = 1
     r = r && Expression(b, l + 1, -1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, GO_STATEMENT, r, p, null);
     return r || p;
   }
 
@@ -2363,11 +2363,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "GotoStatement")) return false;
     if (!nextTokenIs(b, GOTO)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, GOTO_STATEMENT, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, GOTO);
     p = r; // pin = 1
     r = r && LabelRef(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, GOTO_STATEMENT, r, p, null);
     return r || p;
   }
 
@@ -2377,13 +2377,13 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "IfStatement")) return false;
     if (!nextTokenIs(b, IF)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, IF_STATEMENT, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, IF);
     p = r; // pin = 1
     r = r && report_error_(b, Condition(b, l + 1));
     r = p && report_error_(b, Block(b, l + 1)) && r;
     r = p && IfStatement_3(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, IF_STATEMENT, r, p, null);
     return r || p;
   }
 
@@ -2400,11 +2400,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ImportDeclaration")) return false;
     if (!nextTokenIs(b, IMPORT)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, IMPORT_DECLARATION, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, IMPORT);
     p = r; // pin = 1
     r = r && ImportDeclaration_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, IMPORT_DECLARATION, r, p, null);
     return r || p;
   }
 
@@ -2423,12 +2423,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ImportDeclaration_1_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ImportDeclaration_1_1")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, LPAREN);
     p = r; // pin = 1
     r = r && report_error_(b, ImportDeclaration_1_1_1(b, l + 1));
     r = p && consumeToken(b, RPAREN) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -2444,10 +2444,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean ImportList(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ImportList")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, IMPORT_LIST, "<import list>");
+    Marker m = enter_section_(b, l, _NONE_, "<import list>");
     r = ImportList_0(b, l + 1);
     if (!r) r = emptyImportList(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, IMPORT_LIST, r, false, null);
     return r;
   }
 
@@ -2471,11 +2471,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ImportList_0_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ImportList_0_0")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = ImportDeclaration(b, l + 1);
     p = r; // pin = 1
     r = r && semi(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -2484,10 +2484,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean ImportSpec(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ImportSpec")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, IMPORT_SPEC, "<import spec>");
+    Marker m = enter_section_(b, l, _NONE_, "<import spec>");
     r = ImportSpec_0(b, l + 1);
     r = r && ImportString(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, IMPORT_SPEC, r, false, null);
     return r;
   }
 
@@ -2514,12 +2514,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
   static boolean ImportSpecs(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ImportSpecs")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = ImportSpec(b, l + 1);
     p = r; // pin = 1
     r = r && report_error_(b, ImportSpecs_1(b, l + 1));
     r = p && ImportSpecs_2(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -2559,10 +2559,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ImportString")) return false;
     if (!nextTokenIs(b, "<import string>", RAW_STRING, STRING)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, IMPORT_STRING, "<import string>");
+    Marker m = enter_section_(b, l, _NONE_, "<import string>");
     r = consumeToken(b, STRING);
     if (!r) r = consumeToken(b, RAW_STRING);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, IMPORT_STRING, r, false, null);
     return r;
   }
 
@@ -2635,9 +2635,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean Key_0_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Key_0_1")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _AND_);
+    Marker m = enter_section_(b, l, _AND_, null);
     r = consumeToken(b, COLON);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -2656,9 +2656,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean Key_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Key_1_0")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
+    Marker m = enter_section_(b, l, _NOT_, null);
     r = !Key_1_0_0(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -2697,12 +2697,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "LabeledStatement")) return false;
     if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, LABELED_STATEMENT, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = LabelDefinition(b, l + 1);
     r = r && consumeToken(b, COLON);
     p = r; // pin = 2
     r = r && LabeledStatement_2(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, LABELED_STATEMENT, r, p, null);
     return r || p;
   }
 
@@ -2718,9 +2718,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean LeftHandExprList(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "LeftHandExprList")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, LEFT_HAND_EXPR_LIST, "<left hand expr list>");
+    Marker m = enter_section_(b, l, _NONE_, "<left hand expr list>");
     r = ExpressionList(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, LEFT_HAND_EXPR_LIST, r, false, null);
     return r;
   }
 
@@ -2729,9 +2729,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean LiteralTypeExpr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "LiteralTypeExpr")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, LITERAL_TYPE_EXPR, "<literal type expr>");
+    Marker m = enter_section_(b, l, _NONE_, "<literal type expr>");
     r = LiteralTypeExprInner(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, LITERAL_TYPE_EXPR, r, false, null);
     return r;
   }
 
@@ -2759,13 +2759,13 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean LiteralValue(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "LiteralValue")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, LITERAL_VALUE, "<literal value>");
+    Marker m = enter_section_(b, l, _NONE_, "<literal value>");
     r = LiteralValue_0(b, l + 1);
     r = r && consumeToken(b, LBRACE);
     p = r; // pin = 2
     r = r && report_error_(b, LiteralValue_2(b, l + 1));
     r = p && consumeToken(b, RBRACE) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, LITERAL_VALUE, r, p, null);
     return r || p;
   }
 
@@ -2794,14 +2794,14 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "MapType")) return false;
     if (!nextTokenIs(b, MAP)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, MAP_TYPE, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, MAP);
     p = r; // pin = 1
     r = r && report_error_(b, consumeToken(b, LBRACK));
     r = p && report_error_(b, Type(b, l + 1)) && r;
     r = p && report_error_(b, consumeToken(b, RBRACK)) && r;
     r = p && Type(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, MAP_TYPE, r, p, null);
     return r || p;
   }
 
@@ -2810,10 +2810,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean MethodSpec(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "MethodSpec")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, METHOD_SPEC, "<method spec>");
+    Marker m = enter_section_(b, l, _NONE_, "<method spec>");
     r = MethodSpec_0(b, l + 1);
     if (!r) r = MethodSpec_1(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, METHOD_SPEC, r, false, null);
     return r;
   }
 
@@ -2832,9 +2832,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean MethodSpec_0_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "MethodSpec_0_1")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _AND_);
+    Marker m = enter_section_(b, l, _AND_, null);
     r = MethodSpec_0_1_0(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -2842,9 +2842,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean MethodSpec_0_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "MethodSpec_0_1_0")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
+    Marker m = enter_section_(b, l, _NOT_, null);
     r = !consumeToken(b, LPAREN);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -2872,12 +2872,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
   static boolean MethodSpecs(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "MethodSpecs")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = MethodSpec(b, l + 1);
     p = r; // pin = 1
     r = r && report_error_(b, MethodSpecs_1(b, l + 1));
     r = p && MethodSpecs_2(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -2936,10 +2936,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "PackageClause")) return false;
     if (!nextTokenIs(b, PACKAGE)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, PACKAGE_CLAUSE, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeTokens(b, 1, PACKAGE, IDENTIFIER);
     p = r; // pin = 1
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, PACKAGE_CLAUSE, r, p, null);
     return r || p;
   }
 
@@ -2987,9 +2987,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ParamDefinitionListNoPin_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ParamDefinitionListNoPin_1")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _AND_);
+    Marker m = enter_section_(b, l, _AND_, null);
     r = ParamDefinitionListNoPin_1_0(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -2997,9 +2997,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ParamDefinitionListNoPin_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ParamDefinitionListNoPin_1_0")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
+    Marker m = enter_section_(b, l, _NOT_, null);
     r = !ParamDefinitionListNoPin_1_0_0(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -3042,10 +3042,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean ParameterDeclaration(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ParameterDeclaration")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, PARAMETER_DECLARATION, "<parameter declaration>");
+    Marker m = enter_section_(b, l, _NONE_, "<parameter declaration>");
     r = ParameterDeclaration_0(b, l + 1);
     if (!r) r = Type(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, PARAMETER_DECLARATION, r, false, null);
     return r;
   }
 
@@ -3080,11 +3080,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   static boolean ParameterList(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ParameterList")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = ParameterDeclaration(b, l + 1);
     p = r; // pin = 1
     r = r && ParameterList_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -3104,11 +3104,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ParameterList_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ParameterList_1_0")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, COMMA);
     p = r; // pin = 1
     r = r && ParameterList_1_0_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -3127,9 +3127,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ParameterList_1_0_1_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ParameterList_1_0_1_1")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _AND_);
+    Marker m = enter_section_(b, l, _AND_, null);
     r = consumeToken(b, RPAREN);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -3189,11 +3189,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "PointerType")) return false;
     if (!nextTokenIs(b, MUL)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, POINTER_TYPE, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, MUL);
     p = r; // pin = 1
     r = r && Type(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, POINTER_TYPE, r, p, null);
     return r || p;
   }
 
@@ -3203,10 +3203,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "QualifiedReferenceExpression")) return false;
     if (!nextTokenIs(b, DOT)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _LEFT_, REFERENCE_EXPRESSION, null);
+    Marker m = enter_section_(b, l, _LEFT_, null);
     r = consumeToken(b, DOT);
     r = r && consumeToken(b, IDENTIFIER);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, REFERENCE_EXPRESSION, r, false, null);
     return r;
   }
 
@@ -3216,10 +3216,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "QualifiedTypeReferenceExpression")) return false;
     if (!nextTokenIs(b, DOT)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _LEFT_, TYPE_REFERENCE_EXPRESSION, null);
+    Marker m = enter_section_(b, l, _LEFT_, null);
     r = consumeToken(b, DOT);
     r = r && consumeToken(b, IDENTIFIER);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, TYPE_REFERENCE_EXPRESSION, r, false, null);
     return r;
   }
 
@@ -3228,12 +3228,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean RangeClause(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "RangeClause")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, RANGE_CLAUSE, "<range clause>");
+    Marker m = enter_section_(b, l, _NONE_, "<range clause>");
     r = RangeClause_0(b, l + 1);
     r = r && consumeToken(b, RANGE);
     p = r; // pin = 2
     r = r && Expression(b, l + 1, -1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, RANGE_CLAUSE, r, p, null);
     return r || p;
   }
 
@@ -3249,11 +3249,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean ReceiverType(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ReceiverType")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, RECEIVER_TYPE, "<receiver type>");
+    Marker m = enter_section_(b, l, _NONE_, "<receiver type>");
     r = TypeName(b, l + 1);
     if (!r) r = ReceiverType_1(b, l + 1);
     if (!r) r = ReceiverType_2(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, RECEIVER_TYPE, r, false, null);
     return r;
   }
 
@@ -3287,10 +3287,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean RecvStatement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "RecvStatement")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, RECV_STATEMENT, "<recv statement>");
+    Marker m = enter_section_(b, l, _NONE_, "<recv statement>");
     r = RecvStatement_0(b, l + 1);
     r = r && Expression(b, l + 1, -1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, RECV_STATEMENT, r, false, null);
     return r;
   }
 
@@ -3318,11 +3318,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean Result(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Result")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, RESULT, "<result>");
+    Marker m = enter_section_(b, l, _NONE_, "<result>");
     r = Result_0(b, l + 1);
     if (!r) r = Type(b, l + 1);
     if (!r) r = ResultParameters(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, RESULT, r, false, null);
     return r;
   }
 
@@ -3351,12 +3351,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
   static boolean ResultParameterList(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ResultParameterList")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = ParameterDeclaration(b, l + 1);
     p = r; // pin = 1
     r = r && report_error_(b, ResultParameterList_1(b, l + 1));
     r = p && ResultParameterList_2(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -3376,11 +3376,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ResultParameterList_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ResultParameterList_1_0")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, COMMA);
     p = r; // pin = 1
     r = r && ResultParameterList_1_0_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -3399,9 +3399,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ResultParameterList_1_0_1_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ResultParameterList_1_0_1_1")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _AND_);
+    Marker m = enter_section_(b, l, _AND_, null);
     r = consumeToken(b, RPAREN);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -3468,11 +3468,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ReturnStatement")) return false;
     if (!nextTokenIs(b, RETURN)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, RETURN_STATEMENT, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, RETURN);
     p = r; // pin = 1
     r = r && ReturnStatement_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, RETURN_STATEMENT, r, p, null);
     return r || p;
   }
 
@@ -3489,13 +3489,13 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "SelectStatement")) return false;
     if (!nextTokenIs(b, SELECT)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, SELECT_STATEMENT, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, SELECT);
     p = r; // pin = 1
     r = r && report_error_(b, consumeToken(b, LBRACE));
     r = p && report_error_(b, SelectStatement_2(b, l + 1)) && r;
     r = p && consumeToken(b, RBRACE) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, SELECT_STATEMENT, r, p, null);
     return r || p;
   }
 
@@ -3517,11 +3517,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "SendStatement")) return false;
     if (!nextTokenIs(b, SEND_CHANNEL)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _LEFT_, SEND_STATEMENT, null);
+    Marker m = enter_section_(b, l, _LEFT_, null);
     r = consumeToken(b, SEND_CHANNEL);
     p = r; // pin = 1
     r = r && Expression(b, l + 1, -1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, SEND_STATEMENT, r, p, null);
     return r || p;
   }
 
@@ -3530,14 +3530,15 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean SetType(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "SetType")) return false;
     if (!nextTokenIs(b, SET)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, SET);
     r = r && consumeToken(b, LBRACK);
-    r = r && Type(b, l + 1);
-    r = r && consumeToken(b, RBRACK);
-    exit_section_(b, m, SET_TYPE, r);
-    return r;
+    p = r; // pin = 2
+    r = r && report_error_(b, Type(b, l + 1));
+    r = p && consumeToken(b, RBRACK) && r;
+    exit_section_(b, l, m, SET_TYPE, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */
@@ -3546,12 +3547,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "ShortVarDeclaration")) return false;
     if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, SHORT_VAR_DECLARATION, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = VarDefinitionList(b, l + 1);
     r = r && consumeToken(b, VAR_ASSIGN);
     p = r; // pin = 2
     r = r && ExpressionList(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, SHORT_VAR_DECLARATION, r, p, null);
     return r || p;
   }
 
@@ -3582,10 +3583,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean SimpleStatement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "SimpleStatement")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _COLLAPSE_, SIMPLE_STATEMENT, "<simple statement>");
+    Marker m = enter_section_(b, l, _COLLAPSE_, "<simple statement>");
     r = ShortVarDeclaration(b, l + 1);
     if (!r) r = SimpleStatement_1(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, SIMPLE_STATEMENT, r, false, null);
     return r;
   }
 
@@ -3593,11 +3594,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean SimpleStatement_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "SimpleStatement_1")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = LeftHandExprList(b, l + 1);
     p = r; // pin = LeftHandExprList
     r = r && SimpleStatement_1_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -3685,9 +3686,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean SliceExprBody_0_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "SliceExprBody_0_0")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _AND_);
+    Marker m = enter_section_(b, l, _AND_, null);
     r = consumeToken(b, COLON);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -3762,7 +3763,7 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean Statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Statement")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _COLLAPSE_, STATEMENT, "<statement>");
+    Marker m = enter_section_(b, l, _COLLAPSE_, "<statement>");
     r = ConstDeclaration(b, l + 1);
     if (!r) r = TypeDeclaration(b, l + 1);
     if (!r) r = VarDeclaration(b, l + 1);
@@ -3780,7 +3781,7 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!r) r = SelectStatement(b, l + 1);
     if (!r) r = ForStatement(b, l + 1);
     if (!r) r = DeferStatement(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, STATEMENT, r, false, null);
     return r;
   }
 
@@ -3789,9 +3790,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   static boolean StatementRecover(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "StatementRecover")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
+    Marker m = enter_section_(b, l, _NOT_, null);
     r = !StatementRecover_0(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -3883,11 +3884,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   static boolean StatementWithSemi(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "StatementWithSemi")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = Statement(b, l + 1);
     p = r; // pin = 1
     r = r && StatementWithSemi_1(b, l + 1);
-    exit_section_(b, l, m, r, p, StatementRecover_parser_);
+    exit_section_(b, l, m, null, r, p, StatementRecover_parser_);
     return r || p;
   }
 
@@ -3906,9 +3907,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean StatementWithSemi_1_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "StatementWithSemi_1_1")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _AND_);
+    Marker m = enter_section_(b, l, _AND_, null);
     r = consumeToken(b, RBRACE);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -3984,11 +3985,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "StreamSpec")) return false;
     if (!nextTokenIs(b, STREAM)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, STREAM_SPEC, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, STREAM);
     p = r; // pin = 1
     r = r && StreamArgs(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, STREAM_SPEC, r, p, null);
     return r || p;
   }
 
@@ -3998,10 +3999,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "StringLiteral")) return false;
     if (!nextTokenIs(b, "<string literal>", RAW_STRING, STRING)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, STRING_LITERAL, "<string literal>");
+    Marker m = enter_section_(b, l, _NONE_, "<string literal>");
     r = consumeToken(b, STRING);
     if (!r) r = consumeToken(b, RAW_STRING);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, STRING_LITERAL, r, false, null);
     return r;
   }
 
@@ -4011,13 +4012,13 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "StructOrUnionType")) return false;
     if (!nextTokenIs(b, "<struct or union type>", STRUCT, UNION)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _COLLAPSE_, STRUCT_OR_UNION_TYPE, "<struct or union type>");
+    Marker m = enter_section_(b, l, _COLLAPSE_, "<struct or union type>");
     r = StructOrUnionType_0(b, l + 1);
     p = r; // pin = 1
     r = r && report_error_(b, consumeToken(b, LBRACE));
     r = p && report_error_(b, StructOrUnionType_2(b, l + 1)) && r;
     r = p && consumeToken(b, RBRACE) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, STRUCT_OR_UNION_TYPE, r, p, null);
     return r || p;
   }
 
@@ -4057,11 +4058,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "SwitchStatement")) return false;
     if (!nextTokenIs(b, SWITCH)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _COLLAPSE_, SWITCH_STATEMENT, null);
+    Marker m = enter_section_(b, l, _COLLAPSE_, null);
     r = SwitchStart(b, l + 1);
     p = r; // pin = 1
     r = r && SwitchStatement_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, SWITCH_STATEMENT, r, p, null);
     return r || p;
   }
 
@@ -4082,9 +4083,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "Tag")) return false;
     if (!nextTokenIs(b, "<tag>", RAW_STRING, STRING)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, TAG, "<tag>");
+    Marker m = enter_section_(b, l, _NONE_, "<tag>");
     r = StringLiteral(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, TAG, r, false, null);
     return r;
   }
 
@@ -4094,12 +4095,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "Tags")) return false;
     if (!nextTokenIs(b, LBRACE)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, TAGS, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, LBRACE);
     p = r; // pin = 1
     r = r && report_error_(b, ExpressionList(b, l + 1));
     r = p && consumeToken(b, RBRACE) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, TAGS, r, p, null);
     return r || p;
   }
 
@@ -4108,11 +4109,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   static boolean TopLevelDeclaration(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TopLevelDeclaration")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = OneOfDeclarations(b, l + 1);
     p = r; // pin = 1
     r = r && semi(b, l + 1);
-    exit_section_(b, l, m, r, p, TopLevelDeclarationRecover_parser_);
+    exit_section_(b, l, m, null, r, p, TopLevelDeclarationRecover_parser_);
     return r || p;
   }
 
@@ -4121,9 +4122,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   static boolean TopLevelDeclarationRecover(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TopLevelDeclarationRecover")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
+    Marker m = enter_section_(b, l, _NOT_, null);
     r = !TopLevelDeclarationRecover_0(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -4147,12 +4148,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean Type(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Type")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _COLLAPSE_, TYPE, "<type>");
+    Marker m = enter_section_(b, l, _COLLAPSE_, "<type>");
     r = TypeName(b, l + 1);
     if (!r) r = ErrorTypeName(b, l + 1);
     if (!r) r = TypeLit(b, l + 1);
     if (!r) r = ParType(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, TYPE, r, false, null);
     return r;
   }
 
@@ -4161,13 +4162,13 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean TypeCaseClause(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeCaseClause")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, TYPE_CASE_CLAUSE, "<type case clause>");
+    Marker m = enter_section_(b, l, _NONE_, "<type case clause>");
     r = TypeCaseClause_0(b, l + 1);
     p = r; // pin = 1
     r = r && report_error_(b, TypeSwitchCase(b, l + 1));
     r = p && report_error_(b, consumeToken(b, COLON)) && r;
     r = p && TypeCaseClause_3(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, TYPE_CASE_CLAUSE, r, p, null);
     return r || p;
   }
 
@@ -4175,9 +4176,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean TypeCaseClause_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeCaseClause_0")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
+    Marker m = enter_section_(b, l, _NOT_, null);
     r = !consumeToken(b, RBRACE);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -4194,11 +4195,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "TypeDeclaration")) return false;
     if (!nextTokenIs(b, TYPE_)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, TYPE_DECLARATION, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, TYPE_);
     p = r; // pin = 1
     r = r && TypeDeclaration_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, TYPE_DECLARATION, r, p, null);
     return r || p;
   }
 
@@ -4217,12 +4218,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean TypeDeclaration_1_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeDeclaration_1_1")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, LPAREN);
     p = r; // pin = 1
     r = r && report_error_(b, TypeDeclaration_1_1_1(b, l + 1));
     r = p && consumeToken(b, RPAREN) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -4239,12 +4240,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "TypeGuard")) return false;
     if (!nextTokenIs(b, LPAREN)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, TYPE_GUARD, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, LPAREN);
     r = r && consumeToken(b, TYPE_);
     p = r; // pin = 2
     r = r && consumeToken(b, RPAREN);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, TYPE_GUARD, r, p, null);
     return r || p;
   }
 
@@ -4253,11 +4254,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean TypeList(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeList")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _COLLAPSE_, TYPE_LIST, "<type list>");
+    Marker m = enter_section_(b, l, _COLLAPSE_, "<type list>");
     r = Type(b, l + 1);
     p = r; // pin = 1
     r = r && TypeList_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, TYPE_LIST, r, p, null);
     return r || p;
   }
 
@@ -4277,11 +4278,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean TypeList_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeList_1_0")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, COMMA);
     p = r; // pin = 1
     r = r && Type(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -4290,10 +4291,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean TypeListNoPin(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeListNoPin")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _COLLAPSE_, TYPE_LIST, "<type list no pin>");
+    Marker m = enter_section_(b, l, _COLLAPSE_, "<type list no pin>");
     r = Type(b, l + 1);
     r = r && TypeListNoPin_1(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, TYPE_LIST, r, false, null);
     return r;
   }
 
@@ -4384,10 +4385,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "TypeReferenceExpression")) return false;
     if (!nextTokenIs(b, "<type reference expression>", OPTIONAL_ARG, IDENTIFIER)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, TYPE_REFERENCE_EXPRESSION, "<type reference expression>");
+    Marker m = enter_section_(b, l, _NONE_, "<type reference expression>");
     r = TypeReferenceExpression_0(b, l + 1);
     r = r && consumeToken(b, IDENTIFIER);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, TYPE_REFERENCE_EXPRESSION, r, false, null);
     return r;
   }
 
@@ -4416,12 +4417,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "TypeSpecs")) return false;
     if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = TypeSpec(b, l + 1);
     p = r; // pin = 1
     r = r && report_error_(b, TypeSpecs_1(b, l + 1));
     r = p && TypeSpecs_2(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -4472,11 +4473,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean TypeSwitchCase_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeSwitchCase_0")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, CASE);
     p = r; // pin = 1
     r = r && TypeList(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -4485,12 +4486,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean TypeSwitchGuard(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeSwitchGuard")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, TYPE_SWITCH_GUARD, "<type switch guard>");
+    Marker m = enter_section_(b, l, _NONE_, "<type switch guard>");
     r = TypeSwitchGuard_0(b, l + 1);
     r = r && Expression(b, l + 1, -1);
     r = r && consumeToken(b, DOT);
     r = r && TypeGuard(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, TYPE_SWITCH_GUARD, r, false, null);
     return r;
   }
 
@@ -4517,13 +4518,13 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean TypeSwitchStatement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeSwitchStatement")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _LEFT_, TYPE_SWITCH_STATEMENT, "<type switch statement>");
+    Marker m = enter_section_(b, l, _LEFT_, "<type switch statement>");
     r = TypeSwitchStatement_0(b, l + 1);
     p = r; // pin = 1
     r = r && report_error_(b, consumeToken(b, LBRACE));
     r = p && report_error_(b, TypeSwitchStatement_2(b, l + 1)) && r;
     r = p && consumeToken(b, RBRACE) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, TYPE_SWITCH_STATEMENT, r, p, null);
     return r || p;
   }
 
@@ -4584,10 +4585,10 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean Value(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Value")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, VALUE, "<value>");
+    Marker m = enter_section_(b, l, _NONE_, "<value>");
     r = Expression(b, l + 1, -1);
     if (!r) r = LiteralValue(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, VALUE, r, false, null);
     return r;
   }
 
@@ -4597,11 +4598,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "VarDeclaration")) return false;
     if (!nextTokenIs(b, VAR)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, VAR_DECLARATION, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, VAR);
     p = r; // pin = 1
     r = r && VarDeclaration_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, VAR_DECLARATION, r, p, null);
     return r || p;
   }
 
@@ -4653,11 +4654,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "VarDefinitionList")) return false;
     if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = VarDefinition(b, l + 1);
     p = r; // pin = 1
     r = r && VarDefinitionList_1(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -4677,11 +4678,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean VarDefinitionList_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "VarDefinitionList_1_0")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, COMMA);
     p = r; // pin = 1
     r = r && VarDefinition(b, l + 1);
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -4755,12 +4756,12 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "VarSpecs")) return false;
     if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = VarSpec(b, l + 1);
     p = r; // pin = 1
     r = r && report_error_(b, VarSpecs_1(b, l + 1));
     r = p && VarSpecs_2(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, null, r, p, null);
     return r || p;
   }
 
@@ -4813,7 +4814,7 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean assign_op(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "assign_op")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ASSIGN_OP, "<assign op>");
+    Marker m = enter_section_(b, l, _NONE_, "<assign op>");
     r = consumeToken(b, ASSIGN);
     if (!r) r = consumeToken(b, PLUS_ASSIGN);
     if (!r) r = consumeToken(b, MINUS_ASSIGN);
@@ -4826,7 +4827,7 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, SHIFT_RIGHT_ASSIGN);
     if (!r) r = consumeToken(b, BIT_AND_ASSIGN);
     if (!r) r = consumeToken(b, BIT_CLEAR_ASSIGN);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, ASSIGN_OP, r, false, null);
     return r;
   }
 
@@ -4991,11 +4992,11 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean ConversionExpr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ConversionExpr")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, CONVERSION_EXPR, "<conversion expr>");
+    Marker m = enter_section_(b, l, _NONE_, "<conversion expr>");
     r = ConversionExpr_0(b, l + 1);
     r = r && Type(b, l + 1);
     r = r && ConversionTail(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, CONVERSION_EXPR, r, false, null);
     return r;
   }
 
@@ -5003,9 +5004,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean ConversionExpr_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ConversionExpr_0")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _AND_);
+    Marker m = enter_section_(b, l, _AND_, null);
     r = ConversionPredicate(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -5013,22 +5014,22 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean CompositeLit(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "CompositeLit")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, COMPOSITE_LIT, "<composite lit>");
+    Marker m = enter_section_(b, l, _NONE_, "<composite lit>");
     r = LiteralTypeExprInner(b, l + 1);
     r = r && LiteralValue(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, COMPOSITE_LIT, r, false, null);
     return r;
   }
 
   // ReferenceExpression QualifiedReferenceExpression?
   public static boolean OperandName(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "OperandName")) return false;
-    if (!nextTokenIsSmart(b, IDENTIFIER)) return false;
+    if (!nextTokenIsFast(b, IDENTIFIER)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _COLLAPSE_, REFERENCE_EXPRESSION, null);
+    Marker m = enter_section_(b, l, _COLLAPSE_, null);
     r = ReferenceExpression(b, l + 1);
     r = r && OperandName_1(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, REFERENCE_EXPRESSION, r, false, null);
     return r;
   }
 
@@ -5095,9 +5096,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean TypeAssertionExpr_0_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeAssertionExpr_0_2")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _AND_);
+    Marker m = enter_section_(b, l, _AND_, null);
     r = TypeAssertionExpr_0_2_0(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -5105,9 +5106,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean TypeAssertionExpr_0_2_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeAssertionExpr_0_2_0")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
+    Marker m = enter_section_(b, l, _NOT_, null);
     r = !consumeTokenSmart(b, TYPE_);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -5126,9 +5127,9 @@ public class VdlParser implements PsiParser, LightPsiParser {
   private static boolean SelectorExpr_0_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "SelectorExpr_0_1")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
+    Marker m = enter_section_(b, l, _NOT_, null);
     r = !SelectorExpr_0_1_0(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, null, r, false, null);
     return r;
   }
 
@@ -5179,7 +5180,7 @@ public class VdlParser implements PsiParser, LightPsiParser {
   public static boolean Literal(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Literal")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _COLLAPSE_, LITERAL, "<literal>");
+    Marker m = enter_section_(b, l, _COLLAPSE_, "<literal>");
     r = consumeTokenSmart(b, INT);
     if (!r) r = consumeTokenSmart(b, FLOAT);
     if (!r) r = consumeTokenSmart(b, FLOATI);
@@ -5188,37 +5189,37 @@ public class VdlParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeTokenSmart(b, OCT);
     if (!r) r = StringLiteral(b, l + 1);
     if (!r) r = consumeTokenSmart(b, CHAR);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, LITERAL, r, false, null);
     return r;
   }
 
   // func Signature Block
   public static boolean FunctionLit(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "FunctionLit")) return false;
-    if (!nextTokenIsSmart(b, FUNC)) return false;
+    if (!nextTokenIsFast(b, FUNC)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, FUNCTION_LIT, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeTokenSmart(b, FUNC);
     p = r; // pin = 1
     r = r && report_error_(b, Signature(b, l + 1));
     r = p && Block(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, FUNCTION_LIT, r, p, null);
     return r || p;
   }
 
   // '(' <<enterMode "PAR">> Expression <<exitModeSafe "PAR">>')'
   public static boolean ParenthesesExpr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ParenthesesExpr")) return false;
-    if (!nextTokenIsSmart(b, LPAREN)) return false;
+    if (!nextTokenIsFast(b, LPAREN)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, PARENTHESES_EXPR, null);
+    Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeTokenSmart(b, LPAREN);
     p = r; // pin = 1
     r = r && report_error_(b, enterMode(b, l + 1, "PAR"));
     r = p && report_error_(b, Expression(b, l + 1, -1)) && r;
     r = p && report_error_(b, exitModeSafe(b, l + 1, "PAR")) && r;
     r = p && consumeToken(b, RPAREN) && r;
-    exit_section_(b, l, m, r, p, null);
+    exit_section_(b, l, m, PARENTHESES_EXPR, r, p, null);
     return r || p;
   }
 

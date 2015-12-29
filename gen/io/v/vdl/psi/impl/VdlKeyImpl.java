@@ -17,12 +17,8 @@ public class VdlKeyImpl extends VdlCompositeElementImpl implements VdlKey {
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitKey(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitKey(this);
     else super.accept(visitor);
   }
 

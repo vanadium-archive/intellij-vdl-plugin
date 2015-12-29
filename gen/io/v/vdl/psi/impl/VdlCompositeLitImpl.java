@@ -16,12 +16,8 @@ public class VdlCompositeLitImpl extends VdlExpressionImpl implements VdlComposi
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitCompositeLit(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitCompositeLit(this);
     else super.accept(visitor);
   }
 

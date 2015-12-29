@@ -16,12 +16,8 @@ public class VdlAddExprImpl extends VdlBinaryExprImpl implements VdlAddExpr {
     super(node);
   }
 
-  public void accept(@NotNull VdlVisitor visitor) {
-    visitor.visitAddExpr(this);
-  }
-
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
+    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitAddExpr(this);
     else super.accept(visitor);
   }
 
