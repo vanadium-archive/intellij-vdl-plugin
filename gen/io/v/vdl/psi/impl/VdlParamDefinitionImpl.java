@@ -28,4 +28,8 @@ public class VdlParamDefinitionImpl extends VdlCompositeElementImpl implements V
     return findNotNullChildByType(IDENTIFIER);
   }
 
+  public boolean isVariadic() {
+    return VdlPsiImplUtil.isVariadic(this);
+  }
+
 }

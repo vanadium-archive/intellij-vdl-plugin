@@ -20,7 +20,7 @@ public class VdlVisitor extends PsiElementVisitor {
   }
 
   public void visitAnonymousFieldDefinition(@NotNull VdlAnonymousFieldDefinition o) {
-    visitCompositeElement(o);
+    visitNamedElement(o);
   }
 
   public void visitArgumentList(@NotNull VdlArgumentList o) {
@@ -143,10 +143,6 @@ public class VdlVisitor extends PsiElementVisitor {
     visitCompositeElement(o);
   }
 
-  public void visitErrorTypeName(@NotNull VdlErrorTypeName o) {
-    visitCompositeElement(o);
-  }
-
   public void visitExprCaseClause(@NotNull VdlExprCaseClause o) {
     visitCompositeElement(o);
   }
@@ -156,7 +152,7 @@ public class VdlVisitor extends PsiElementVisitor {
   }
 
   public void visitExpression(@NotNull VdlExpression o) {
-    visitCompositeElement(o);
+    visitTypeOwner(o);
   }
 
   public void visitFallthroughStatement(@NotNull VdlFallthroughStatement o) {
@@ -172,7 +168,7 @@ public class VdlVisitor extends PsiElementVisitor {
   }
 
   public void visitFieldName(@NotNull VdlFieldName o) {
-    visitCompositeElement(o);
+    visitReferenceExpressionBase(o);
   }
 
   public void visitForClause(@NotNull VdlForClause o) {
@@ -321,6 +317,7 @@ public class VdlVisitor extends PsiElementVisitor {
 
   public void visitReferenceExpression(@NotNull VdlReferenceExpression o) {
     visitExpression(o);
+    // visitReferenceExpressionBase(o);
   }
 
   public void visitResult(@NotNull VdlResult o) {
@@ -429,7 +426,7 @@ public class VdlVisitor extends PsiElementVisitor {
   }
 
   public void visitTypeReferenceExpression(@NotNull VdlTypeReferenceExpression o) {
-    visitCompositeElement(o);
+    visitReferenceExpressionBase(o);
   }
 
   public void visitTypeSpec(@NotNull VdlTypeSpec o) {
@@ -457,7 +454,7 @@ public class VdlVisitor extends PsiElementVisitor {
   }
 
   public void visitVarDefinition(@NotNull VdlVarDefinition o) {
-    visitCompositeElement(o);
+    visitNamedElement(o);
   }
 
   public void visitVarSpec(@NotNull VdlVarSpec o) {
@@ -469,6 +466,14 @@ public class VdlVisitor extends PsiElementVisitor {
   }
 
   public void visitNamedElement(@NotNull VdlNamedElement o) {
+    visitCompositeElement(o);
+  }
+
+  public void visitReferenceExpressionBase(@NotNull VdlReferenceExpressionBase o) {
+    visitCompositeElement(o);
+  }
+
+  public void visitTypeOwner(@NotNull VdlTypeOwner o) {
     visitCompositeElement(o);
   }
 

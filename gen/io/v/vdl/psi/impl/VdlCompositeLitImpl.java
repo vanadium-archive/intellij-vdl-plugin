@@ -22,12 +22,6 @@ public class VdlCompositeLitImpl extends VdlExpressionImpl implements VdlComposi
   }
 
   @Override
-  @Nullable
-  public VdlErrorTypeName getErrorTypeName() {
-    return findChildByClass(VdlErrorTypeName.class);
-  }
-
-  @Override
   @NotNull
   public VdlLiteralValue getLiteralValue() {
     return findNotNullChildByClass(VdlLiteralValue.class);
@@ -43,6 +37,12 @@ public class VdlCompositeLitImpl extends VdlExpressionImpl implements VdlComposi
   @Nullable
   public VdlTypeReferenceExpression getTypeReferenceExpression() {
     return findChildByClass(VdlTypeReferenceExpression.class);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getError() {
+    return findChildByType(ERROR);
   }
 
 }

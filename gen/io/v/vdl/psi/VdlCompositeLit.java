@@ -7,9 +7,6 @@ import com.intellij.psi.PsiElement;
 
 public interface VdlCompositeLit extends VdlExpression {
 
-  @Nullable
-  VdlErrorTypeName getErrorTypeName();
-
   @NotNull
   VdlLiteralValue getLiteralValue();
 
@@ -18,5 +15,8 @@ public interface VdlCompositeLit extends VdlExpression {
 
   @Nullable
   VdlTypeReferenceExpression getTypeReferenceExpression();
+
+  @Nullable
+  PsiElement getError();
 
 }

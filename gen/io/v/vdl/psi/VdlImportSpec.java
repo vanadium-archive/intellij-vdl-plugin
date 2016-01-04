@@ -26,4 +26,6 @@ public interface VdlImportSpec extends VdlNamedElement, StubBasedPsiElement<VdlI
 
   String getName();
 
+  String getLocalPackageName();
+
 }

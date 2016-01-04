@@ -10,6 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static io.v.vdl.psi.VdlTypes.*;
 import io.v.vdl.psi.VdlCompositeElementImpl;
 import io.v.vdl.psi.*;
+import com.intellij.psi.PsiReference;
 
 public class VdlTypeReferenceExpressionImpl extends VdlCompositeElementImpl implements VdlTypeReferenceExpression {
 
@@ -32,6 +33,16 @@ public class VdlTypeReferenceExpressionImpl extends VdlCompositeElementImpl impl
   @NotNull
   public PsiElement getIdentifier() {
     return findNotNullChildByType(IDENTIFIER);
+  }
+
+  @NotNull
+  public PsiReference getReference() {
+    return VdlPsiImplUtil.getReference(this);
+  }
+
+  @Nullable
+  public VdlTypeReferenceExpression getQualifier() {
+    return VdlPsiImplUtil.getQualifier(this);
   }
 
 }

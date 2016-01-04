@@ -10,7 +10,9 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.util.Condition;
 import com.intellij.openapi.util.Conditions;
 import com.intellij.openapi.util.Ref;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubTree;
@@ -21,13 +23,16 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ArrayFactory;
 import com.intellij.util.Processor;
 import com.intellij.util.containers.ContainerUtil;
+import com.intellij.util.containers.MultiMap;
 import io.v.vdl.VdlFileType;
 import io.v.vdl.VdlLanguage;
+import io.v.vdl.VdlUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class VdlFile extends PsiFileBase {
@@ -153,5 +158,111 @@ public class VdlFile extends PsiFileBase {
         if (stub != null) return stub.getPackageName();
         VdlPackageClause packageClause = getPackage();
         return packageClause != null ? packageClause.getName() : null;
+    }
+
+    @NotNull
+    public List<VdlVarDefinition> getVars() {
+        StubElement<VdlFile> stub = getStub();
+        if (stub != null) {
+            List<VdlVarDefinition> result = ContainerUtil.newArrayList();
+            List<VdlVarSpec> varSpecs = getChildrenByType(stub, VdlTypes.VAR_SPEC, VdlVarSpecStubElementType.ARRAY_FACTORY);
+            for (VdlVarSpec spec : varSpecs) {
+                VdlVarSpecStub specStub = spec.getStub();
+                if (specStub == null) continue;
+                result.addAll(getChildrenByType(specStub, VdlTypes.VAR_DEFINITION, VdlVarDefinitionStubElementType.ARRAY_FACTORY));
+            }
+            return result;
+        }
+        return CachedValuesManager.getCachedValue(this, new CachedValueProvider<List<VdlVarDefinition>>() {
+            @Override
+            public Result<List<VdlVarDefinition>> compute() {
+                return Result.create(calcVars(), VdlFile.this);
+            }
+        });
+    }
+
+    @NotNull
+    private List<VdlVarDefinition> calcVars() {
+        final List<VdlVarDefinition> result = ContainerUtil.newArrayList();
+        processChildrenDummyAware(this, new Processor<PsiElement>() {
+            @Override
+            public boolean process(PsiElement e) {
+                if (e instanceof VdlVarDeclaration) {
+                    for (VdlVarSpec spec : ((VdlVarDeclaration)e).getVarSpecList()) {
+                        for (VdlVarDefinition def : spec.getVarDefinitionList()) {
+                            result.add(def);
+                        }
+                    }
+                }
+                return true;
+            }
+        });
+        return result;
+    }
+
+    /**
+     * @return map like { local package name, maybe alias -> import spec } for file
+     */
+    @NotNull
+    public MultiMap<String, VdlImportSpec> getImportMap() {
+        MultiMap<String, VdlImportSpec> map = MultiMap.createLinked();
+        for (VdlImportSpec spec : getImports()) {
+            String alias = spec.getAlias();
+            if (alias != null) {
+                map.putValue(alias, spec);
+                continue;
+            }
+            if (spec.isDot()) {
+                map.putValue(".", spec);
+                continue;
+            }
+            VdlImportString string = spec.getImportString();
+            PsiDirectory dir = string.resolve();
+            Collection<String> packagesInDirectory = VdlUtil.getAllPackagesInDirectory(dir, true);
+            if (!packagesInDirectory.isEmpty()) {
+                for (String packageNames : packagesInDirectory) {
+                    if (!StringUtil.isEmpty(packageNames)) {
+                        map.putValue(packageNames, spec);
+                    }
+                }
+            }
+            else {
+                String key = spec.getLocalPackageName();
+                if (!StringUtil.isEmpty(key)) {
+                    map.putValue(key, spec);
+                }
+            }
+        }
+        return map;
+    }
+
+    @NotNull
+    public List<VdlImportSpec> getImports() {
+        StubElement<VdlFile> stub = getStub();
+        if (stub != null) return getChildrenByType(stub, VdlTypes.IMPORT, VdlImportSpecStubElementType.ARRAY_FACTORY);
+        return CachedValuesManager.getCachedValue(this, new CachedValueProvider<List<VdlImportSpec>>() {
+            @Override
+            public Result<List<VdlImportSpec>> compute() {
+                return Result.create(calcImports(), VdlFile.this);
+            }
+        });
+    }
+
+    @NotNull
+    private List<VdlImportSpec> calcImports() {
+        List<VdlImportSpec> result = ContainerUtil.newArrayList();
+        VdlImportList list = getImportList();
+        if (list == null) return ContainerUtil.emptyList();
+        for (VdlImportDeclaration declaration : list.getImportDeclarationList()) {
+            for (VdlImportSpec spec : declaration.getImportSpecList()) {
+                result.add(spec);
+            }
+        }
+        return result;
+    }
+
+    @Nullable
+    public VdlImportList getImportList() {
+        return findChildByClass(VdlImportList.class);
     }
 }

@@ -10,4 +10,6 @@ public interface VdlParamDefinition extends VdlCompositeElement {
   @NotNull
   PsiElement getIdentifier();
 
+  boolean isVariadic();
+
 }

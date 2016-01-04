@@ -4,13 +4,14 @@ package io.v.vdl.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.StubBasedPsiElement;
 
-public interface VdlType extends VdlCompositeElement {
-
-  @Nullable
-  VdlErrorTypeName getErrorTypeName();
+public interface VdlType extends VdlCompositeElement, StubBasedPsiElement<VdlTypeStub> {
 
   @Nullable
   VdlTypeReferenceExpression getTypeReferenceExpression();
+
+  @Nullable
+  PsiElement getError();
 
 }

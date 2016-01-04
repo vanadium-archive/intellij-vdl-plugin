@@ -40,4 +40,8 @@ public class VdlParameterDeclarationImpl extends VdlCompositeElementImpl impleme
     return findChildByType(TRIPLE_DOT);
   }
 
+  public boolean isVariadic() {
+    return VdlPsiImplUtil.isVariadic(this);
+  }
+
 }

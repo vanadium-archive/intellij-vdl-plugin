@@ -20,6 +20,4 @@ public interface VdlNamedElement extends VdlCompositeElement, PsiNameIdentifierO
 
     @Nullable
     VdlType findSiblingType();
-
-    boolean isBlank();
 }

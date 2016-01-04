@@ -4,16 +4,20 @@ package io.v.vdl.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.StubBasedPsiElement;
 
-public interface VdlAnonymousFieldDefinition extends VdlCompositeElement {
-
-  @Nullable
-  VdlErrorTypeName getErrorTypeName();
+public interface VdlAnonymousFieldDefinition extends VdlNamedElement, StubBasedPsiElement<VdlAnonymousFieldDefinitionStub> {
 
   @Nullable
   VdlTypeReferenceExpression getTypeReferenceExpression();
 
   @Nullable
   PsiElement getMul();
+
+  @Nullable
+  PsiElement getError();
+
+  @Nullable
+  PsiElement getIdentifier();
 
 }

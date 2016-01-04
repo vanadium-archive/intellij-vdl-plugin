@@ -11,9 +11,9 @@ public interface VdlTypes {
   IElementType ACTION_IDENTIFIER = new VdlCompositeElementType("ACTION_IDENTIFIER");
   IElementType ADD_EXPR = new VdlCompositeElementType("ADD_EXPR");
   IElementType AND_EXPR = new VdlCompositeElementType("AND_EXPR");
-  IElementType ANONYMOUS_FIELD_DEFINITION = new VdlCompositeElementType("ANONYMOUS_FIELD_DEFINITION");
+  IElementType ANONYMOUS_FIELD_DEFINITION = VdlStubElementTypeFactory.factory("ANONYMOUS_FIELD_DEFINITION");
   IElementType ARGUMENT_LIST = new VdlCompositeElementType("ARGUMENT_LIST");
-  IElementType ARRAY_OR_SLICE_TYPE = new VdlCompositeElementType("ARRAY_OR_SLICE_TYPE");
+  IElementType ARRAY_OR_SLICE_TYPE = VdlStubElementTypeFactory.factory("ARRAY_OR_SLICE_TYPE");
   IElementType ASSIGNMENT_STATEMENT = new VdlCompositeElementType("ASSIGNMENT_STATEMENT");
   IElementType ASSIGN_OP = new VdlCompositeElementType("ASSIGN_OP");
   IElementType BLOCK = new VdlCompositeElementType("BLOCK");
@@ -21,7 +21,7 @@ public interface VdlTypes {
   IElementType BUILTIN_ARGS = new VdlCompositeElementType("BUILTIN_ARGS");
   IElementType BUILTIN_CALL_EXPR = new VdlCompositeElementType("BUILTIN_CALL_EXPR");
   IElementType CALL_EXPR = new VdlCompositeElementType("CALL_EXPR");
-  IElementType CHANNEL_TYPE = new VdlCompositeElementType("CHANNEL_TYPE");
+  IElementType CHANNEL_TYPE = VdlStubElementTypeFactory.factory("CHANNEL_TYPE");
   IElementType COMM_CASE = new VdlCompositeElementType("COMM_CASE");
   IElementType COMM_CLAUSE = new VdlCompositeElementType("COMM_CLAUSE");
   IElementType COMPOSITE_LIT = new VdlCompositeElementType("COMPOSITE_LIT");
@@ -35,14 +35,13 @@ public interface VdlTypes {
   IElementType ELEMENT = new VdlCompositeElementType("ELEMENT");
   IElementType ELSE_STATEMENT = new VdlCompositeElementType("ELSE_STATEMENT");
   IElementType ENUM_FIELD_DECLARATION = new VdlCompositeElementType("ENUM_FIELD_DECLARATION");
-  IElementType ENUM_TYPE = new VdlCompositeElementType("ENUM_TYPE");
+  IElementType ENUM_TYPE = VdlStubElementTypeFactory.factory("ENUM_TYPE");
   IElementType ERROR_DECLARATION = new VdlCompositeElementType("ERROR_DECLARATION");
   IElementType ERROR_DETAIL = new VdlCompositeElementType("ERROR_DETAIL");
   IElementType ERROR_IDENTIFIER = new VdlCompositeElementType("ERROR_IDENTIFIER");
   IElementType ERROR_LANGUAGE_SPEC = new VdlCompositeElementType("ERROR_LANGUAGE_SPEC");
   IElementType ERROR_RESULT = new VdlCompositeElementType("ERROR_RESULT");
   IElementType ERROR_SPEC = new VdlCompositeElementType("ERROR_SPEC");
-  IElementType ERROR_TYPE_NAME = new VdlCompositeElementType("ERROR_TYPE_NAME");
   IElementType EXPRESSION = new VdlCompositeElementType("EXPRESSION");
   IElementType EXPR_CASE_CLAUSE = new VdlCompositeElementType("EXPR_CASE_CLAUSE");
   IElementType EXPR_SWITCH_STATEMENT = new VdlCompositeElementType("EXPR_SWITCH_STATEMENT");
@@ -54,7 +53,7 @@ public interface VdlTypes {
   IElementType FOR_STATEMENT = new VdlCompositeElementType("FOR_STATEMENT");
   IElementType FUNCTION_DECLARATION = new VdlCompositeElementType("FUNCTION_DECLARATION");
   IElementType FUNCTION_LIT = new VdlCompositeElementType("FUNCTION_LIT");
-  IElementType FUNCTION_TYPE = new VdlCompositeElementType("FUNCTION_TYPE");
+  IElementType FUNCTION_TYPE = VdlStubElementTypeFactory.factory("FUNCTION_TYPE");
   IElementType GOTO_STATEMENT = new VdlCompositeElementType("GOTO_STATEMENT");
   IElementType GO_STATEMENT = new VdlCompositeElementType("GO_STATEMENT");
   IElementType IF_STATEMENT = new VdlCompositeElementType("IF_STATEMENT");
@@ -63,7 +62,7 @@ public interface VdlTypes {
   IElementType IMPORT_SPEC = VdlStubElementTypeFactory.factory("IMPORT_SPEC");
   IElementType IMPORT_STRING = new VdlCompositeElementType("IMPORT_STRING");
   IElementType INDEX_OR_SLICE_EXPR = new VdlCompositeElementType("INDEX_OR_SLICE_EXPR");
-  IElementType INTERFACE_TYPE = new VdlCompositeElementType("INTERFACE_TYPE");
+  IElementType INTERFACE_TYPE = VdlStubElementTypeFactory.factory("INTERFACE_TYPE");
   IElementType KEY = new VdlCompositeElementType("KEY");
   IElementType LABELED_STATEMENT = new VdlCompositeElementType("LABELED_STATEMENT");
   IElementType LABEL_DEFINITION = new VdlCompositeElementType("LABEL_DEFINITION");
@@ -72,7 +71,7 @@ public interface VdlTypes {
   IElementType LITERAL = new VdlCompositeElementType("LITERAL");
   IElementType LITERAL_TYPE_EXPR = new VdlCompositeElementType("LITERAL_TYPE_EXPR");
   IElementType LITERAL_VALUE = new VdlCompositeElementType("LITERAL_VALUE");
-  IElementType MAP_TYPE = new VdlCompositeElementType("MAP_TYPE");
+  IElementType MAP_TYPE = VdlStubElementTypeFactory.factory("MAP_TYPE");
   IElementType METHOD_SPEC = VdlStubElementTypeFactory.factory("METHOD_SPEC");
   IElementType MUL_EXPR = new VdlCompositeElementType("MUL_EXPR");
   IElementType OR_EXPR = new VdlCompositeElementType("OR_EXPR");
@@ -81,10 +80,10 @@ public interface VdlTypes {
   IElementType PARAMETER_DECLARATION = new VdlCompositeElementType("PARAMETER_DECLARATION");
   IElementType PARAM_DEFINITION = new VdlCompositeElementType("PARAM_DEFINITION");
   IElementType PARENTHESES_EXPR = new VdlCompositeElementType("PARENTHESES_EXPR");
-  IElementType PAR_TYPE = new VdlCompositeElementType("PAR_TYPE");
-  IElementType POINTER_TYPE = new VdlCompositeElementType("POINTER_TYPE");
+  IElementType PAR_TYPE = VdlStubElementTypeFactory.factory("PAR_TYPE");
+  IElementType POINTER_TYPE = VdlStubElementTypeFactory.factory("POINTER_TYPE");
   IElementType RANGE_CLAUSE = new VdlCompositeElementType("RANGE_CLAUSE");
-  IElementType RECEIVER_TYPE = new VdlCompositeElementType("RECEIVER_TYPE");
+  IElementType RECEIVER_TYPE = VdlStubElementTypeFactory.factory("RECEIVER_TYPE");
   IElementType RECV_STATEMENT = new VdlCompositeElementType("RECV_STATEMENT");
   IElementType REFERENCE_EXPRESSION = new VdlCompositeElementType("REFERENCE_EXPRESSION");
   IElementType RESULT = new VdlCompositeElementType("RESULT");
@@ -93,26 +92,26 @@ public interface VdlTypes {
   IElementType SELECTOR_EXPR = new VdlCompositeElementType("SELECTOR_EXPR");
   IElementType SELECT_STATEMENT = new VdlCompositeElementType("SELECT_STATEMENT");
   IElementType SEND_STATEMENT = new VdlCompositeElementType("SEND_STATEMENT");
-  IElementType SET_TYPE = new VdlCompositeElementType("SET_TYPE");
+  IElementType SET_TYPE = VdlStubElementTypeFactory.factory("SET_TYPE");
   IElementType SHORT_VAR_DECLARATION = new VdlCompositeElementType("SHORT_VAR_DECLARATION");
   IElementType SIGNATURE = new VdlCompositeElementType("SIGNATURE");
   IElementType SIMPLE_STATEMENT = new VdlCompositeElementType("SIMPLE_STATEMENT");
-  IElementType SPEC_TYPE = new VdlCompositeElementType("SPEC_TYPE");
+  IElementType SPEC_TYPE = VdlStubElementTypeFactory.factory("SPEC_TYPE");
   IElementType STATEMENT = new VdlCompositeElementType("STATEMENT");
   IElementType STREAM_ARGS = new VdlCompositeElementType("STREAM_ARGS");
   IElementType STREAM_SPEC = new VdlCompositeElementType("STREAM_SPEC");
   IElementType STRING_LITERAL = new VdlCompositeElementType("STRING_LITERAL");
-  IElementType STRUCT_OR_UNION_TYPE = new VdlCompositeElementType("STRUCT_OR_UNION_TYPE");
+  IElementType STRUCT_OR_UNION_TYPE = VdlStubElementTypeFactory.factory("STRUCT_OR_UNION_TYPE");
   IElementType SWITCH_START = new VdlCompositeElementType("SWITCH_START");
   IElementType SWITCH_STATEMENT = new VdlCompositeElementType("SWITCH_STATEMENT");
   IElementType TAG = new VdlCompositeElementType("TAG");
   IElementType TAGS = new VdlCompositeElementType("TAGS");
-  IElementType TYPE = new VdlCompositeElementType("TYPE");
+  IElementType TYPE = VdlStubElementTypeFactory.factory("TYPE");
   IElementType TYPE_ASSERTION_EXPR = new VdlCompositeElementType("TYPE_ASSERTION_EXPR");
   IElementType TYPE_CASE_CLAUSE = new VdlCompositeElementType("TYPE_CASE_CLAUSE");
   IElementType TYPE_DECLARATION = new VdlCompositeElementType("TYPE_DECLARATION");
   IElementType TYPE_GUARD = new VdlCompositeElementType("TYPE_GUARD");
-  IElementType TYPE_LIST = new VdlCompositeElementType("TYPE_LIST");
+  IElementType TYPE_LIST = VdlStubElementTypeFactory.factory("TYPE_LIST");
   IElementType TYPE_REFERENCE_EXPRESSION = new VdlCompositeElementType("TYPE_REFERENCE_EXPRESSION");
   IElementType TYPE_SPEC = VdlStubElementTypeFactory.factory("TYPE_SPEC");
   IElementType TYPE_SWITCH_GUARD = new VdlCompositeElementType("TYPE_SWITCH_GUARD");
@@ -120,8 +119,8 @@ public interface VdlTypes {
   IElementType UNARY_EXPR = new VdlCompositeElementType("UNARY_EXPR");
   IElementType VALUE = new VdlCompositeElementType("VALUE");
   IElementType VAR_DECLARATION = new VdlCompositeElementType("VAR_DECLARATION");
-  IElementType VAR_DEFINITION = new VdlCompositeElementType("VAR_DEFINITION");
-  IElementType VAR_SPEC = new VdlCompositeElementType("VAR_SPEC");
+  IElementType VAR_DEFINITION = VdlStubElementTypeFactory.factory("VAR_DEFINITION");
+  IElementType VAR_SPEC = VdlStubElementTypeFactory.factory("VAR_SPEC");
 
   IElementType ASSIGN = new VdlTokenType("=");
   IElementType BIT_AND = new VdlTokenType("&");
@@ -317,9 +316,6 @@ public interface VdlTypes {
       }
       else if (type == ERROR_SPEC) {
         return new VdlErrorSpecImpl(node);
-      }
-      else if (type == ERROR_TYPE_NAME) {
-        return new VdlErrorTypeNameImpl(node);
       }
       else if (type == EXPRESSION) {
         return new VdlExpressionImpl(node);

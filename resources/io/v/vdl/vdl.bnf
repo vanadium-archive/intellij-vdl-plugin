@@ -72,9 +72,12 @@
   extends("(Or|Add|Conversion|Mul|Selector)Expr")=BinaryExpr
   extends(".*(Expr|Literal|Lit|OperandName)")=Expression
 
-  implements("(Type|Import|Method)Spec|MethodDeclaration|FieldDefinition")="io.v.vdl.psi.VdlNamedElement"
-  extends("(Type|Import|Method)Spec|MethodDeclaration|FieldDefinition")="io.v.vdl.psi.VdlNamedElementImpl<?>"
-  elementTypeFactory("(Type|Import|Method)Spec|MethodDeclaration|FieldDefinition")="io.v.vdl.psi.VdlStubElementTypeFactory.factory"
+  implements("(Type|Import|Method)Spec|MethodDeclaration|((Anonymous)?Field|Var)Definition")="io.v.vdl.psi.VdlNamedElement"
+  extends("(Type|Import|Method)Spec|MethodDeclaration|((Anonymous)?Field|Var)Definition")="io.v.vdl.psi.VdlNamedElementImpl<?>"
+  extends("Type|(Var|Import)Spec")="io.v.vdl.psi.VdlStubbedElementImpl<?>"
+  elementTypeFactory("(Method|Import|Type|Var)Spec|(Var|(Anonymous)?Field)Definition|.*Type|TypeList.*")="io.v.vdl.psi.VdlStubElementTypeFactory.factory"
+
+  implements(".*ReferenceExpression|FieldName")="io.v.vdl.psi.VdlReferenceExpressionBase"
 
   pin(".*Statement")=1
   extends(".*Statement")=Statement
@@ -97,20 +100,20 @@ ImportDeclaration ::= import ( ImportSpec | '(' ImportSpecs? ')' ) {
 private ImportSpecs ::= ImportSpec (semi ImportSpec)* semi? {pin=1}
 ImportSpec ::= [ '.' | identifier ] ImportString {
     stubClass="io.v.vdl.psi.VdlImportSpecStub"
-    methods=[getAlias isDot getPath getName]
+    methods=[getAlias isDot getPath getName getLocalPackageName]
 }
 ImportString ::= string | raw_string {
-    methods=[getPath]
+    methods=[getPath resolve]
 }
 
-Type ::= TypeName | ErrorTypeName | TypeLit | ParType
+Type ::= TypeName | ErrorTypeName | TypeLit | ParType {stubClass="io.v.vdl.psi.VdlTypeStub"}
 ParType ::= '(' Type ')'
 private TypeName ::= TypeReferenceExpression QualifiedTypeReferenceExpression?
     | ErrorTypeName
-TypeReferenceExpression ::= '?'? identifier
+TypeReferenceExpression ::= '?'? identifier { methods=[getReference getQualifier] }
 left QualifiedTypeReferenceExpression ::= '.' identifier {elementType=TypeReferenceExpression}
 
-ErrorTypeName ::= error
+private ErrorTypeName ::= error
 
 private TypeLit ::=
     ArrayOrSliceType
@@ -138,7 +141,10 @@ FieldDefinition ::= identifier {
   stubClass="io.v.vdl.psi.VdlFieldDefinitionStub"
 }
 
-AnonymousFieldDefinition ::= '*'? TypeName
+AnonymousFieldDefinition ::= '*'? TypeName {
+  stubClass="io.v.vdl.psi.VdlAnonymousFieldDefinitionStub"
+  methods=[getIdentifier]
+}
 Tag ::= StringLiteral
 
 PointerType ::= '*' Type {pin=1}
@@ -155,12 +161,11 @@ ResultParameters ::= '(' [ (ResultParameterList ','? | TypeListNoPin) ] ')'
 private ResultParameterList ::= ParameterDeclaration (',' (ParameterDeclaration | &')'))* ErrorResult? {pin(".*")=1}
 Parameters ::= '(' [ (ParameterList ','?| TypeListNoPin) ] ')'
 private ParameterList ::= ParameterDeclaration (',' (ParameterDeclaration | &')'))* {pin(".*")=1}
-ParameterDeclaration ::= ParamDefinitionListNoPin? '...'? Type | Type
-private ParamDefinitionListNoPin ::= ParamDefinition &(!('.' | ')')) (',' ParamDefinition)* // todo
-ParamDefinition ::= identifier
+ParameterDeclaration ::= ParamDefinitionListNoPin? '...'? Type | Type {methods=[isVariadic]}
+private ParamDefinitionListNoPin ::= ParamDefinition &(!('.' | ')')) (',' ParamDefinition)*
+ParamDefinition ::= identifier {methods=[isVariadic]}
 
-
-InterfaceType ::= interface '{' MethodSpecs? '}'
+InterfaceType ::= interface '{' MethodSpecs? '}' {methods=[getMethods getBaseTypesReferences]}
 private MethodSpecs ::= MethodSpec (semi MethodSpec)* semi? {pin=1}
 MethodSpec ::= TypeName &(!'(') | identifier Signature Tags? {
   stubClass="io.v.vdl.psi.VdlMethodSpecStub"
@@ -240,16 +245,20 @@ private TypeSpecs ::= TypeSpec (semi TypeSpec)* semi? {pin=1}
 TypeSpec ::= SpecType {
   pin=1
   stubClass="io.v.vdl.psi.VdlTypeSpecStub"
-  methods=[shouldGoDeeper identifier="SpecType/identifier"]
+  methods=[shouldGoDeeper getMethods identifier="SpecType/identifier"]
 
 }
 SpecType ::= identifier Type
 
 VarDeclaration ::= var ( VarSpec | '(' VarSpecs? ')' ) {pin=1}
 private VarSpecs ::= VarSpec (semi VarSpec)* semi? {pin=1}
-VarSpec ::= VarDefinitionList ( Type [ '=' ExpressionList ] | '=' ExpressionList )
+VarSpec ::= VarDefinitionList ( Type [ '=' ExpressionList ] | '=' ExpressionList ) {
+  stubClass="io.v.vdl.psi.VdlVarSpecStub"
+}
 private VarDefinitionList ::= VarDefinition ( ',' VarDefinition )*
-VarDefinition ::= identifier
+VarDefinition ::= identifier {
+  stubClass="io.v.vdl.psi.VdlVarDefinitionStub"
+}
 
 ShortVarDeclaration ::= VarDefinitionList ':=' ExpressionList {pin=2 extends=VarSpec}
 
@@ -283,7 +292,7 @@ StringLiteral ::= string | raw_string {
 OperandName ::= ReferenceExpression QualifiedReferenceExpression? {elementType=ReferenceExpression}
 
 left QualifiedReferenceExpression ::= '.' identifier {elementType=ReferenceExpression}
-ReferenceExpression ::= identifier {extends=Expression}
+ReferenceExpression ::= identifier {extends=Expression methods=[getQualifier]}
 
 CompositeLit ::= (LiteralTypeExprInner LiteralValue) // the brackets are valuable
 private LiteralTypeExprInner ::=
@@ -302,7 +311,7 @@ private E_recover ::= !('}'|',')
 Element ::= First [':' Value]  {pin(".*")=1}
 private First ::= Key | <<keyOrValueExpression>>
 Key ::= (FieldName &':') | !() Expression // nullability hack for key without reference inside
-FieldName ::= identifier
+FieldName ::= identifier {methods=[getQualifier]}
 Value ::= Expression | LiteralValue
 
 FunctionLit ::= func Signature Block {pin=1}
@@ -316,7 +325,7 @@ Expression ::=
   | UnaryExpr
   | ConversionExpr
   | MaxGroup
-  | ParenthesesExpr
+  | ParenthesesExpr {methods=[getVdlType] implements="io.v.vdl.psi.VdlTypeOwner"}
 
 fake BinaryExpr ::= Expression+ {
   methods=[left="Expression[0]" right="Expression[1]"]

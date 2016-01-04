@@ -9,9 +9,6 @@ import com.intellij.psi.StubBasedPsiElement;
 public interface VdlMethodSpec extends VdlNamedElement, StubBasedPsiElement<VdlMethodSpecStub> {
 
   @Nullable
-  VdlErrorTypeName getErrorTypeName();
-
-  @Nullable
   VdlSignature getSignature();
 
   @Nullable
@@ -19,6 +16,9 @@ public interface VdlMethodSpec extends VdlNamedElement, StubBasedPsiElement<VdlM
 
   @Nullable
   VdlTypeReferenceExpression getTypeReferenceExpression();
+
+  @Nullable
+  PsiElement getError();
 
   @Nullable
   PsiElement getIdentifier();

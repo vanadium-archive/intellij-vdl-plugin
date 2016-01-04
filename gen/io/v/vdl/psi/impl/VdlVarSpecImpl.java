@@ -8,13 +8,19 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static io.v.vdl.psi.VdlTypes.*;
-import io.v.vdl.psi.VdlCompositeElementImpl;
+import io.v.vdl.psi.VdlStubbedElementImpl;
+import io.v.vdl.psi.VdlVarSpecStub;
 import io.v.vdl.psi.*;
+import com.intellij.psi.stubs.IStubElementType;
 
-public class VdlVarSpecImpl extends VdlCompositeElementImpl implements VdlVarSpec {
+public class VdlVarSpecImpl extends VdlStubbedElementImpl<VdlVarSpecStub> implements VdlVarSpec {
 
   public VdlVarSpecImpl(ASTNode node) {
     super(node);
+  }
+
+  public VdlVarSpecImpl(VdlVarSpecStub stub, IStubElementType nodeType) {
+    super(stub, nodeType);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {

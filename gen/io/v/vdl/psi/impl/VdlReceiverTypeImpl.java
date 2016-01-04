@@ -23,12 +23,6 @@ public class VdlReceiverTypeImpl extends VdlTypeImpl implements VdlReceiverType 
 
   @Override
   @Nullable
-  public VdlErrorTypeName getErrorTypeName() {
-    return findChildByClass(VdlErrorTypeName.class);
-  }
-
-  @Override
-  @Nullable
   public VdlReceiverType getReceiverType() {
     return findChildByClass(VdlReceiverType.class);
   }
@@ -55,6 +49,12 @@ public class VdlReceiverTypeImpl extends VdlTypeImpl implements VdlReceiverType 
   @Nullable
   public PsiElement getRparen() {
     return findChildByType(RPAREN);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getError() {
+    return findChildByType(ERROR);
   }
 
 }

@@ -28,4 +28,9 @@ public class VdlFieldNameImpl extends VdlCompositeElementImpl implements VdlFiel
     return findNotNullChildByType(IDENTIFIER);
   }
 
+  @Nullable
+  public VdlReferenceExpression getQualifier() {
+    return VdlPsiImplUtil.getQualifier(this);
+  }
+
 }

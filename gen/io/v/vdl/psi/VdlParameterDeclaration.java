@@ -16,4 +16,6 @@ public interface VdlParameterDeclaration extends VdlCompositeElement {
   @Nullable
   PsiElement getTripleDot();
 
+  boolean isVariadic();
+
 }

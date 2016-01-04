@@ -10,6 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static io.v.vdl.psi.VdlTypes.*;
 import io.v.vdl.psi.VdlCompositeElementImpl;
 import io.v.vdl.psi.*;
+import com.intellij.psi.PsiDirectory;
 
 public class VdlImportStringImpl extends VdlCompositeElementImpl implements VdlImportString {
 
@@ -37,6 +38,11 @@ public class VdlImportStringImpl extends VdlCompositeElementImpl implements VdlI
   @NotNull
   public String getPath() {
     return VdlPsiImplUtil.getPath(this);
+  }
+
+  @Nullable
+  public PsiDirectory resolve() {
+    return VdlPsiImplUtil.resolve(this);
   }
 
 }
