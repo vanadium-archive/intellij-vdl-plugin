@@ -41,6 +41,7 @@
     <completion.contributor language="VDL" implementationClass="io.v.vdl.VdlKeywordCompletionContributor"/>
     <colorSettingsPage implementation="io.v.vdl.VdlColorSettingsPage"/>
     <lang.smartEnterProcessor language="VDL" implementationClass="io.v.vdl.VdlSmartEnterProcessor"/>
+    <lang.findUsagesProvider language="VDL" implementationClass="io.v.vdl.VdlFindUsagesProvider"/>
   </extensions>
 
   <actions>
