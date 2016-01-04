@@ -99,8 +99,6 @@ public abstract class VdlNamedElementImpl<T extends VdlNamedStub<?>> extends Vdl
         return super.getIcon(flags);
     }
 
-
-
     @Override
     public ItemPresentation getPresentation() {
         String text = UsageViewUtil.createNodeText(this);
@@ -126,11 +124,6 @@ public abstract class VdlNamedElementImpl<T extends VdlNamedStub<?>> extends Vdl
             };
         }
         return super.getPresentation();
-    }
-
-    @Override
-    public boolean isBlank() {
-        return StringUtil.equals(getName(), "_");
     }
 
     @Override

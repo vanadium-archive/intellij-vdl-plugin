@@ -122,9 +122,6 @@ public class VdlParser implements PsiParser, LightPsiParser {
     else if (t == ERROR_SPEC) {
       r = ErrorSpec(b, 0);
     }
-    else if (t == ERROR_TYPE_NAME) {
-      r = ErrorTypeName(b, 0);
-    }
     else if (t == EXPR_CASE_CLAUSE) {
       r = ExprCaseClause(b, 0);
     }
@@ -1594,14 +1591,8 @@ public class VdlParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // error
-  public static boolean ErrorTypeName(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "ErrorTypeName")) return false;
-    if (!nextTokenIs(b, ERROR)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, ERROR);
-    exit_section_(b, m, ERROR_TYPE_NAME, r);
-    return r;
+  static boolean ErrorTypeName(PsiBuilder b, int l) {
+    return consumeToken(b, ERROR);
   }
 
   /* ********************************************************** */

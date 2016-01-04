@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface VdlReceiverType extends VdlType {
 
   @Nullable
-  VdlErrorTypeName getErrorTypeName();
-
-  @Nullable
   VdlReceiverType getReceiverType();
 
   @Nullable
@@ -24,5 +21,8 @@ public interface VdlReceiverType extends VdlType {
 
   @Nullable
   PsiElement getRparen();
+
+  @Nullable
+  PsiElement getError();
 
 }

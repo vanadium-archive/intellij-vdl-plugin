@@ -27,4 +27,9 @@ public class VdlReferenceExpressionImpl extends VdlExpressionImpl implements Vdl
     return findNotNullChildByType(IDENTIFIER);
   }
 
+  @Nullable
+  public VdlReferenceExpression getQualifier() {
+    return VdlPsiImplUtil.getQualifier(this);
+  }
+
 }

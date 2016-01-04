@@ -30,12 +30,6 @@ public class VdlMethodSpecImpl extends VdlNamedElementImpl<VdlMethodSpecStub> im
 
   @Override
   @Nullable
-  public VdlErrorTypeName getErrorTypeName() {
-    return findChildByClass(VdlErrorTypeName.class);
-  }
-
-  @Override
-  @Nullable
   public VdlSignature getSignature() {
     return findChildByClass(VdlSignature.class);
   }
@@ -50,6 +44,12 @@ public class VdlMethodSpecImpl extends VdlNamedElementImpl<VdlMethodSpecStub> im
   @Nullable
   public VdlTypeReferenceExpression getTypeReferenceExpression() {
     return findChildByClass(VdlTypeReferenceExpression.class);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getError() {
+    return findChildByType(ERROR);
   }
 
   @Override

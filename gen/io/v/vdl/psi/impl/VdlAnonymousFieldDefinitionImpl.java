@@ -8,24 +8,24 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static io.v.vdl.psi.VdlTypes.*;
-import io.v.vdl.psi.VdlCompositeElementImpl;
+import io.v.vdl.psi.VdlNamedElementImpl;
+import io.v.vdl.psi.VdlAnonymousFieldDefinitionStub;
 import io.v.vdl.psi.*;
+import com.intellij.psi.stubs.IStubElementType;
 
-public class VdlAnonymousFieldDefinitionImpl extends VdlCompositeElementImpl implements VdlAnonymousFieldDefinition {
+public class VdlAnonymousFieldDefinitionImpl extends VdlNamedElementImpl<VdlAnonymousFieldDefinitionStub> implements VdlAnonymousFieldDefinition {
 
   public VdlAnonymousFieldDefinitionImpl(ASTNode node) {
     super(node);
   }
 
+  public VdlAnonymousFieldDefinitionImpl(VdlAnonymousFieldDefinitionStub stub, IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitAnonymousFieldDefinition(this);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public VdlErrorTypeName getErrorTypeName() {
-    return findChildByClass(VdlErrorTypeName.class);
   }
 
   @Override
@@ -38,6 +38,17 @@ public class VdlAnonymousFieldDefinitionImpl extends VdlCompositeElementImpl imp
   @Nullable
   public PsiElement getMul() {
     return findChildByType(MUL);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getError() {
+    return findChildByType(ERROR);
+  }
+
+  @Nullable
+  public PsiElement getIdentifier() {
+    return VdlPsiImplUtil.getIdentifier(this);
   }
 
 }

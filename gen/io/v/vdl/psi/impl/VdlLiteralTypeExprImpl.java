@@ -23,12 +23,6 @@ public class VdlLiteralTypeExprImpl extends VdlExpressionImpl implements VdlLite
 
   @Override
   @Nullable
-  public VdlErrorTypeName getErrorTypeName() {
-    return findChildByClass(VdlErrorTypeName.class);
-  }
-
-  @Override
-  @Nullable
   public VdlType getType() {
     return findChildByClass(VdlType.class);
   }
@@ -37,6 +31,12 @@ public class VdlLiteralTypeExprImpl extends VdlExpressionImpl implements VdlLite
   @Nullable
   public VdlTypeReferenceExpression getTypeReferenceExpression() {
     return findChildByClass(VdlTypeReferenceExpression.class);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getError() {
+    return findChildByType(ERROR);
   }
 
 }

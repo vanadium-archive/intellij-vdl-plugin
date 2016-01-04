@@ -8,12 +8,12 @@ import com.intellij.psi.PsiElement;
 public interface VdlLiteralTypeExpr extends VdlExpression {
 
   @Nullable
-  VdlErrorTypeName getErrorTypeName();
-
-  @Nullable
   VdlType getType();
 
   @Nullable
   VdlTypeReferenceExpression getTypeReferenceExpression();
+
+  @Nullable
+  PsiElement getError();
 
 }

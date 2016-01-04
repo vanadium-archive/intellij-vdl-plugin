@@ -45,4 +45,14 @@ public class VdlInterfaceTypeImpl extends VdlTypeImpl implements VdlInterfaceTyp
     return findNotNullChildByType(INTERFACE);
   }
 
+  @NotNull
+  public List<VdlMethodSpec> getMethods() {
+    return VdlPsiImplUtil.getMethods(this);
+  }
+
+  @NotNull
+  public List<VdlTypeReferenceExpression> getBaseTypesReferences() {
+    return VdlPsiImplUtil.getBaseTypesReferences(this);
+  }
+
 }

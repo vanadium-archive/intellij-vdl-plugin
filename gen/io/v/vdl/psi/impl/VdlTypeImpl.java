@@ -8,13 +8,19 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static io.v.vdl.psi.VdlTypes.*;
-import io.v.vdl.psi.VdlCompositeElementImpl;
+import io.v.vdl.psi.VdlStubbedElementImpl;
+import io.v.vdl.psi.VdlTypeStub;
 import io.v.vdl.psi.*;
+import com.intellij.psi.stubs.IStubElementType;
 
-public class VdlTypeImpl extends VdlCompositeElementImpl implements VdlType {
+public class VdlTypeImpl extends VdlStubbedElementImpl<VdlTypeStub> implements VdlType {
 
   public VdlTypeImpl(ASTNode node) {
     super(node);
+  }
+
+  public VdlTypeImpl(VdlTypeStub stub, IStubElementType nodeType) {
+    super(stub, nodeType);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -24,14 +30,14 @@ public class VdlTypeImpl extends VdlCompositeElementImpl implements VdlType {
 
   @Override
   @Nullable
-  public VdlErrorTypeName getErrorTypeName() {
-    return findChildByClass(VdlErrorTypeName.class);
+  public VdlTypeReferenceExpression getTypeReferenceExpression() {
+    return findChildByClass(VdlTypeReferenceExpression.class);
   }
 
   @Override
   @Nullable
-  public VdlTypeReferenceExpression getTypeReferenceExpression() {
-    return findChildByClass(VdlTypeReferenceExpression.class);
+  public PsiElement getError() {
+    return findChildByType(ERROR);
   }
 
 }

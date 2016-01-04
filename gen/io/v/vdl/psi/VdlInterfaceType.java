@@ -19,4 +19,10 @@ public interface VdlInterfaceType extends VdlType {
   @NotNull
   PsiElement getInterface();
 
+  @NotNull
+  List<VdlMethodSpec> getMethods();
+
+  @NotNull
+  List<VdlTypeReferenceExpression> getBaseTypesReferences();
+
 }

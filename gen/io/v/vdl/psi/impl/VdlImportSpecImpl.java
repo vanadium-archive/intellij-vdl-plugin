@@ -63,4 +63,8 @@ public class VdlImportSpecImpl extends VdlNamedElementImpl<VdlImportSpecStub> im
     return VdlPsiImplUtil.getName(this);
   }
 
+  public String getLocalPackageName() {
+    return VdlPsiImplUtil.getLocalPackageName(this);
+  }
+
 }
