@@ -16,7 +16,7 @@ public abstract class VdlStubElementType<S extends StubBase<T>, T extends VdlCom
 
     @NotNull
     public String getExternalId() {
-        return "go." + super.toString();
+        return "vdl." + super.toString();
     }
 
     public void indexStub(@NotNull S stub, @NotNull IndexSink sink) {
