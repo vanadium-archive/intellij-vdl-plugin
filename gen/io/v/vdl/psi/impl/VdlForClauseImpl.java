@@ -17,8 +17,12 @@ public class VdlForClauseImpl extends VdlCompositeElementImpl implements VdlForC
     super(node);
   }
 
+  public void accept(@NotNull VdlVisitor visitor) {
+    visitor.visitForClause(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitForClause(this);
+    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
     else super.accept(visitor);
   }
 

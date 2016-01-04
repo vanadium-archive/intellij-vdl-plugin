@@ -23,8 +23,12 @@ public class VdlVarDefinitionImpl extends VdlNamedElementImpl<VdlVarDefinitionSt
     super(stub, nodeType);
   }
 
+  public void accept(@NotNull VdlVisitor visitor) {
+    visitor.visitVarDefinition(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitVarDefinition(this);
+    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
     else super.accept(visitor);
   }
 

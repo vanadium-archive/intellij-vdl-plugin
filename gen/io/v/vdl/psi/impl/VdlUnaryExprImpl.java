@@ -16,8 +16,12 @@ public class VdlUnaryExprImpl extends VdlExpressionImpl implements VdlUnaryExpr 
     super(node);
   }
 
+  public void accept(@NotNull VdlVisitor visitor) {
+    visitor.visitUnaryExpr(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitUnaryExpr(this);
+    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
     else super.accept(visitor);
   }
 

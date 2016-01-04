@@ -9,6 +9,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static io.v.vdl.psi.VdlTypes.*;
 import io.v.vdl.psi.*;
+import com.intellij.psi.stubs.IStubElementType;
 
 public class VdlEnumTypeImpl extends VdlTypeImpl implements VdlEnumType {
 
@@ -16,8 +17,16 @@ public class VdlEnumTypeImpl extends VdlTypeImpl implements VdlEnumType {
     super(node);
   }
 
+  public VdlEnumTypeImpl(VdlTypeStub stub, IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
+
+  public void accept(@NotNull VdlVisitor visitor) {
+    visitor.visitEnumType(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitEnumType(this);
+    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
     else super.accept(visitor);
   }
 

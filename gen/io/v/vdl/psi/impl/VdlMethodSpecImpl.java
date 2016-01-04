@@ -23,8 +23,12 @@ public class VdlMethodSpecImpl extends VdlNamedElementImpl<VdlMethodSpecStub> im
     super(stub, nodeType);
   }
 
+  public void accept(@NotNull VdlVisitor visitor) {
+    visitor.visitMethodSpec(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitMethodSpec(this);
+    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
     else super.accept(visitor);
   }
 

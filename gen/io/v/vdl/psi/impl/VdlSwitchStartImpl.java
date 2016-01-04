@@ -17,8 +17,12 @@ public class VdlSwitchStartImpl extends VdlCompositeElementImpl implements VdlSw
     super(node);
   }
 
+  public void accept(@NotNull VdlVisitor visitor) {
+    visitor.visitSwitchStart(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitSwitchStart(this);
+    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
     else super.accept(visitor);
   }
 

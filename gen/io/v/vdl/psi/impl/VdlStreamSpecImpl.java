@@ -17,8 +17,12 @@ public class VdlStreamSpecImpl extends VdlCompositeElementImpl implements VdlStr
     super(node);
   }
 
+  public void accept(@NotNull VdlVisitor visitor) {
+    visitor.visitStreamSpec(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitStreamSpec(this);
+    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
     else super.accept(visitor);
   }
 

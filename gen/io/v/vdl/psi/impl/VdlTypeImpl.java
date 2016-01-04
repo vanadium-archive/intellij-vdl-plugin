@@ -23,8 +23,12 @@ public class VdlTypeImpl extends VdlStubbedElementImpl<VdlTypeStub> implements V
     super(stub, nodeType);
   }
 
+  public void accept(@NotNull VdlVisitor visitor) {
+    visitor.visitType(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitType(this);
+    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
     else super.accept(visitor);
   }
 

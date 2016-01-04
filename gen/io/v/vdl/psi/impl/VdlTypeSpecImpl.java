@@ -23,15 +23,19 @@ public class VdlTypeSpecImpl extends VdlNamedElementImpl<VdlTypeSpecStub> implem
     super(stub, nodeType);
   }
 
+  public void accept(@NotNull VdlVisitor visitor) {
+    visitor.visitTypeSpec(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitTypeSpec(this);
+    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
     else super.accept(visitor);
   }
 
   @Override
   @NotNull
   public VdlSpecType getSpecType() {
-    return findNotNullChildByClass(VdlSpecType.class);
+    return findNotNullChildByClass(VdlSpecType.class, VdlTypeStub.class);
   }
 
   public boolean shouldGoDeeper() {
