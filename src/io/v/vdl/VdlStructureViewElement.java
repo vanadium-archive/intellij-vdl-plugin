@@ -11,7 +11,9 @@ import com.intellij.navigation.NavigationItem;
 import com.intellij.psi.PsiElement;
 import io.v.vdl.psi.*;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +49,33 @@ public class VdlStructureViewElement implements StructureViewTreeElement {
     @NotNull
     @Override
     public ItemPresentation getPresentation() {
-        return element instanceof NavigationItem ? ((NavigationItem) element).getPresentation() : null;
+        ItemPresentation result = null;
+        if (element.isValid() && element instanceof NavigationItem) {
+            result = ((NavigationItem) element).getPresentation();
+        }
+
+        if (result == null) {
+            result = new ItemPresentation() {
+                @Nullable
+                @Override
+                public String getPresentableText() {
+                    return null;
+                }
+
+                @Nullable
+                @Override
+                public String getLocationString() {
+                    return null;
+                }
+
+                @Nullable
+                @Override
+                public Icon getIcon(boolean b) {
+                    return null;
+                }
+            };
+        }
+        return result;
     }
 
     @NotNull
