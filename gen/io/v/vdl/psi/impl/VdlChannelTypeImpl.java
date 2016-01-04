@@ -9,6 +9,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static io.v.vdl.psi.VdlTypes.*;
 import io.v.vdl.psi.*;
+import com.intellij.psi.stubs.IStubElementType;
 
 public class VdlChannelTypeImpl extends VdlTypeImpl implements VdlChannelType {
 
@@ -16,8 +17,16 @@ public class VdlChannelTypeImpl extends VdlTypeImpl implements VdlChannelType {
     super(node);
   }
 
+  public VdlChannelTypeImpl(VdlTypeStub stub, IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
+
+  public void accept(@NotNull VdlVisitor visitor) {
+    visitor.visitChannelType(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitChannelType(this);
+    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
     else super.accept(visitor);
   }
 

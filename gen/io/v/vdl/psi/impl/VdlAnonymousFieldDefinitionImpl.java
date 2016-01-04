@@ -23,8 +23,12 @@ public class VdlAnonymousFieldDefinitionImpl extends VdlNamedElementImpl<VdlAnon
     super(stub, nodeType);
   }
 
+  public void accept(@NotNull VdlVisitor visitor) {
+    visitor.visitAnonymousFieldDefinition(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitAnonymousFieldDefinition(this);
+    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
     else super.accept(visitor);
   }
 

@@ -9,6 +9,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static io.v.vdl.psi.VdlTypes.*;
 import io.v.vdl.psi.*;
+import com.intellij.psi.stubs.IStubElementType;
 
 public class VdlMapTypeImpl extends VdlTypeImpl implements VdlMapType {
 
@@ -16,8 +17,16 @@ public class VdlMapTypeImpl extends VdlTypeImpl implements VdlMapType {
     super(node);
   }
 
+  public VdlMapTypeImpl(VdlTypeStub stub, IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
+
+  public void accept(@NotNull VdlVisitor visitor) {
+    visitor.visitMapType(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitMapType(this);
+    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
     else super.accept(visitor);
   }
 

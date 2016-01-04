@@ -23,8 +23,12 @@ public class VdlVarSpecImpl extends VdlStubbedElementImpl<VdlVarSpecStub> implem
     super(stub, nodeType);
   }
 
+  public void accept(@NotNull VdlVisitor visitor) {
+    visitor.visitVarSpec(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof VdlVisitor) ((VdlVisitor)visitor).visitVarSpec(this);
+    if (visitor instanceof VdlVisitor) accept((VdlVisitor)visitor);
     else super.accept(visitor);
   }
 
@@ -37,13 +41,13 @@ public class VdlVarSpecImpl extends VdlStubbedElementImpl<VdlVarSpecStub> implem
   @Override
   @Nullable
   public VdlType getType() {
-    return findChildByClass(VdlType.class);
+    return findChildByClass(VdlType.class, VdlTypeStub.class);
   }
 
   @Override
   @NotNull
   public List<VdlVarDefinition> getVarDefinitionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, VdlVarDefinition.class);
+    return findChildrenByClass(VdlVarDefinition.class, VdlVarDefinitionStub.class);
   }
 
   @Override

@@ -245,10 +245,10 @@ private TypeSpecs ::= TypeSpec (semi TypeSpec)* semi? {pin=1}
 TypeSpec ::= SpecType {
   pin=1
   stubClass="io.v.vdl.psi.VdlTypeSpecStub"
-  methods=[shouldGoDeeper getMethods identifier="SpecType/identifier"]
+  methods=[shouldGoDeeper identifier="SpecType/identifier"]
 
 }
-SpecType ::= identifier Type
+SpecType ::= identifier Type {stubClass="io.v.vdl.psi.VdlTypeStub" extends="io.v.vdl.psi.impl.VdlTypeImpl" implements=Type}
 
 VarDeclaration ::= var ( VarSpec | '(' VarSpecs? ')' ) {pin=1}
 private VarSpecs ::= VarSpec (semi VarSpec)* semi? {pin=1}
